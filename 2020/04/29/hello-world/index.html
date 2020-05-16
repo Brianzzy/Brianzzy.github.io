@@ -294,7 +294,7 @@
     
     <div>
     
-        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-hand-peace-o"></i>感谢您的阅读-------------</div>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
     
 </div>
         <div class="reward-container">
@@ -658,13 +658,6 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     });
   }, window.Valine);
 });
- //增加以下六行代码去除 power by valine
-    var infoEle = document.querySelector('#comments .info');
-    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0){
-      infoEle.childNodes.forEach(function(item) {
-        item.parentNode.removeChild(item);
-      });
-    }
 </script>
 
     </div>
