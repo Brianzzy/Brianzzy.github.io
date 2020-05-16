@@ -1,6 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>初识Java</title>
+    <url>/2020/05/16/%E5%88%9D%E8%AF%86Java/</url>
+    <content><![CDATA[<h2 id="java帝国的建立"><a href="#java帝国的建立" class="headerlink" title="java帝国的建立"></a>java帝国的建立</h2><p>1972 年C语言诞生 ，C语言具有贴近硬件，运行速度极快，效率极高的优点，一经诞生，就广泛用于操作系统、编译器、数据库、网络系统等的开发。但由于C语言的指针问题和内存管理的问题，对新手有一些不太友好。</p>
+<a id="more"></a>
+
+<p>1982年C++诞生，C++兼容C语言，它增加了面向对象的特性，在图形领域和游戏方面取得了一些成就。但C++更加复杂。</p>
+<p>1995年，java诞生，它语法有些像C，但没有C中的指针和内存管理问题；它实现了真正的可移植性，编写一次，到处运行；它也有面向对象的特性，有更安全的类型，有高质量的类库等优点。</p>
+<h3 id="java的发展"><a href="#java的发展" class="headerlink" title="java的发展"></a>java的发展</h3><p>1995年的网页简单而粗糙，缺乏互动性。java团队在浏览器中放入了java的运行环境，开发了一个图形界面程序(Applet)，使得网页变得更美观，有互动性。java进入了广大程序员的视线。</p>
+<p>1998年，java 发布java2版本，该版本包含三个方向：</p>
+<p>Java 2 标准版（J2SE）    针对桌面端开发</p>
+<p>Java 2 移动版（J2ME）    针对移动端开发</p>
+<p>Java 2 企业版（J2EE）     针对服务器端开发</p>
+<p> 但是Java SE 和Java ME当时并没有得到很好的发展。反而Java EE得到了很多IT大公司的应用 ，他们基于Java开发了许多的平台、系统、工具：</p>
+<ul>
+<li>构建工具：Ant，Maven，Jekins</li>
+<li>应用服务器：Tomcat，Jetty，Jboss，Websphere，weblogic</li>
+<li>Web开发：Struts，Spring，Hibernate，myBatis</li>
+<li>开发工具：Eclipse，Netbean，intellij idea，Jbuilder</li>
+<li>……</li>
+</ul>
+<p>2006年，Hadoop的发布让Java进入大数据领域</p>
+<p>2008年，Android的诞生，让Java重新进入了移动端领域，并在移动端开发中占据了举足轻重的地位。</p>
+<p>之后，Java的发展就一发不可收拾，占据了服务器端开发的大部分市场，一个伟大的帝国诞生了！！</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">拓展：</span><br><span class="line">“三高”问题：高可用，高性能，高并发。</span><br></pre></td></tr></table></figure>
+
+<h2 id="Java的特性和优势"><a href="#Java的特性和优势" class="headerlink" title="Java的特性和优势"></a>Java的特性和优势</h2><ul>
+<li>简单性</li>
+<li>面向对象</li>
+<li>跨平台 可移植性</li>
+<li>高性能</li>
+<li>分布式</li>
+<li>动态性（反射机制）</li>
+<li>多线程</li>
+<li>安全性</li>
+<li>健壮性</li>
+</ul>
+<h2 id="Java-的三大版本"><a href="#Java-的三大版本" class="headerlink" title="Java 的三大版本"></a>Java 的三大版本</h2><h3 id="JavaSE"><a href="#JavaSE" class="headerlink" title="JavaSE"></a>JavaSE</h3><p>标准版（桌面程序，控制台开发…）</p>
+<h3 id="JavaME"><a href="#JavaME" class="headerlink" title="JavaME"></a>JavaME</h3><p>嵌入式开发（手机，小家电…）</p>
+<p>该版本几乎已经没有人用了</p>
+<h3 id="JavaEE"><a href="#JavaEE" class="headerlink" title="JavaEE"></a>JavaEE</h3><p>企业级开发（web端，服务器开发…）</p>
+<h2 id="JDK、JRE、JVM"><a href="#JDK、JRE、JVM" class="headerlink" title="JDK、JRE、JVM"></a>JDK、JRE、JVM</h2><p>JDK：Java Development Kit</p>
+<p>JRE：Java Runtime Environment</p>
+<p>JVM：Java Virtual Machine</p>
+<p><img src="https://i.loli.net/2020/05/09/h5MHDELCjmzKvcY.png" alt=""></p>
+<h2 id="JDK的安装"><a href="#JDK的安装" class="headerlink" title="JDK的安装"></a>JDK的安装</h2><p><a href="https://www.oracle.com/java/technologies/javase-jdk8-downloads.html" target="_blank" rel="noopener">https://www.oracle.com/java/technologies/javase-jdk8-downloads.html</a></p>
+<p>去上面网址下载对应的版本</p>
+<p>下载后双击安装，记住安装的路径</p>
+<p><strong>配置环境变量</strong></p>
+<p>右键点击此电脑，打开属性，找到高级系统设置-&gt;环境变量-&gt;系统变量</p>
+<ol>
+<li>新建一个变量JAVA_HOME，值为jdk安装的路径</li>
+</ol>
+<p><img src="https://i.loli.net/2020/05/09/dF2PvYc5eJ8H9nD.png" alt=""></p>
+<ol start="2">
+<li>配置Path变量，找到系统变量中的Path变量，点击编辑，新建两个，值分别为<code>%JAVA_HOME%\bin</code>，<code>%JAVA_HOME%\jre\bin</code></li>
+</ol>
+<p><img src="https://i.loli.net/2020/05/09/uaRCMe71En3XG9V.png" alt=""></p>
+<p>配置好环境变量之后，打开cmd(终端)，输入 </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+
+<p>出现下图效果说明JDK安装配置成功</p>
+<p><img src="https://i.loli.net/2020/05/09/hTROlwQ7uWEyVaJ.png" alt=""></p>
+<h2 id="第一个程序"><a href="#第一个程序" class="headerlink" title="第一个程序"></a>第一个程序</h2><p><strong>HelloWorld</strong></p>
+<p>步骤：</p>
+<ol>
+<li>新建一个文件夹，存放代码</li>
+<li>新建一个Java文件(Hello.java)</li>
+<li>编写代码</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hello</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		System.out.print(<span class="string">"Hello,World!"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>编译 ，打开终端，输入命令</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">javac -Hello.java</span><br></pre></td></tr></table></figure>
+
+<p> 编译完成后生成一个Hello.class文件，再输入运行命令</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">java Hello</span><br></pre></td></tr></table></figure>
+
+<p> 就能看到终端中打印出了 <code>Hello,World!</code></p>
+</li>
+</ol>
+<p><img src="https://i.loli.net/2020/05/09/oLXTjy8ECYeFV25.png" alt=""></p>
+<p><strong>可能遇到的问题</strong></p>
+<ul>
+<li>每个单词的大小写不能出现问题，<strong>Java对大小写敏感</strong></li>
+<li>文件名 和 类名必须保持一致，并且首字母大写</li>
+<li>符号要用英状态下的符号</li>
+</ul>
+<h2 id="Java程序运行机制"><a href="#Java程序运行机制" class="headerlink" title="Java程序运行机制"></a>Java程序运行机制</h2><h3 id="编译型与解释型"><a href="#编译型与解释型" class="headerlink" title="编译型与解释型"></a>编译型与解释型</h3><p>我们知道，计算机是无法理解现在的高级语言程序的，计算机只能理解机器语言，也就是可以通过CPU进行分析和执行的指令集。而要想让计算机能够运行我们写的高级语言程序，就需要一个系统软件来实现，它就是<strong><code>语言处理程序</code></strong>，也称为<strong><code>编译程序</code></strong>，它可以将我们写的高级语言程序，翻译成计算机可执行的<strong><code>机器语言</code></strong>。而这个翻译的方式就分为<strong><code>编译型</code></strong>和<strong><code>解释性</code></strong>两种。</p>
+<p><strong><code>编译型：</code></strong>是有一个负责翻译的程序来对我们的源代码进行转换，生成相对应的可执行代码(机器码),这个过程就被称为编译,而来编译的程序也就被称为编译器,也就是说我们写一个程序代码在源文件当中,通常经过编译以后生成一个可执行文件,这样我们就可以直接运行了。</p>
+<p><strong><code>解释型：</code></strong>在程序运行的前一刻，还只有源程序没有可执行程序,而当执行时每执行到源程序的某一条指令，则会有有一个称为解释程序的外壳程序将源代码转换成二进制代码以供执行,也就是说一边解释 一边执行 ,所以解释型程序是离不开解释程序的。</p>
+<p>从上面我们可以看出，编译型和解释型的关键区别就在于这个翻译的时机不同。解释型语言在运行程序的时候才翻译,每执行一次,要翻译一次,效率较低。编译型就是直接编译成机器可以执行的格式,只翻译一次。</p>
+<p>编译型和解释型各有优缺点</p>
+<p>优点:</p>
+<p>解释型:可移植性好,只要有运行相应需要的解释环境,可以在不用的操作系统上运行,修改调试也非常方便</p>
+<p>编译型:相比解释执行编译执行效率高，占用资源小，适合复杂程序</p>
+<p>缺点:</p>
+<p>解释型:一句一句执行解释,浪费计算机资源,效率低</p>
+<p>编译型:兼容性差,编译型程序虽然源代码也可以移植，但前提是必须针对不同的系统分别进行编译.</p>
+<h3 id="Java程序运行机制-1"><a href="#Java程序运行机制-1" class="headerlink" title="Java程序运行机制"></a>Java程序运行机制</h3><p><strong>Java这个语言有些特殊，它既是编译型的，又是解释型的</strong></p>
+<p>说Java是编译型的，是因为所有的Java代码都是要编译的，.java不经过编译就什么用都没有。</p>
+<p>说Java是解释型的，是因为java代码编译后不能直接运行，它是解释运行在JVM上的，所以它是解释运行的，那也就算是解释型的了。 </p>
+<p>但是，现在的JVM为了效率，都有一些JIT优化。它又会把.class的二进制代码编译为本地的代码直接运行，所以，又是编译的。像C、C++ 他们经过一次编译之后直接可以编译成操作系统了解的类型，可以直接执行的 所以他们是编译型的语言。没有经过第二次的处理 而Java不一样，他首先由编译器编译成.class类型的文件，这个是Java自己类型的文件 ，然后再通过虚拟机(JVM)从.class文件中读一行解释执行一行，所以他是解释型的语言，而由于Java对于多种不同的操作系统有不同的JVM所以 Java实现了真正意义上的跨平台！</p>
+<p>观看下面两张图 了解一下Java的虚拟机机制：</p>
+<blockquote>
+<p>1.java语言的编译–&gt;解释—&gt;执行过程</p>
+<p><img src="https://i.loli.net/2020/05/10/HtRmwf4LBIr1qPS.jpg" alt="java语言的编译--&gt;解释---&gt;执行过程"></p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/05/10/ITZEnaNuweHiflQ.jpg" alt="java虚拟机JVM"></p>
+<blockquote>
+<p>如果严格按照定义来说，Java应该是解释型语言，因为<em>.java程序在编译之后，被编译为\</em>.class文件，并不是机器码，依然不能被计算机直接运行。*.class文件是在JVM中被解释运行的。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Java基础</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java语法基础</title>
     <url>/2020/05/16/Java%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h2 id="注释、标识符，关键字"><a href="#注释、标识符，关键字" class="headerlink" title="注释、标识符，关键字"></a>注释、标识符，关键字</h2><h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><a id="more"></a>
@@ -288,127 +409,6 @@
 
 
 
-]]></content>
-      <categories>
-        <category>Java基础</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>初识Java</title>
-    <url>/2020/05/16/%E5%88%9D%E8%AF%86Java/</url>
-    <content><![CDATA[<h2 id="java帝国的建立"><a href="#java帝国的建立" class="headerlink" title="java帝国的建立"></a>java帝国的建立</h2><p>1972 年C语言诞生 ，C语言具有贴近硬件，运行速度极快，效率极高的优点，一经诞生，就广泛用于操作系统、编译器、数据库、网络系统等的开发。但由于C语言的指针问题和内存管理的问题，对新手有一些不太友好。</p>
-<a id="more"></a>
-
-<p>1982年C++诞生，C++兼容C语言，它增加了面向对象的特性，在图形领域和游戏方面取得了一些成就。但C++更加复杂。</p>
-<p>1995年，java诞生，它语法有些像C，但没有C中的指针和内存管理问题；它实现了真正的可移植性，编写一次，到处运行；它也有面向对象的特性，有更安全的类型，有高质量的类库等优点。</p>
-<h3 id="java的发展"><a href="#java的发展" class="headerlink" title="java的发展"></a>java的发展</h3><p>1995年的网页简单而粗糙，缺乏互动性。java团队在浏览器中放入了java的运行环境，开发了一个图形界面程序(Applet)，使得网页变得更美观，有互动性。java进入了广大程序员的视线。</p>
-<p>1998年，java 发布java2版本，该版本包含三个方向：</p>
-<p>Java 2 标准版（J2SE）    针对桌面端开发</p>
-<p>Java 2 移动版（J2ME）    针对移动端开发</p>
-<p>Java 2 企业版（J2EE）     针对服务器端开发</p>
-<p> 但是Java SE 和Java ME当时并没有得到很好的发展。反而Java EE得到了很多IT大公司的应用 ，他们基于Java开发了许多的平台、系统、工具：</p>
-<ul>
-<li>构建工具：Ant，Maven，Jekins</li>
-<li>应用服务器：Tomcat，Jetty，Jboss，Websphere，weblogic</li>
-<li>Web开发：Struts，Spring，Hibernate，myBatis</li>
-<li>开发工具：Eclipse，Netbean，intellij idea，Jbuilder</li>
-<li>……</li>
-</ul>
-<p>2006年，Hadoop的发布让Java进入大数据领域</p>
-<p>2008年，Android的诞生，让Java重新进入了移动端领域，并在移动端开发中占据了举足轻重的地位。</p>
-<p>之后，Java的发展就一发不可收拾，占据了服务器端开发的大部分市场，一个伟大的帝国诞生了！！</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">拓展：</span><br><span class="line">“三高”问题：高可用，高性能，高并发。</span><br></pre></td></tr></table></figure>
-
-<h2 id="Java的特性和优势"><a href="#Java的特性和优势" class="headerlink" title="Java的特性和优势"></a>Java的特性和优势</h2><ul>
-<li>简单性</li>
-<li>面向对象</li>
-<li>跨平台 可移植性</li>
-<li>高性能</li>
-<li>分布式</li>
-<li>动态性（反射机制）</li>
-<li>多线程</li>
-<li>安全性</li>
-<li>健壮性</li>
-</ul>
-<h2 id="Java-的三大版本"><a href="#Java-的三大版本" class="headerlink" title="Java 的三大版本"></a>Java 的三大版本</h2><h3 id="JavaSE"><a href="#JavaSE" class="headerlink" title="JavaSE"></a>JavaSE</h3><p>标准版（桌面程序，控制台开发…）</p>
-<h3 id="JavaME"><a href="#JavaME" class="headerlink" title="JavaME"></a>JavaME</h3><p>嵌入式开发（手机，小家电…）</p>
-<p>该版本几乎已经没有人用了</p>
-<h3 id="JavaEE"><a href="#JavaEE" class="headerlink" title="JavaEE"></a>JavaEE</h3><p>企业级开发（web端，服务器开发…）</p>
-<h2 id="JDK、JRE、JVM"><a href="#JDK、JRE、JVM" class="headerlink" title="JDK、JRE、JVM"></a>JDK、JRE、JVM</h2><p>JDK：Java Development Kit</p>
-<p>JRE：Java Runtime Environment</p>
-<p>JVM：Java Virtual Machine</p>
-<p><img src="https://i.loli.net/2020/05/09/h5MHDELCjmzKvcY.png" alt=""></p>
-<h2 id="JDK的安装"><a href="#JDK的安装" class="headerlink" title="JDK的安装"></a>JDK的安装</h2><p><a href="https://www.oracle.com/java/technologies/javase-jdk8-downloads.html" target="_blank" rel="noopener">https://www.oracle.com/java/technologies/javase-jdk8-downloads.html</a></p>
-<p>去上面网址下载对应的版本</p>
-<p>下载后双击安装，记住安装的路径</p>
-<p><strong>配置环境变量</strong></p>
-<p>右键点击此电脑，打开属性，找到高级系统设置-&gt;环境变量-&gt;系统变量</p>
-<ol>
-<li>新建一个变量JAVA_HOME，值为jdk安装的路径</li>
-</ol>
-<p><img src="https://i.loli.net/2020/05/09/dF2PvYc5eJ8H9nD.png" alt=""></p>
-<ol start="2">
-<li>配置Path变量，找到系统变量中的Path变量，点击编辑，新建两个，值分别为<code>%JAVA_HOME%\bin</code>，<code>%JAVA_HOME%\jre\bin</code></li>
-</ol>
-<p><img src="https://i.loli.net/2020/05/09/uaRCMe71En3XG9V.png" alt=""></p>
-<p>配置好环境变量之后，打开cmd(终端)，输入 </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
-
-<p>出现下图效果说明JDK安装配置成功</p>
-<p><img src="https://i.loli.net/2020/05/09/hTROlwQ7uWEyVaJ.png" alt=""></p>
-<h2 id="第一个程序"><a href="#第一个程序" class="headerlink" title="第一个程序"></a>第一个程序</h2><p><strong>HelloWorld</strong></p>
-<p>步骤：</p>
-<ol>
-<li>新建一个文件夹，存放代码</li>
-<li>新建一个Java文件(Hello.java)</li>
-<li>编写代码</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hello</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		System.out.print(<span class="string">"Hello,World!"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li><p>编译 ，打开终端，输入命令</p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">javac -Hello.java</span><br></pre></td></tr></table></figure>
-
-<p> 编译完成后生成一个Hello.class文件，再输入运行命令</p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">java Hello</span><br></pre></td></tr></table></figure>
-
-<p> 就能看到终端中打印出了 <code>Hello,World!</code></p>
-</li>
-</ol>
-<p><img src="https://i.loli.net/2020/05/09/oLXTjy8ECYeFV25.png" alt=""></p>
-<p><strong>可能遇到的问题</strong></p>
-<ul>
-<li>每个单词的大小写不能出现问题，<strong>Java对大小写敏感</strong></li>
-<li>文件名 和 类名必须保持一致，并且首字母大写</li>
-<li>符号要用英状态下的符号</li>
-</ul>
-<h2 id="Java程序运行机制"><a href="#Java程序运行机制" class="headerlink" title="Java程序运行机制"></a>Java程序运行机制</h2><h3 id="编译型与解释型"><a href="#编译型与解释型" class="headerlink" title="编译型与解释型"></a>编译型与解释型</h3><p>我们知道，计算机是无法理解现在的高级语言程序的，计算机只能理解机器语言，也就是可以通过CPU进行分析和执行的指令集。而要想让计算机能够运行我们写的高级语言程序，就需要一个系统软件来实现，它就是<strong><code>语言处理程序</code></strong>，也称为<strong><code>编译程序</code></strong>，它可以将我们写的高级语言程序，翻译成计算机可执行的<strong><code>机器语言</code></strong>。而这个翻译的方式就分为<strong><code>编译型</code></strong>和<strong><code>解释性</code></strong>两种。</p>
-<p><strong><code>编译型：</code></strong>是有一个负责翻译的程序来对我们的源代码进行转换，生成相对应的可执行代码(机器码),这个过程就被称为编译,而来编译的程序也就被称为编译器,也就是说我们写一个程序代码在源文件当中,通常经过编译以后生成一个可执行文件,这样我们就可以直接运行了。</p>
-<p><strong><code>解释型：</code></strong>在程序运行的前一刻，还只有源程序没有可执行程序,而当执行时每执行到源程序的某一条指令，则会有有一个称为解释程序的外壳程序将源代码转换成二进制代码以供执行,也就是说一边解释 一边执行 ,所以解释型程序是离不开解释程序的。</p>
-<p>从上面我们可以看出，编译型和解释型的关键区别就在于这个翻译的时机不同。解释型语言在运行程序的时候才翻译,每执行一次,要翻译一次,效率较低。编译型就是直接编译成机器可以执行的格式,只翻译一次。</p>
-<p>编译型和解释型各有优缺点</p>
-<p>优点:</p>
-<p>解释型:可移植性好,只要有运行相应需要的解释环境,可以在不用的操作系统上运行,修改调试也非常方便</p>
-<p>编译型:相比解释执行编译执行效率高，占用资源小，适合复杂程序</p>
-<p>缺点:</p>
-<p>解释型:一句一句执行解释,浪费计算机资源,效率低</p>
-<p>编译型:兼容性差,编译型程序虽然源代码也可以移植，但前提是必须针对不同的系统分别进行编译.</p>
-<h3 id="Java程序运行机制-1"><a href="#Java程序运行机制-1" class="headerlink" title="Java程序运行机制"></a>Java程序运行机制</h3><p><strong>Java这个语言有些特殊，它既是编译型的，又是解释型的</strong></p>
-<p>说Java是编译型的，是因为所有的Java代码都是要编译的，.java不经过编译就什么用都没有。</p>
-<p>说Java是解释型的，是因为java代码编译后不能直接运行，它是解释运行在JVM上的，所以它是解释运行的，那也就算是解释型的了。 </p>
-<p>但是，现在的JVM为了效率，都有一些JIT优化。它又会把.class的二进制代码编译为本地的代码直接运行，所以，又是编译的。像C、C++ 他们经过一次编译之后直接可以编译成操作系统了解的类型，可以直接执行的 所以他们是编译型的语言。没有经过第二次的处理 而Java不一样，他首先由编译器编译成.class类型的文件，这个是Java自己类型的文件 ，然后再通过虚拟机(JVM)从.class文件中读一行解释执行一行，所以他是解释型的语言，而由于Java对于多种不同的操作系统有不同的JVM所以 Java实现了真正意义上的跨平台！</p>
-<p>观看下面两张图 了解一下Java的虚拟机机制：</p>
-<blockquote>
-<p>1.java语言的编译–&gt;解释—&gt;执行过程</p>
-<p><img src="https://i.loli.net/2020/05/10/HtRmwf4LBIr1qPS.jpg" alt="java语言的编译--&gt;解释---&gt;执行过程"></p>
-</blockquote>
-<p><img src="https://i.loli.net/2020/05/10/ITZEnaNuweHiflQ.jpg" alt="java虚拟机JVM"></p>
-<blockquote>
-<p>如果严格按照定义来说，Java应该是解释型语言，因为<em>.java程序在编译之后，被编译为\</em>.class文件，并不是机器码，依然不能被计算机直接运行。*.class文件是在JVM中被解释运行的。</p>
-</blockquote>
 ]]></content>
       <categories>
         <category>Java基础</category>
