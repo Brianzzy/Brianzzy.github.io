@@ -41,8 +41,8 @@
 <h3 id="JavaME"><a href="#JavaME" class="headerlink" title="JavaME"></a>JavaME</h3><p>嵌入式开发（手机，小家电…）</p>
 <p>该版本几乎已经没有人用了</p>
 <h3 id="JavaEE"><a href="#JavaEE" class="headerlink" title="JavaEE"></a>JavaEE</h3><p>企业级开发（web端，服务器开发…）</p>
-<h2 id="JDK、JRE、JVM"><a href="#JDK、JRE、JVM" class="headerlink" title="JDK、JRE、JVM"></a>JDK、JRE、JVM</h2><p>JDK：Java Development Kit</p>
-<p>JRE：Java Runtime Environment</p>
+<h2 id="JDK、JRE、JVM"><a href="#JDK、JRE、JVM" class="headerlink" title="JDK、JRE、JVM"></a>JDK、JRE、JVM</h2><p>JDK：Java Development Kit，称为Java开发包或者Java开发者工具，是一个编写Java的Applet小程序和应用程序的开发环境。JDK是整个Java的核心，包括了<code>Java运行环境(JRE)</code>，一些<code>Java工具</code>和<code>Java的核心类库(Java API)</code>。</p>
+<p>JRE：Java Runtime Environment。JRE是个运行环境，JDK是个开发环境。因此写Java程序时需要JDK，而运行Java程序时就需要JRE。而JDK中已经包含了JRE，因此只要安装了JDK就可以编辑Java程序，也可以正常运行Java程序。</p>
 <p>JVM：Java Virtual Machine</p>
 <p><img src="https://i.loli.net/2020/05/09/h5MHDELCjmzKvcY.png" alt=""></p>
 <h2 id="JDK的安装"><a href="#JDK的安装" class="headerlink" title="JDK的安装"></a>JDK的安装</h2><p><a href="https://www.oracle.com/java/technologies/javase-jdk8-downloads.html" target="_blank" rel="noopener">https://www.oracle.com/java/technologies/javase-jdk8-downloads.html</a></p>
