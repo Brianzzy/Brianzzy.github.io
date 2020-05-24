@@ -5,13 +5,12 @@
     <url>/2020/05/24/Java%E6%95%B0%E7%BB%84/</url>
     <content><![CDATA[<h2 id="数组概述"><a href="#数组概述" class="headerlink" title="数组概述"></a>数组概述</h2><p><strong><code>数组的定义:</code></strong></p>
 <ul>
-<li><p>数组是<span style="color:red">相同类型数据</span>的有序集合。</p>
-</li>
-<li><p>数组描述的是相同类型的若干个数据，按照一定的先后次序排列组合而成。</p>
-</li>
-<li><p>其中，每一个数据称作一个数组元素，每个数组元素可以通过一个下标来访问它们。</p>
-</li>
+<li>数组是<span style="color:red">相同类型数据</span>的有序集合。</li>
+<li>数组描述的是相同类型的若干个数据，按照一定的先后次序排列组合而成。</li>
+<li>其中，每一个数据称作一个数组元素，每个数组元素可以通过一个下标来访问它们。</li>
 </ul>
+<a id="more"></a>
+
 <h3 id="数组的声明创建"><a href="#数组的声明创建" class="headerlink" title="数组的声明创建"></a>数组的声明创建</h3><p>首先必须声明数组变量，才能在程序中使用数组。下面是声明数组变量的语法：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">dataType[] arrayRefVar;		<span class="comment">//首选的方法</span></span><br><span class="line">或</span><br><span class="line">dataType arrayRefVar[];		<span class="comment">//效果相同，但不是首选方法，不推荐使用</span></span><br></pre></td></tr></table></figure>
 
