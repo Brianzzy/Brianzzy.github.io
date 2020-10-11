@@ -84,13 +84,12 @@
     <url>/2020/05/24/Java%E6%95%B0%E7%BB%84/</url>
     <content><![CDATA[<h2 id="数组概述"><a href="#数组概述" class="headerlink" title="数组概述"></a>数组概述</h2><p><strong><code>数组的定义:</code></strong></p>
 <ul>
-<li><p>数组是<span style="color:red">相同类型数据</span>的有序集合。</p>
-</li>
-<li><p>数组描述的是相同类型的若干个数据，按照一定的先后次序排列组合而成。</p>
-</li>
-<li><p>其中，每一个数据称作一个数组元素，每个数组元素可以通过一个下标来访问它们。</p>
-</li>
+<li>数组是<span style="color:red">相同类型数据</span>的有序集合。</li>
+<li>数组描述的是相同类型的若干个数据，按照一定的先后次序排列组合而成。</li>
+<li>其中，每一个数据称作一个数组元素，每个数组元素可以通过一个下标来访问它们。</li>
 </ul>
+<a id="more"></a>
+
 <h3 id="数组的声明创建"><a href="#数组的声明创建" class="headerlink" title="数组的声明创建"></a>数组的声明创建</h3><p>首先必须声明数组变量，才能在程序中使用数组。下面是声明数组变量的语法：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">dataType[] arrayRefVar;		<span class="comment">//首选的方法</span></span><br><span class="line">或</span><br><span class="line">dataType arrayRefVar[];		<span class="comment">//效果相同，但不是首选方法，不推荐使用</span></span><br></pre></td></tr></table></figure>
 
@@ -1714,6 +1713,138 @@
 <h3 id="字符串转换"><a href="#字符串转换" class="headerlink" title="字符串转换"></a>字符串转换</h3><p>使用包装类还有一个很优秀的地方在于：可以将一个字符串变为指定的基本数据类型，此点一般在接收输入<br>数据上使用较多。<br>在<code>Integer</code>类中提供了以下的操作方法：<br>        <code>public static int parseInt(String s)</code> ：将String变为int型数据<br>在<code>Float</code>类中提供了以下的操作方法：<br>        <code>public static float parseFloat(String s)</code>：将String变为Float<br>在<code>Boolean</code> 类中提供了以下操作方法：<br>        <code>public static boolean parseBoolean(String s)</code>：将String变为boolean<br>……</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo11</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner input = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        String text = input.nextLine();</span><br><span class="line">        <span class="keyword">int</span> x = Integer.parseInt(text);     <span class="comment">//转为int类型,便于运算</span></span><br><span class="line">        System.out.println(x+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+]]></content>
+      <categories>
+        <category>Java基础</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>面向对象</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java异常处理</title>
+    <url>/2020/10/11/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<h2 id="什么是异常"><a href="#什么是异常" class="headerlink" title="什么是异常"></a>什么是异常</h2><p>异常是在程序中导致程序中断运行的一种指令流。</p>
+<p>先来看如下代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionDemo</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">10</span> ;</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span> ;</span><br><span class="line">        System.out.println(<span class="string">"============= 计算开始 ============="</span>) ;</span><br><span class="line">        System.out.println(i + <span class="string">"/"</span> + j + <span class="string">"="</span> + i / j);</span><br><span class="line">        System.out.println(<span class="string">"============= 计算结束 ============="</span>) ;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>运行结果：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">============= 计算开始 =============</span><br><span class="line">Exception in thread <span class="string">"main"</span> java.lang.ArithmeticException: / by zero</span><br><span class="line">	at ExceptionDemo01.main(ExceptionDemo01.java:<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+
+<p>以上的代码在<code>System.out.println(i + &quot;/&quot; + j + &quot;=&quot; + i / j);</code>位置处产生了异常<code>ArithmeticException(算术异常)</code>，一旦产生异常之后，异常之后的语句将不再执行了，所以现在的程序并没有正确的执行完毕之后就退出了。</p>
+<p>那么，为了保证程序出现异常之后仍然可以正确的执行完毕，所以要采用异常的处理机制。</p>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>如果要想对异常进行处理，则必须采用标准的处理格式，处理格式语法如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	<span class="comment">// 有可能发生异常的代码段</span></span><br><span class="line">&#125;<span class="keyword">catch</span>(异常类型<span class="number">1</span> 对象名<span class="number">1</span>)&#123;</span><br><span class="line">	<span class="comment">// 异常的处理操作</span></span><br><span class="line">&#125;<span class="keyword">catch</span>(异常类型<span class="number">2</span> 对象名<span class="number">2</span>)&#123;</span><br><span class="line">    <span class="comment">// 异常的处理操作</span></span><br><span class="line">&#125; ...</span><br><span class="line"><span class="keyword">finally</span>&#123;</span><br><span class="line">	<span class="comment">// 异常的统一出口</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将开头的代码用try-catch处理：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionDemo</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">10</span> ;</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span> ;</span><br><span class="line">        System.out.println(<span class="string">"============= 计算开始 ============="</span>) ;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            System.out.println(i+ <span class="string">"/"</span> + j + <span class="string">"="</span> + i /j);</span><br><span class="line">        &#125;<span class="keyword">catch</span>(ArithmeticException e)&#123;</span><br><span class="line">            System.out.println(<span class="string">"除数不能为0"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"============= 计算结束 ============="</span>) ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">============= 计算开始 =============</span><br><span class="line">除数不能为0</span><br><span class="line">============= 计算结束 =============</span><br></pre></td></tr></table></figure>
+
+<h3 id="try-catch的处理流程"><a href="#try-catch的处理流程" class="headerlink" title="try+catch的处理流程"></a>try+catch的处理流程</h3><p>1、 一旦产生异常，则系统会自动产生一个异常类的实例化对象。</p>
+<p>2、 那么，此时如果异常发生在try语句，则会自动找到匹配的catch语句执行，如果没有在try语句中，则会将异常抛出，抛给调用方法者</p>
+<p>3、 所有的catch根据方法的参数匹配异常类的实例化对象，如果匹配成功，则表示由此catch进行处理。</p>
+<p><img src="https://i.loli.net/2020/10/10/bVzw1mud4eif7ot.png" alt=""></p>
+<h3 id="finally"><a href="#finally" class="headerlink" title="finally"></a>finally</h3><p>在进行异常的处理之后，在异常的处理格式中还有一个finally语句，那么此语句将作为异常的统一出口，<span style="color:red">不管是否产生了异常，最终<strong>必然都要</strong>执行此段代码</span>。</p>
+<blockquote>
+<p>  finally例子1：</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionDemo</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123; </span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           System.out.println(<span class="number">1</span>);</span><br><span class="line">           System.out.println(<span class="number">2</span>);</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">       &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">       &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">           System.out.println(<span class="string">"finally代码块中的内容"</span>);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>  运行测试结果：说明即使在try和catch中return，在准备返回值与跳出函数之间，仍然会执行finally中的语句</p>
+<p>  <img src="https://i.loli.net/2020/10/10/x5eOw9uGgMRCEdZ.png" alt="image-20201010164546702"></p>
+<p>  finally例子2：</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionDemo</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">       Person p = testFinally();</span><br><span class="line">       System.out.println(p.age);		<span class="comment">//28</span></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Person <span class="title">testFinally</span><span class="params">()</span></span>&#123;</span><br><span class="line">       Person p = <span class="keyword">new</span> Person();</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           p.age = <span class="number">18</span>;</span><br><span class="line">           <span class="keyword">return</span> p;</span><br><span class="line">       &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">       &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">           p.age = <span class="number">28</span>;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">       <span class="keyword">int</span> age;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>  finally例子3：</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionDemo</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">       <span class="keyword">int</span> a = testFinally();</span><br><span class="line">       System.out.println(a);		<span class="comment">//10</span></span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">testFinally</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           <span class="keyword">return</span> a;</span><br><span class="line">       &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">       &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">           a = <span class="number">20</span>;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>  注意例子2和例子3，我们 testFinally() 方法一个返回的是引用数据类型，一个返回的是基本数据类型。例子3中返回非引用数据类型时return 备份的就是数据10，所以运行结果是10，不过此时栈中a的数据还是被改成20了。而在例子2中，我们return备份的是引用类型对象 p 在堆中的地址，存放在堆中那个地址的age被改为了28，当我们return 通过地址去找age时，就是会返回28。</p>
+</blockquote>
+<h3 id="异常处理真实场景举例"><a href="#异常处理真实场景举例" class="headerlink" title="异常处理真实场景举例"></a>异常处理真实场景举例</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.InputMismatchException;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionDemo2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> num = menu();</span><br><span class="line">        System.out.println(<span class="string">"您选择的序号是"</span> + num);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">menu</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"请根据提示，选择功能序号："</span>);</span><br><span class="line">        System.out.println(<span class="string">"0.退出\n1.增\n2.删\n3.改"</span>);</span><br><span class="line">        Scanner input = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">int</span> num = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            num = input.nextInt();</span><br><span class="line">            <span class="keyword">if</span> (num&lt;<span class="number">0</span> || num&gt;<span class="number">3</span>)&#123;</span><br><span class="line">                System.out.println(<span class="string">"输入的序号必须是：0/1/2/3"</span>);</span><br><span class="line">                <span class="keyword">return</span> menu();<span class="comment">//如果数字范围超过预期，递归重新调用此函数</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> num;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (InputMismatchException e)&#123;</span><br><span class="line">            System.out.println(<span class="string">"输入必须是数字"</span>);</span><br><span class="line">            <span class="keyword">return</span> menu();  <span class="comment">//如果输入非数字，递归重新调用此函数</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行效果测试：</p>
+<p><img src="https://i.loli.net/2020/10/10/lKxIRXjcQ4SzuGh.png" alt="image-20201010161246734"></p>
+<h2 id="异常体系结构"><a href="#异常体系结构" class="headerlink" title="异常体系结构"></a>异常体系结构</h2><p>异常指的是Exception ， Exception类， 在Java中存在一个父类Throwable（可能的抛出）</p>
+<p>Throwable存在两个子类：</p>
+<ol>
+<li>Error：表示的是错误，是JVM发出的错误操作,只能尽量避免，无法用代码处理。</li>
+<li>Exception：一般表示所有程序中的错误，所以一般在程序中将进行try…catch的处理。</li>
+</ol>
+<p><img src="https://i.loli.net/2020/10/10/5WiUkG6aMdAOwYo.png" alt=""></p>
+<blockquote>
+<p>  多异常捕获的注意点：</p>
+<ol>
+<li><p>捕获更粗的异常不能放在捕获更细的异常之前。</p>
+</li>
+<li><p>如果为了方便，则可以将所有的异常都使用Exception进行捕获。</p>
+<p>特殊的多异常捕获写法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">catch</span>(异常类型<span class="number">1</span> |异常类型<span class="number">2</span> 对象名)&#123;</span><br><span class="line">	<span class="comment">//表示此块用于处理异常类型1 和 异常类型2 的异常信息</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Scanner input = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">            System.out.println(<span class="string">"请输入一个数字："</span>);</span><br><span class="line">            <span class="keyword">int</span> x = input.nextInt();</span><br><span class="line">            System.out.println(<span class="string">"请再输入一个数字："</span>);</span><br><span class="line">            <span class="keyword">int</span> y = input.nextInt();</span><br><span class="line">            System.out.println(x/y);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (InputMismatchException | ArithmeticException e) &#123;		<span class="comment">//格式一</span></span><br><span class="line">            System.out.println(<span class="string">"输入错误"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         catch(RuntimeException e（或Exception e）)&#123;	//扩大异常的形态范围来捕获 ，格式二</span></span><br><span class="line"><span class="comment">         	System.out.println("输入错误");</span></span><br><span class="line"><span class="comment">         &#125; 	</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        System.out.println(<span class="string">"程序执行完毕，正常结束"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<h2 id="throws和throw关键字"><a href="#throws和throw关键字" class="headerlink" title="throws和throw关键字"></a>throws和throw关键字</h2><p>###throws</p>
+<p>在程序中异常的基本处理已经掌握了，但是随异常一起的还有一个称为throws关键字，此关键字主要在方法的声明上使用，表示方法中不处理异常，而交给调用处处理。格式如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">返回值 方法名称()<span class="keyword">throws</span> Exception&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果是因为传入的参数导致异常的发生，则可以通过throws抛出异常。通常是谁调用谁处理；</p>
+<p>如下代码，只有传入参数出错，程序才会出错。</p>
+<p><img src="https://i.loli.net/2020/10/10/XwxopzQTY85asmi.png" alt="image-20201010184935241"></p>
+<p>我们可以用谁调用谁处理的策略，使用throws关键字来处理异常</p>
+<p><img src="https://i.loli.net/2020/10/10/t2qHGzpw1Lgfr7s.png" alt="image-20201010191247867"></p>
+<p>###throw</p>
+<p>throw关键字表示在程序中人为的抛出一个异常，因为从异常处理机制来看，所有的异常一旦产生之后，实际上抛出的就是一个异常类的实例化对象，那么此对象也可以由throw直接抛出。（真正应用时，自己造异常还是比较麻烦的，之前加判断也可以出现相同的效果，所以用的较少）</p>
+<p>代码： <code>throw new Exception(&quot;抛着玩的。&quot;);</code></p>
+<p>看下面的代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionDemo8</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Person p = <span class="keyword">new</span> Person();</span><br><span class="line">        p.setAge(-<span class="number">1</span>);<span class="comment">//传入非法参数</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;	<span class="comment">//处理异常时机：谁调用谁处理</span></span><br><span class="line">        <span class="comment">//之前在设计此函数时，当用户输入了不合理时，自动设为1，</span></span><br><span class="line">        <span class="comment">//但用户在没有任何提示的情况下，输入和实际展示不一致，者本身就是异常</span></span><br><span class="line">        <span class="keyword">if</span> (age &lt; <span class="number">0</span> || age &gt; <span class="number">150</span>)&#123;</span><br><span class="line">            <span class="comment">//this.age = 1;</span></span><br><span class="line">            <span class="comment">//所以在发生异常时，需要告诉调用函数，发生了什么问题，而不是自己默默处理</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"年龄不合理"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.age = age;</span><br><span class="line">        &#125;     </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="https://i.loli.net/2020/10/10/7ciUMJSWOrK5aE9.png" alt="image-20201010173420321"></p>
+<h2 id="RuntimeExcepion与Exception的区别"><a href="#RuntimeExcepion与Exception的区别" class="headerlink" title="RuntimeExcepion与Exception的区别"></a>RuntimeExcepion与Exception的区别</h2><p>注意观察如下方法的源码：</p>
+<p>Integer类：<code>public static int parseInt(String text)throws NumberFormatException</code></p>
+<p>此方法抛出了异常， 但是使用时却不需要进行try…catch捕获处理，原因：</p>
+<p>因为<code>NumberFormatException</code>并不是<code>Exception</code>的直接子类，而是<code>RuntimeException</code>的子类，<span style="color:red">只要是<code>RuntimeException</code>的子类，则表示程序在操作的时候可以不必使用try…catch进行处理，如果有异常发生，则由JVM进行处理。</span>当然，也可以通过try…catch处理。</p>
+<h2 id="自定义异常类"><a href="#自定义异常类" class="headerlink" title="自定义异常类"></a>自定义异常类</h2><blockquote>
+<p>  编写一个类， 继承Exception，并重写一参构造方法 即可完成自定义<strong>受检异常</strong>类型。受检异常必须明确的处理或者抛出，否则编译不通过</p>
+<p>  编写一个类， 继承RuntimeExcepion，并重写一参构造方法 即可完成自定义<strong>运行时异常（非受检异常）</strong>类型。</p>
+<p>  例如：</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyException</span> <span class="keyword">extends</span> <span class="title">Exception</span></span>&#123; <span class="comment">// 继承Exception，表示一个自定义异常类</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">MyException</span><span class="params">(String msg)</span></span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(msg) ; <span class="comment">// 调用Exception中有一个参数的构造</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>  自定义异常可以做很多事情， 例如：</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyException</span> <span class="keyword">extends</span> <span class="title">Exception</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">MyException</span><span class="params">(String msg)</span></span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(msg) ;</span><br><span class="line">		<span class="comment">//在这里给维护人员发短信或邮件， 告知程序出现了BUG。</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="异常处理常见题目"><a href="#异常处理常见题目" class="headerlink" title="异常处理常见题目"></a>异常处理常见题目</h2><ol>
+<li><p><strong>try-catch-finally 中哪个部分可以省略？</strong></p>
+<p>答： catch和finally可以省略其中一个 ， catch和finally不能同时省略<br>注意:格式上允许省略catch块, 但是发生异常时就不会捕获异常了,我们在开发中也不会这样去写代码.</p>
+</li>
+<li><p><strong>try-catch-finally 中，如果 catch 中 return 了，finally 还会执行吗？</strong></p>
+<p>答：finally中的代码会执行</p>
+<blockquote>
+<p>  详解：</p>
+<p>  ​        执行流程：</p>
+<ol>
+<li><p>先计算返回值， 并将返回值存储起来， 等待返回</p>
+</li>
+<li><p>执行finally代码块</p>
+</li>
+<li><p>将之前存储的返回值， 返回出去；</p>
+<p>​       注意：</p>
+</li>
+<li><p>返回值是在finally运算之前就确定了，并且缓存了，不管finally对该值做任何的改变，返回的值都不会改变</p>
+</li>
+<li><p>finally代码中不建议包含return，因为程序会在上述的流程中提前退出，也就是说返回的值不是try或catch中的值</p>
+</li>
+<li><p>如果在try或catch中停止了JVM，则finally不会执行。例如停电，或通过如下代码退出<br>JVM：<code>System.exit(0);</code> </p>
+</li>
+</ol>
+</blockquote>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>Java基础</category>
