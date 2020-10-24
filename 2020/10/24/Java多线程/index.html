@@ -21,30 +21,50 @@
     var CONFIG = {"hostname":"www.pengspace.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="记录自己学习的历程">
-<meta property="og:type" content="website">
-<meta property="og:title" content="鹏空间">
-<meta property="og:url" content="https://www.pengspace.top/index.html">
+  <meta name="description" content="多线程概述&#x3D;&#x3D;多线程：栈空间独立，堆内存共享&#x3D;&#x3D; 多线程是实现并发机制的一种有效手段。进程和线程一样，都是实现并发的一个基本单位。线程是比进程更小的执行单位，线程是在进程的基础上进行的进一步划分。所谓多线程是指一个进程在执行过程中可以产生多个线程，这些线程可以同时存在、同时运行，一个进程可能包含了多个同时执行的线程。 进程与线程 进程： 正在运行的应用程序：是指一个内存中运行的应用程序，每个进程都">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java多线程">
+<meta property="og:url" content="https://www.pengspace.top/2020/10/24/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/index.html">
 <meta property="og:site_name" content="鹏空间">
-<meta property="og:description" content="记录自己学习的历程">
+<meta property="og:description" content="多线程概述&#x3D;&#x3D;多线程：栈空间独立，堆内存共享&#x3D;&#x3D; 多线程是实现并发机制的一种有效手段。进程和线程一样，都是实现并发的一个基本单位。线程是比进程更小的执行单位，线程是在进程的基础上进行的进一步划分。所谓多线程是指一个进程在执行过程中可以产生多个线程，这些线程可以同时存在、同时运行，一个进程可能包含了多个同时执行的线程。 进程与线程 进程： 正在运行的应用程序：是指一个内存中运行的应用程序，每个进程都">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/10/20/t4hNj7XJWOHBuvr.png">
+<meta property="og:image" content="https://i.loli.net/2020/10/20/ZeTkrMvRzSK8t3F.png">
+<meta property="og:image" content="https://i.loli.net/2020/10/20/DFz1sN5h2wUqyBG.png">
+<meta property="og:image" content="https://i.loli.net/2020/10/20/pIqfd5TD2waWtXo.gif">
+<meta property="og:image" content="https://i.loli.net/2020/10/20/7vUXIGJWRbj4tTH.png">
+<meta property="og:image" content="https://i.loli.net/2020/10/20/YDGyOnPhEL3eXNz.png">
+<meta property="og:image" content="https://i.loli.net/2020/10/21/g31kZ6c4FnywoqQ.png">
+<meta property="og:image" content="https://i.loli.net/2020/10/21/fcxmMsCzRarQS8P.png">
+<meta property="og:image" content="https://i.loli.net/2020/10/21/SoCgaNvHtdc6GwX.png">
+<meta property="og:image" content="https://i.loli.net/2020/10/21/MdGWmJql95V1uEX.png">
+<meta property="og:image" content="https://i.loli.net/2020/10/21/oC9p8qRF7h1d4DS.png">
+<meta property="og:image" content="https://i.loli.net/2020/10/21/CAYzM4DNI36Pg7V.png">
+<meta property="og:image" content="https://i.loli.net/2020/10/21/HhAMOSIL9Ymn3lE.png">
+<meta property="og:image" content="https://i.loli.net/2020/10/21/flHwKZ9nbGrg8mT.png">
+<meta property="og:image" content="https://i.loli.net/2020/10/21/m7pIQqgSCZz59HG.png">
+<meta property="article:published_time" content="2020-10-24T08:23:00.000Z">
+<meta property="article:modified_time" content="2020-10-24T08:23:57.287Z">
 <meta property="article:author" content="AnswerCoder">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="多线程">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/10/20/t4hNj7XJWOHBuvr.png">
 
-<link rel="canonical" href="https://www.pengspace.top/">
+<link rel="canonical" href="https://www.pengspace.top/2020/10/24/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>鹏空间</title>
+  <title>Java多线程 | 鹏空间</title>
   
 
 
@@ -182,442 +202,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.pengspace.top/2020/10/24/XML%E5%92%8CJSON%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88java%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://i.loli.net/2020/05/01/VMPAdgQKfpzoWtc.jpg">
-      <meta itemprop="name" content="AnswerCoder">
-      <meta itemprop="description" content="记录自己学习的历程">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="鹏空间">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/24/XML%E5%92%8CJSON%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88java%EF%BC%89/" class="post-title-link" itemprop="url">XML和JSON的使用（java）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-10-24 16:24:49 / 修改时间：16:25:48" itemprop="dateCreated datePublished" datetime="2020-10-24T16:24:49+08:00">2020-10-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">Java基础</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">评论数：</span>
-    
-    <a title="valine" href="/2020/10/24/XML%E5%92%8CJSON%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88java%EF%BC%89/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/24/XML%E5%92%8CJSON%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88java%EF%BC%89/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
 
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><a href="https://baike.baidu.com/item/%E5%8F%AF%E6%89%A9%E5%B1%95%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80/2885849?fromtitle=xml&fromid=86251&fr=aladdin" target="_blank" rel="noopener">XML</a>全称可扩展标记语言（eXtensible Markup Language）。是一种用于标记电子文件使其具有结构性的标记语言。</p>
-<blockquote>
-<p>  在电子计算机中，标记指计算机所能理解的信息符号，通过此种标记，计算机之间可以处理包含各种的信息比如文章等。它可以用来标记数据、定义数据类型，是一种允许用户对自己的标记语言进行定义的源语言。 它非常适合万维网传输，提供统一的方法来描述和交换独立于应用程序或供应商的结构化数据。是Internet环境中跨平台的、依赖于内容的技术，也是当今处理分布式结构信息的有效工具。早在1998年，W3C就发布了XML1.0规范，使用它来简化Internet的文档信息传输。</p>
-</blockquote>
-<p><strong>特性:</strong></p>
-<ol>
-<li>xml具有平台无关性, 是一门独立的标记语言.</li>
-<li>xml具有自我描述性</li>
-</ol>
-<p><strong>用途</strong></p>
-<ol>
-<li>网络数据传输</li>
-<li>数据存储</li>
-<li>配置文件</li>
-</ol>
-<blockquote>
-<p>  .XML文件是保存XML数据的一种方式，XML数据也可以以其他的方式存在（如在内存中构建XML数据）。不要将XML语言狭隘的理解成XML文件。</p>
-</blockquote>
-<p>###XML语法</p>
-<h4 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h4><p>在XML文档开头，要先写XML文档声明，格式如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>XML文档正文都是由一个个的<strong>标记</strong>组成的，包含：</p>
-<ul>
-<li>开始标记(开放标记): &lt;标记名称&gt;</li>
-<li>结束标记(闭合标记): &lt;/标记名称&gt;</li>
-<li>标记内容: 开始标记与结束标记之间 ，是标记的内容。</li>
-</ul>
-<blockquote>
-<p>  标记名称: 自定义名称，必须遵循以下命名规则：</p>
-<ol>
-<li>名称可以含字母、数字以及其他的字符</li>
-<li>名称不能以数字或者标点符号开始</li>
-<li>名称不能以字符 “xml”（或者 XML、Xml）开始</li>
-<li>名称不能包含空格，不能包含冒号（:）</li>
-<li>名称区分大小写</li>
-</ol>
-</blockquote>
-<p>例如 ,我们通过标记, 描述一个名字:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>答案<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>注意：</strong></p>
-<ol>
-<li><p>一个XML文档中，必须有且且仅允许有一个根标记。</p>
-</li>
-<li><p>标记可以嵌套, 但是不允许交。</p>
-</li>
-<li><p>标记名称 允许重复</p>
-</li>
-<li><p>标记的层级称呼 (子标记，父标记 ，兄弟标记，后代标记 ，祖先标记)，例如下面代码：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">persons</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">person</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>张三<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">length</span>&gt;</span>180cm<span class="tag">&lt;/<span class="name">length</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">person</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">person</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>李四<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">length</span>&gt;</span>200cm<span class="tag">&lt;/<span class="name">length</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">person</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">persons</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>name是person的子标记，是person的后代标记，是persons的后代标记，是length的兄弟标记。person是name的父标记。persons是name的祖先标记。</p>
-</li>
-<li><p>标记除了开始和结束 , 还可以包含属性。标记中的属性，在标记开始时描述，由属性名和属性值组成。<br>在开始标记中, 描述属性，可以包含0-n个属性，每一个属性是一个键值对!<br>属性名不允许重复 ，键与值之间使用等号连接, 多个属性之间使用空格分割，属性值 必须被引号引住。例如：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">persons</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">person</span> <span class="attr">id</span>=<span class="string">"10001"</span> <span class="attr">groupid</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>李四<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">age</span>&gt;</span>18<span class="tag">&lt;/<span class="name">age</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">person</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">persons</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>可以在XML文档中写注释，但是不能写在文档声明前，不能嵌套注释。<br>格式如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 注释 --&gt;</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h4 id="语法进阶CDATA"><a href="#语法进阶CDATA" class="headerlink" title="语法进阶CDATA"></a>语法进阶CDATA</h4><p>CDATA 是不会被 XML 解析器解析的文本数据。像 “&lt;” 和 “&amp;” 字符在 XML 元素中都是非法的。</p>
-<blockquote>
-<p>  “&lt;” 会产生错误，因为解析器会把该字符解释为新元素的开始。</p>
-<p>  “&amp;” 会产生错误，因为解析器会把该字符解释为字符实体的开始。</p>
-</blockquote>
-<p>某些文本，比如 JavaScript 代码，包含大量 “&lt;” 或 “&amp;” 字符。为了避免错误，可以将脚本代码定义为 CDATA。CDATA 部分中的所有内容都会被解析器忽略。定义格式如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;![CDATA[脚本代码]]&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Java解析XML"><a href="#Java解析XML" class="headerlink" title="Java解析XML"></a>Java解析XML</h3><p>在java中，XML可以通过下面四种方式解析</p>
-<ol>
-<li>SAX解析</li>
-<li>DOM解析</li>
-<li>JDOM解析</li>
-<li>DOM4J解析</li>
-</ol>
-<p>其实也可以说成SAX和DOM两种解析方式，因为后面两种也属于DOM解析，是由DOM解析的基础上扩展来的，只是用与Java。</p>
-<h4 id="SAX解析"><a href="#SAX解析" class="headerlink" title="SAX解析"></a>SAX解析</h4><p>解析方式是事件驱动机制 !</p>
-<p>SAX解析器，<strong>逐行读取</strong>XML文件进行解析 ，每当解析到一个标签的<strong>开始/结束/内容/属性</strong>时，触发事件。我们可以编写程序在这些事件发生时，进行相应的处理。</p>
-<blockquote>
-<p>  <strong>优点：</strong></p>
-<ol>
-<li>分析能够立即开始，而不是等待所有的数据被处理</li>
-<li>逐行加载，节省内存。有助于解析大于系统内存的文档</li>
-<li>有时不必解析整个文档，它可以在某个条件得到满足时停止解析。</li>
-</ol>
-<p>  <strong>缺点：</strong></p>
-<ol>
-<li>单向解析，无法定位文档层次，无法同时访问同一文档的不同部分数据(因为逐行解析，当解析第n行时，第n-1行已经被释放了，无法再进行操作了)。</li>
-<li>无法得知事件发生时元素的层次，只能自己维护节点的父/子关系.</li>
-<li>只读解析方式，无法修改XML文档的内容。</li>
-</ol>
-</blockquote>
-<h4 id="DOM解析"><a href="#DOM解析" class="headerlink" title="DOM解析"></a>DOM解析</h4><p>是用与平台和语言无关的方式表示XML文档的官方W3C标准，分析该结构通常需要<strong>加载整个文档</strong>和内存中建立文档树模型。程序员可以通过操作文档树，来完成数据的获取、修改、删除等.</p>
-<blockquote>
-<p>  <strong>优点:</strong></p>
-<ol>
-<li>文档在内存中加载，允许对数据和结构做出更改.</li>
-<li>访问是双向的，可以在任何时候在树中双向解析数据。</li>
-</ol>
-<p>  <strong>缺点:</strong></p>
-<ol>
-<li>文档全部加载在内存中，消耗资源大.</li>
-</ol>
-</blockquote>
-<h4 id="JDOM解析"><a href="#JDOM解析" class="headerlink" title="JDOM解析"></a>JDOM解析</h4><p>目的是解析为Java特定文档模型，它简化与XML的交互并且比使用DOM实现更快。由于是第一个Java特定模型，JDOM一直得到大力推广和促进。</p>
-<blockquote>
-<p>  优点:</p>
-<ol>
-<li><p>使用具体类而不使用接口，简化了DOM的API。</p>
-</li>
-<li><p>大量使用了Java集合类，方便了Java开发人员。</p>
-<p>缺点：</p>
-</li>
-<li><p>没有较好的灵活性。</p>
-</li>
-<li><p>性能不是那么优异。</p>
-</li>
-</ol>
-</blockquote>
-<h4 id="DOM4J解析"><a href="#DOM4J解析" class="headerlink" title="DOM4J解析"></a>DOM4J解析</h4><p>它是JDOM的一种智能分支。它合并了许多超出基本XML文档表示的功能，包括集成的XPath支持、XML Schema支持以及用于大文档或流化文档的基于事件的处理。它还提供了构建文档表示的选项。</p>
-<p>DOM4J是一个非常优秀的Java XML API，具有性能优异、灵活性好、功能强大和极端易用使用的特点，同时它也是一个开放源代码的软件。如今你可以看到越来越多的Java软件都在使用DOM4J来读写XML。</p>
-<h5 id="DOM4J解析XML"><a href="#DOM4J解析XML" class="headerlink" title="DOM4J解析XML"></a>DOM4J解析XML</h5><p><strong>步骤:</strong></p>
-<ol>
-<li><p>引入DOM4j的jar包 dom4j.jar</p>
-</li>
-<li><p>创建一个指向XML文件的输入流</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"xml文件的地址"</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建一个XML读取工具对象<code>SAXReader</code></p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SAXReader sr = <span class="keyword">new</span> SAXReader();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用读取工具对象，读取XML文档的输入流， 并得到文档对象<code>Document</code></p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Document doc = sr.read(fis);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过文档对象, 获取XML文档中的根元素对象 <code>Element root</code></p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Element root = doc.getRootElement();</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p><strong>文档对象 <code>Document</code></strong></p>
-<p>指的是加载到内存的 整个XML文档。常用方法:</p>
-<ol>
-<li><p>通过文档对象, 获取XML文档中的根元素对象</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Element root = doc.getRootElement();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>添加根节点</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Element root = doc.addElement(<span class="string">"根节点名称"</span>);</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p><strong>元素对象 <code>Element</code></strong></p>
-<p>指的是XML文档中的单个节点。常用方法：</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>String getName()</code></td>
-<td>获取当前节点的标记名称</td>
-</tr>
-<tr>
-<td><code>String getText()</code></td>
-<td>获取节点内容</td>
-</tr>
-<tr>
-<td><code>void setText(String s)</code></td>
-<td>设置节点内容</td>
-</tr>
-<tr>
-<td><code>String attributeValue(String s)</code></td>
-<td>获取节点的属性值，s表示属性名称</td>
-</tr>
-<tr>
-<td><code>void addAttribute(String key,String value)</code></td>
-<td>添加属性 （key属性名，value属性值）</td>
-</tr>
-<tr>
-<td><code>Element element(String name)</code></td>
-<td>根据子节点名称获取匹配名称的第一个子节点对象</td>
-</tr>
-<tr>
-<td><code>List&lt;Element&gt; elements()</code></td>
-<td>获取所有的子节点对象</td>
-</tr>
-<tr>
-<td><code>String elementText(String s)</code></td>
-<td>返回子节点内容，s表示子标签名称</td>
-</tr>
-<tr>
-<td><code>Element addElement(String name)</code></td>
-<td>添加子节点  （name子节点名称）</td>
-</tr>
-</tbody></table>
-<p><strong>解析本地文件案例</strong></p>
-<p><img src="https://i.loli.net/2020/10/24/DWNRyanEpfSKIt9.png" alt=""></p>
-<p><strong>解析网络文件案例</strong></p>
-<p><img src="https://i.loli.net/2020/10/24/yR6wnKSqAjibEgI.png" alt=""></p>
-<h5 id="DOM4J-XPATH解析XML"><a href="#DOM4J-XPATH解析XML" class="headerlink" title="DOM4J - XPATH解析XML"></a>DOM4J - XPATH解析XML</h5><p>XPATH就是通过路径快速的查找一个或一组元素</p>
-<table>
-<thead>
-<tr>
-<th>标记</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>/</td>
-<td>从根节点开找</td>
-</tr>
-<tr>
-<td>//</td>
-<td>查找后代节点</td>
-</tr>
-<tr>
-<td>.</td>
-<td>查找当前节点</td>
-</tr>
-<tr>
-<td>…</td>
-<td>查找父节点</td>
-</tr>
-<tr>
-<td>@</td>
-<td>选择属性，属性使用方式:<br>[@属性名=‘值’] <br>[@属性名&gt;‘值’]<br>[@属性名&lt;‘值’] <br>[@属性名!=‘值’]</td>
-</tr>
-</tbody></table>
-<p>例如：在我们解析本地文件案例中有一个books.xml文件，如果我们想找到 “三国演义”这个元素，XPATH 路径k可以这样写：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//book[@id='1001']//name</span><br></pre></td></tr></table></figure>
-
-<p>通过Node类的两个方法, 来完成查找(Node是 Document 与 Element 的父接口)</p>
-<p>方法1，根据路径表达式， 查找匹配的单个节点，如果结果有多个，只取第一个</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Node e = selectSingleNode(<span class="string">"路径表达式"</span>);</span><br></pre></td></tr></table></figure>
-
-<p>方法2，根据路径表达式， 查找匹配的所有节点</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Node&gt; es = selectNodes(<span class="string">"路径表达式"</span>);</span><br></pre></td></tr></table></figure>
-
-<p>例子：</p>
-<p><img src="https://i.loli.net/2020/10/24/dptXgi5PVfseMKL.png" alt=""></p>
-<p><img src="https://i.loli.net/2020/10/24/IXvg15HAyc8KQ4J.png" alt="image-20201024011319670"></p>
-<h3 id="Java生成XML"><a href="#Java生成XML" class="headerlink" title="Java生成XML"></a>Java生成XML</h3><p><strong>步骤:</strong></p>
-<ol>
-<li><p>通过文档帮助器 (<code>DocumentHelper</code>) ，创建空的文档对象</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Document doc = DocumentHelper.createDocument();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过文档对象，向其中添加根节点</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Element root = doc.addElement(<span class="string">"根节点名称"</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过根节点对象root , 丰富我们的子节点</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Element e = root.addElement(<span class="string">"元素名称"</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建一个文件输出流 ,用于存储XML文件</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(<span class="string">"要存储的位置"</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将文件输出流, 转换为XML文档输出流</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XMLWriter xw = <span class="keyword">new</span> XMLWriter(fos);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>写出文档</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xw.write(doc);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>释放资源</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xw.close();</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p><strong>例子</strong></p>
-<p><img src="https://i.loli.net/2020/10/24/wJnlYCycOIZ2jVk.png" alt="image-20201024014247166"></p>
-<p>####XStream的使用</p>
-<p>快速的将Java中的对象, 转换为 XML字符串.</p>
-<p>使用步骤:</p>
-<ol>
-<li><p>创建XStream 对象</p>
- <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">XStream x</span> = new XStream();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改类生成的节点名称 (默认节点名称为 包名.类名)</p>
- <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x.<span class="keyword">alias</span>(<span class="string">"节点名称"</span>,类名<span class="class">.<span class="keyword">class</span>);</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>传入对象 , 生成XML字符串</p>
- <figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span> <span class="built_in">xml</span>字符串 = x.toXML(对象);</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>例子：</p>
-<p><img src="https://i.loli.net/2020/10/24/BMce4ZkQX85qbNi.png" alt="image-20201024013927345"></p>
-<h2 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h2><h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><p><a href="https://baike.baidu.com/item/JSON/2462549?fr=aladdin" target="_blank" rel="noopener">JSON</a>全称JavaScript Object Notation ，JS对象简谱 ，是一种轻量级的数据交换格式。</p>
-<blockquote>
-<p>  它基于 <a href="https://baike.baidu.com/item/ECMAScript" target="_blank" rel="noopener">ECMAScript</a> (欧洲计算机协会制定的js规范)的一个子集，采用完全独立于编程语言的文本格式来存储和表示数据。简洁和清晰的层次结构使得 JSON 成为理想的数据交换语言。 易于人阅读和编写，同时也易于机器解析和生成，并有效地提升网络传输效率。</p>
-<p>  JSON是[Douglas Crockford](<a href="https://baike.baidu.com/item/Douglas" target="_blank" rel="noopener">https://baike.baidu.com/item/Douglas</a> Crockford/5960317)在2001年开始推广使用的数据格式，在2005年-2006年正式成为主流的数据格式，雅虎和谷歌就在那时候开始广泛地使用JSON格式。</p>
-</blockquote>
-<h3 id="json语法"><a href="#json语法" class="headerlink" title="json语法"></a>json语法</h3><blockquote>
-<p>  该部分内容参考自<a href="https://www.sojson.com/json/json_syntax.html" target="_blank" rel="noopener">https://www.sojson.com/json/json_syntax.html</a></p>
-<p>  版权所属：SOJSON（原创文章）</p>
-<p>  原文地址：<a href="https://www.sojson.com/json/json_syntax.html" target="_blank" rel="noopener">https://www.sojson.com/json/json_syntax.html</a></p>
-</blockquote>
-<p><strong>json 语法规则</strong></p>
-<ul>
-<li><strong>数据在名称/值对中</strong>，也就是我们常说的键值对，用逗号分隔</li>
-<li><strong>花括号{}保存对象</strong></li>
-<li><strong>方括号[]保存数组</strong></li>
-</ul>
-<p><strong>JSON 数据</strong>的书写格式是：<code>{Key:Value}</code>、<code>{Key:Array}</code>。前面是键，中间是英文的“:”（冒号），然后是值。但是注意的是如果是字符串，严格来说都是要用英文双引号引起来的。例如：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"name"</span>:<span class="string">"answer"</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<p>JSON数据的值可以是 <strong>数字（整数或浮点数）、字符串（在双引号中）、逻辑值（<code>true</code> 或 <code>false</code>）、数组（在方括号中）、对象（在花括号中）、<code>null</code></strong>。</p>
-<p><strong>JSON对象</strong>在花括号中，对象可以包含多个名称/值对，如下代码所示：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"answer"</span>,</span><br><span class="line">    <span class="attr">"age"</span>: <span class="number">21</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>JSON数组</strong>在方括号（”[]”）中书写，数组可包含多个对象，如下“student”描述</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"student"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"name"</span>: <span class="string">"answer"</span>,</span><br><span class="line">            <span class="attr">"age"</span>: <span class="string">"21"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"name"</span>: <span class="string">"brian"</span>,</span><br><span class="line">            <span class="attr">"age"</span>: <span class="string">"20"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"name"</span>: <span class="string">"joe"</span>,</span><br><span class="line">            <span class="attr">"age"</span>: <span class="string">"25"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在上面的例子中，对象 “student” 是包含三个对象的数组。每个对象代表一条关于一个学生（姓名和年龄）的记录。</p>
-<h3 id="Java解析转换JSON"><a href="#Java解析转换JSON" class="headerlink" title="Java解析转换JSON"></a>Java解析转换JSON</h3><blockquote>
-<p>  将Java中的对象快速的转换为JSON格式的字符串。</p>
-<p>  将JSON格式的字符串, 转换为Java的对象。</p>
-</blockquote>
-<p>Java官方未提供官方的json解析工具，json的解析借助第三方工具完成。常见的第三方工具有谷歌的<strong>Gson</strong>和阿里巴巴的<strong>fastjson</strong>。在使用前都要先导入jar包，可以从某hub上下载。</p>
-<p><img src="https://i.loli.net/2020/10/24/OxXGZVTL7avnmEk.png" alt=""></p>
-<h4 id="Gson"><a href="#Gson" class="headerlink" title="Gson"></a>Gson</h4><p><strong>将对象转换为JSON字符串</strong>，在需要转换JSON字符串的位置编写如下代码即可：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String json = <span class="keyword">new</span> Gson().toJSON(要转换的对象);</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2020/10/24/axH4XYOTv9MK8Nq.png" alt=""></p>
-<p><strong>将JSON字符串转换为对象</strong>，在需要转换Java对象的位置，编写如下代码:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象 = <span class="keyword">new</span> Gson().fromJson(JSON字符串,对象类型<span class="class">.<span class="keyword">class</span>)</span>;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2020/10/24/CXxaiUnwAqPYEOD.png" alt=""></p>
-<h4 id="FastJson"><a href="#FastJson" class="headerlink" title="FastJson"></a>FastJson</h4><p><strong>将对象转换为JSON字符串</strong>，在需要转换JSON字符串的位置编写如下代码即可:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String json=JSON.toJSONString(要转换的对象);</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2020/10/24/lRdcx8KVgMz69yp.png" alt=""></p>
-<p><strong>将JSON字符串转换为对象</strong>，在需要转换Java对象的位置, 编写如下代码:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">类型 对象名=JSON.parseObject(JSON字符串, 类型<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"><span class="comment">//或者</span></span><br><span class="line">List&lt;类型&gt; list=JSON.parseArray(JSON字符串,类型<span class="class">.<span class="keyword">class</span>)</span>;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2020/10/24/VE1laqAPfMgYvcG.png" alt=""></p>
-<p><img src="https://i.loli.net/2020/10/24/eDRPWEik5fpCO2s.png" alt=""></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -633,10 +221,9 @@
       <meta itemprop="name" content="鹏空间">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/24/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-title-link" itemprop="url">Java多线程</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          Java多线程
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -659,6 +246,13 @@
             </span>
 
           
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
   
   <span class="post-meta-item">
     
@@ -697,7 +291,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="多线程概述"><a href="#多线程概述" class="headerlink" title="多线程概述"></a>多线程概述</h2><p>==多线程：栈空间独立，堆内存共享==</p>
+        <h2 id="多线程概述"><a href="#多线程概述" class="headerlink" title="多线程概述"></a>多线程概述</h2><p>==多线程：栈空间独立，堆内存共享==</p>
 <p>多线程是实现并发机制的一种有效手段。进程和线程一样，都是实现并发的一个基本单位。线程是比进程更小的执行单位，线程是在进程的基础上进行的进一步划分。所谓多线程是指一个进程在执行过程中可以产生多个线程，这些线程可以同时存在、同时运行，一个进程可能包含了多个同时执行的线程。</p>
 <h3 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h3><ul>
 <li><strong>进程</strong>：<ul>
@@ -1248,367 +842,86 @@
 
 
 
-      
     </div>
 
     
     
+    <div>
     
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
       
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.pengspace.top/2020/10/24/Java%E6%B3%9B%E5%9E%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://i.loli.net/2020/05/01/VMPAdgQKfpzoWtc.jpg">
-      <meta itemprop="name" content="AnswerCoder">
-      <meta itemprop="description" content="记录自己学习的历程">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="鹏空间">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/24/Java%E6%B3%9B%E5%9E%8B/" class="post-title-link" itemprop="url">Java泛型</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-10-24 16:21:15 / 修改时间：16:22:43" itemprop="dateCreated datePublished" datetime="2020-10-24T16:21:15+08:00">2020-10-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">Java基础</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">评论数：</span>
-    
-    <a title="valine" href="/2020/10/24/Java%E6%B3%9B%E5%9E%8B/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/24/Java%E6%B3%9B%E5%9E%8B/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="AnswerCoder 微信支付">
+        <p>微信支付</p>
+      </div>
       
-          <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>泛型，即“参数化类型”。就是将类型由原来的具体的类型参数化，类似于方法中的变量参数，此时类型也定义成参数形式（可以称之为类型形参），然后在使用/调用时传入具体的类型（类型实参）。</p>
-<blockquote>
-<p>  <strong>注意：</strong></p>
-<p>  在编译之后程序会采取去泛型化的措施。也就是说Java中的泛型，只在编译阶段有效。在编译过程中，正确检验泛型结果后，会将泛型的相关信息擦出，并且在对象进入和离开方法的边界处添加类型检查和类型转换的方法。也就是说，泛型信息不会进入到运行时阶段。</p>
-<p>  <strong>作用：</strong></p>
-<ol>
-<li>提高代码复用率</li>
-<li>泛型中的类型在使用时指定，不需要强制类型转换（类型安全，编译器会检查类型）</li>
-</ol>
-</blockquote>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><h4 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义一个泛型类：</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassName</span>&lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line">	<span class="keyword">private</span> T data;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> T <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> data;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(T data)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.data = data;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//使用该类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ClassName&lt;String&gt; val1 = <span class="keyword">new</span> ClassName&lt;&gt; ();     <span class="comment">//在使用时指定为具体的类型</span></span><br><span class="line">        val1.setData(<span class="string">""</span>);</span><br><span class="line">        ClassName&lt;Integer&gt; val2 = <span class="keyword">new</span> ClassName&lt;&gt; ();</span><br><span class="line">        val2.setData(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="AnswerCoder 支付宝">
+        <p>支付宝</p>
+      </div>
 
-<h4 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IntercaceName</span>&lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line">	<span class="function">T <span class="title">getData</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//实现接口时，可以选择指定泛型类型，也可以选择不指定， 如下：</span></span><br><span class="line"><span class="comment">//指定类型：</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Interface1</span> <span class="keyword">implements</span> <span class="title">IntercaceName</span>&lt;<span class="title">String</span>&gt; </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String text;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> text;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//不指定类型：</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Interface1</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span> <span class="title">IntercaceName</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> T data;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> T <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> data;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  </div>
+</div>
 
-<h4 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> &lt;T&gt; T 方法名(T a, T b) &#123;&#125;		<span class="comment">//T只在方法内有效</span></span><br></pre></td></tr></table></figure>
+        
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        print(<span class="string">"haha"</span>);</span><br><span class="line">        print(<span class="number">11212</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(T a)</span></span>&#123;		<span class="comment">//方法内的泛型只在方法内有效</span></span><br><span class="line">        System.out.println(a);	</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="限制泛型类型"><a href="#限制泛型类型" class="headerlink" title="限制泛型类型"></a>限制泛型类型</h3><p>在使用泛型时， 可以指定泛型的限定区域 ，</p>
-<ul>
-<li>例如： 必须是某某类的子类或 某某接口的实现类，格式：<br>  <code>&lt;T extends 类或接口1 &amp; 接口2&gt;</code></li>
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>AnswerCoder
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.pengspace.top/2020/10/24/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="Java多线程">https://www.pengspace.top/2020/10/24/Java多线程/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
 </ul>
-<p><img src="https://i.loli.net/2020/10/13/CjxYoEDT42qc8KR.png" alt="image-20201013115930582"></p>
-<h3 id="泛型中的通配符"><a href="#泛型中的通配符" class="headerlink" title="泛型中的通配符"></a>泛型中的通配符</h3><p>类型通配符是使用<code>?</code>代替方法具体的类型实参。</p>
-<ol>
-<li><code>&lt;? extends Parent&gt;</code> 指定了泛型类型的上届</li>
-<li><code>&lt;? super Child&gt;</code>  指定了泛型类型的下届</li>
-<li><code>&lt;?&gt;</code> 指定了没有限制的泛型类型</li>
-</ol>
-<p><img src="https://i.loli.net/2020/10/13/J2DuWzcF4KIa5tl.png" alt=""></p>
-<blockquote>
-<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p>  如果需要 ，我们可以指定多个泛型，中间用 <code>,</code>隔开即可</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassName</span>&lt;<span class="title">T</span>,<span class="title">E</span>,<span class="title">A</span>,<span class="title">B</span>&gt;</span>&#123;</span><br><span class="line">	<span class="keyword">private</span> T data1;</span><br><span class="line">   <span class="keyword">private</span> E data2;</span><br><span class="line">	<span class="keyword">private</span> A data3;</span><br><span class="line">   <span class="keyword">private</span> B data4;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
+</div>
 
-      
-    </div>
 
-    
-    
-    
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.pengspace.top/2020/10/11/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://i.loli.net/2020/05/01/VMPAdgQKfpzoWtc.jpg">
-      <meta itemprop="name" content="AnswerCoder">
-      <meta itemprop="description" content="记录自己学习的历程">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="鹏空间">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/10/11/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">Java异常处理</a>
-        </h2>
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+              <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 多线程</a>
+          </div>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-10-11 14:24:00 / 修改时间：14:26:34" itemprop="dateCreated datePublished" datetime="2020-10-11T14:24:00+08:00">2020-10-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">Java基础</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">评论数：</span>
-    
-    <a title="valine" href="/2020/10/11/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/11/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>6.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="什么是异常"><a href="#什么是异常" class="headerlink" title="什么是异常"></a>什么是异常</h2><p>异常是在程序中导致程序中断运行的一种指令流。</p>
-<p>先来看如下代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionDemo</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">10</span> ;</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span> ;</span><br><span class="line">        System.out.println(<span class="string">"============= 计算开始 ============="</span>) ;</span><br><span class="line">        System.out.println(i + <span class="string">"/"</span> + j + <span class="string">"="</span> + i / j);</span><br><span class="line">        System.out.println(<span class="string">"============= 计算结束 ============="</span>) ;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/10/11/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.pengspace.top/2020/10/06/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://i.loli.net/2020/05/01/VMPAdgQKfpzoWtc.jpg">
-      <meta itemprop="name" content="AnswerCoder">
-      <meta itemprop="description" content="记录自己学习的历程">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="鹏空间">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/06/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7/" class="post-title-link" itemprop="url">Java面向对象高级</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-10-06 14:51:51 / 修改时间：15:02:49" itemprop="dateCreated datePublished" datetime="2020-10-06T14:51:51+08:00">2020-10-06</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">Java基础</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">评论数：</span>
-    
-    <a title="valine" href="/2020/10/06/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/06/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>12k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>11 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>有时候我们需要这样一个类，它不需要被实例化，也不需要实现完整的方法，它只是用来被继承的，用来限制子类的一个“规范”。这样的类我们就可以将它定义为<strong>抽象类</strong>，抽象类内的方法可以定义为<strong>抽象方法</strong>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/10/06/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/24/Java%E6%B3%9B%E5%9E%8B/" rel="prev" title="Java泛型">
+      <i class="fa fa-chevron-left"></i> Java泛型
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/10/24/XML%E5%92%8CJSON%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88java%EF%BC%89/" rel="next" title="XML和JSON的使用（java）">
+      XML和JSON的使用（java） <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
   
-
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
 
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -1655,6 +968,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程概述"><span class="nav-number">1.</span> <span class="nav-text">多线程概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程与线程"><span class="nav-number">1.1.</span> <span class="nav-text">进程与线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程调度"><span class="nav-number">1.2.</span> <span class="nav-text">线程调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同步与异步-amp-并发与并行"><span class="nav-number">1.3.</span> <span class="nav-text">同步与异步&amp;并发与并行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程的实现方式"><span class="nav-number">2.</span> <span class="nav-text">多线程的实现方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#继承Thread类"><span class="nav-number">2.1.</span> <span class="nav-text">继承Thread类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现Runnable接口"><span class="nav-number">2.2.</span> <span class="nav-text">实现Runnable接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现Callable接口"><span class="nav-number">2.3.</span> <span class="nav-text">实现Callable接口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程的应用实例"><span class="nav-number">3.</span> <span class="nav-text">多线程的应用实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置和获取线程名称"><span class="nav-number">3.1.</span> <span class="nav-text">设置和获取线程名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程休眠sleep"><span class="nav-number">3.2.</span> <span class="nav-text">线程休眠sleep</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程的中断"><span class="nav-number">3.3.</span> <span class="nav-text">线程的中断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#守护线程"><span class="nav-number">3.4.</span> <span class="nav-text">守护线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程安全问题"><span class="nav-number">3.5.</span> <span class="nav-text">线程安全问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题引入"><span class="nav-number">3.5.1.</span> <span class="nav-text">问题引入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同步代码块"><span class="nav-number">3.5.2.</span> <span class="nav-text">同步代码块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同步方法"><span class="nav-number">3.5.3.</span> <span class="nav-text">同步方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#显式锁"><span class="nav-number">3.5.4.</span> <span class="nav-text">显式锁</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程死锁"><span class="nav-number">3.6.</span> <span class="nav-text">线程死锁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概述"><span class="nav-number">3.6.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何避免死锁"><span class="nav-number">3.6.2.</span> <span class="nav-text">如何避免死锁</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程通信"><span class="nav-number">3.7.</span> <span class="nav-text">多线程通信</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#生产者与消费者"><span class="nav-number">3.7.1.</span> <span class="nav-text">生产者与消费者</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的六种状态"><span class="nav-number">4.</span> <span class="nav-text">线程的六种状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池Executors"><span class="nav-number">5.</span> <span class="nav-text">线程池Executors</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存线程池"><span class="nav-number">5.1.</span> <span class="nav-text">缓存线程池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定长线程池"><span class="nav-number">5.2.</span> <span class="nav-text">定长线程池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单线程线程池"><span class="nav-number">5.3.</span> <span class="nav-text">单线程线程池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#周期性任务定长线程池"><span class="nav-number">5.4.</span> <span class="nav-text">周期性任务定长线程池</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
       
