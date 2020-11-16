@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.pengspace.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="数据库介绍 什么是数据库 数据库(Database)就是按照数据结构来组织，存储和管理数据的仓库。专业的数据库是专门对数据进行创建，访问，管理，搜索等操作的软件，比起我们自己用文件读写的方式，用它对数据进行管理更加的方便，快速，安全。  数据库特点及作用  对数据进行持久化的保存 方便数据的存储和查询，速度快，安全，方便 可以处理并发访问 更加安全的权限管理访问机制   常见的数据库 数据库分两大">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL数据库基础">
+<meta property="og:url" content="https://www.pengspace.top/2020/11/16/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="鹏空间">
+<meta property="og:description" content="数据库介绍 什么是数据库 数据库(Database)就是按照数据结构来组织，存储和管理数据的仓库。专业的数据库是专门对数据进行创建，访问，管理，搜索等操作的软件，比起我们自己用文件读写的方式，用它对数据进行管理更加的方便，快速，安全。  数据库特点及作用  对数据进行持久化的保存 方便数据的存储和查询，速度快，安全，方便 可以处理并发访问 更加安全的权限管理访问机制   常见的数据库 数据库分两大">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/11/07/fdz4w9cKgm5eoqu.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/07/tqBQ3OWFiJYAVXM.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/07/4JtSwzNr2am3qZb.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/07/dHBwemsUYk8Kr79.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/07/Wv9U7rtKES5ohRZ.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/07/9NtUVPWJTiYzwGZ.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/07/iCOfXvus3qG7A26.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/07/YMBXG18lpdgKWVm.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/07/TrcszjHbp2lK7FR.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/07/i9WorwyE14DXhZg.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/07/xiOq49MkGC7mR2p.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/08/iW2HgJZTRpaGBby.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/07/ERAg51wJ43vdKNF.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/08/C1EtjLHgFfQ76SX.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/08/No9qvOmStG1z6be.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/08/i8v9tsl1JkrISmE.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/08/kfDA5FUwxgGN6jz.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/08/a8mH6gLkY5zOpbS.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/08/fkPm93ciztJb7uA.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/08/WmOsZi8a5KjRMSN.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/08/qoVjDgp12uvzaYw.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/08/DY6nwXKyW9lefOI.png">
+<meta property="article:published_time" content="2020-11-16T11:36:21.000Z">
+<meta property="article:modified_time" content="2020-11-16T11:41:29.127Z">
+<meta property="article:author" content="AnswerCoder">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/11/07/fdz4w9cKgm5eoqu.png">
+
+<link rel="canonical" href="https://www.pengspace.top/2020/11/16/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MySQL数据库基础 | 鹏空间</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+    <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+    <script type="text/javascript" src="/js/src/fireworks.js"></script>
+  
+<link rel="alternate" href="/atom.xml" title="鹏空间" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">鹏空间</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">学习笔记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.pengspace.top/2020/11/16/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2020/05/01/VMPAdgQKfpzoWtc.jpg">
+      <meta itemprop="name" content="AnswerCoder">
+      <meta itemprop="description" content="记录自己学习的历程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鹏空间">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MySQL数据库基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-16 19:36:21 / 修改时间：19:41:29" itemprop="dateCreated datePublished" datetime="2020-11-16T19:36:21+08:00">2020-11-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/2020/11/16/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/16/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>20k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>19 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="数据库介绍"><a href="#数据库介绍" class="headerlink" title="数据库介绍"></a>数据库介绍</h2><ul>
+<li><p>什么是数据库</p>
+<p>数据库(Database)就是按照数据结构来组织，存储和管理数据的仓库。<br>专业的数据库是专门对数据进行创建，访问，管理，搜索等操作的软件，比起我们自己用文件读写的方式，用它对数据进行管理更加的方便，快速，安全。</p>
+</li>
+<li><p>数据库特点及作用</p>
+<ul>
+<li>对数据进行持久化的保存</li>
+<li>方便数据的存储和查询，速度快，安全，方便</li>
+<li>可以处理并发访问</li>
+<li>更加安全的权限管理访问机制</li>
+</ul>
+</li>
+<li><p>常见的数据库</p>
+<p>数据库分两大类，一类是 <a href="https://baike.baidu.com/item/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/8999831?fr=aladdin" target="_blank" rel="noopener">关系型数据库</a>。另一类叫做 <a href="https://baike.baidu.com/item/NoSQL/8828247?fromtitle=%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93&fromid=6376860&fr=aladdin" target="_blank" rel="noopener">非关系型数据库</a>。</p>
+<ul>
+<li>关系型数据库： MySQL，Oracle，PostgreSQL，SQLserver…</li>
+<li>非关系型数据库：Redis内存数据库，MongoDB文档数据库…</li>
+</ul>
+<p><img src="https://i.loli.net/2020/11/07/fdz4w9cKgm5eoqu.png" alt=""></p>
+<p>关系型数据库与非关系型数据库对比可以看这篇文章:</p>
+<p><a href="https://my.oschina.net/u/3647687/blog/1534979" target="_blank" rel="noopener">https://my.oschina.net/u/3647687/blog/1534979</a></p>
+</li>
+</ul>
+<blockquote>
+<p>  ‘</p>
+<p>  MySQL是最流行的关系型数据库管理系统</p>
+<p>  关于数据库的一些概念</p>
+<ul>
+<li><p>数据库 Database</p>
+</li>
+<li><p>数据表 Tables</p>
+</li>
+<li><p>数据字段 filed</p>
+</li>
+<li><p>行 row ：每一行就是一条数据</p>
+</li>
+<li><p>列 col</p>
+<p><img src="https://i.loli.net/2020/11/07/tqBQ3OWFiJYAVXM.png" alt=""></p>
+<p><img src="https://i.loli.net/2020/11/07/4JtSwzNr2am3qZb.png" alt=""></p>
+</li>
+</ul>
+</blockquote>
+<h2 id="MySql基础操作"><a href="#MySql基础操作" class="headerlink" title="MySql基础操作"></a>MySql基础操作</h2><h3 id="使用MySql的三种方式："><a href="#使用MySql的三种方式：" class="headerlink" title="使用MySql的三种方式："></a>使用MySql的三种方式：</h3><blockquote>
+<p>  方式一：通过在命令行敲命令来操作</p>
+<p>  方式二：通过图型界面工具,如 Navicat 等</p>
+<p>  方式三：通过编程语言(python,php,java,go…)执行mysql命令</p>
+</blockquote>
+<h3 id="SQL-Structure-query-language-结构化查询语言"><a href="#SQL-Structure-query-language-结构化查询语言" class="headerlink" title="SQL ( Structure query language ) 结构化查询语言"></a>SQL ( Structure query language ) 结构化查询语言</h3><blockquote>
+<p>  SQL语言分为4个部分：DDL（定义）、DML（操作）、DQL（查询）、DCL（控制）</p>
+</blockquote>
+<p>####SQL语句中的快捷指令</p>
+<blockquote>
+<p>  <code>\G</code> 格式化输出（文本式，竖立显示）</p>
+<p>  <code>\s</code> 查看服务器端信息</p>
+<p>  <code>\c</code> 结束命令输入操作</p>
+<p>  <code>\q</code>退出当前sql命令行模式</p>
+<p>  <code>\h</code> 查看帮助</p>
+</blockquote>
+<h3 id="数据库操作步骤-windows命令行"><a href="#数据库操作步骤-windows命令行" class="headerlink" title="数据库操作步骤(windows命令行)"></a>数据库操作步骤(windows命令行)</h3><ol>
+<li><strong>开启数据库服务：</strong></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net start 你电脑中mysql服务的服务名</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  你mysql服务的服务名一般安装时就指定好的，默认是mysql。如果不是可以从系统服务里找一下</p>
+<p>  windows中查看你的mysql服务名</p>
+<ol>
+<li><p><kbd>win</kbd>+<kbd>R</kbd>键 打开运行，输入<code>services.msc</code>，确定</p>
+<p><img src="https://i.loli.net/2020/11/07/dHBwemsUYk8Kr79.png" alt="image-20201107184754395"></p>
+</li>
+<li><p>找到你mysql的服务名</p>
+<p><img src="https://i.loli.net/2020/11/07/Wv9U7rtKES5ohRZ.png" alt="image-20201107185331055"></p>
+</li>
+</ol>
+</blockquote>
+<p><img src="https://i.loli.net/2020/11/07/9NtUVPWJTiYzwGZ.png" alt=""></p>
+<blockquote>
+<p>  关闭数据库服务：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net stop 你电脑中mysql服务的服务名</span><br></pre></td></tr></table></figure>
+</blockquote>
+<ol start="2">
+<li><strong>连接数据库：</strong></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -h 服务器地址 -u 用户名 -p (密码) -P 端口</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2020/11/07/iCOfXvus3qG7A26.png" alt="image-20201107190657607"></p>
+<p>如果时本地操作可以省略 -h 和 -P，写成这样即可</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u 用户名 -p (密码)</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>操作(增删改)</strong></li>
+</ol>
+<p>后面会详细讲解</p>
+<ol start="4">
+<li><strong>退出MySql</strong></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exit;</span><br><span class="line">-- 或者</span><br><span class="line">quit;</span><br></pre></td></tr></table></figure>
+
+<p>也可以用快捷命令<code>\q</code></p>
+<h2 id="MySql数据类型"><a href="#MySql数据类型" class="headerlink" title="MySql数据类型"></a>MySql数据类型</h2><blockquote>
+<p>  数据类型是定义列中可以存储什么类型的数据以及该数据实际怎样存储的基本规则</p>
+<p>  数据类型限制存储在数据列中的数据的类型。例如，数值数据类型列只能接受数值类型的的数据</p>
+<p>  在设计表时，应该特别重视所用的数据类型。使用错误的数据类型可能会严重地影响应用程序的功能和性能。</p>
+<p>  后续更改包含数据的列不是一件小事（而且这样做可能会导致数据丢失），定义之后一般不会再修改字段的数据类型</p>
+</blockquote>
+<p><strong>基本常用的数据类型</strong></p>
+<blockquote>
+<p>  数据类型：整型、浮点型、字符串、日期等</p>
+</blockquote>
+<h3 id="字符串数据类型"><a href="#字符串数据类型" class="headerlink" title="字符串数据类型"></a>字符串数据类型</h3><p>最常用的数据类型是串数据类型。它们存储串，如名字、地址、电 话号码、邮政编码等。</p>
+<p>最常用的有三种基本的串类型，分别为<strong>定长串<code>char</code></strong>、<strong>变长串<code>varchar</code></strong>和<strong>变成文本<code>text</code></strong></p>
+<p><strong>定长串：<code>char</code></strong></p>
+<ul>
+<li><p>接受长度固定的字符串，其长度是在创建表时指定的。不允许存储多于指定长度字符的数据。</p>
+</li>
+<li><p>指定长度后，就会分配固定的存储空间用于存放数据</p>
+</li>
+</ul>
+<blockquote>
+<p>  <code>char(7)</code> 不管实际插入多少字符，它都会占用7个字符位置</p>
+</blockquote>
+<p><strong>变长串 ：<code>varchar</code></strong></p>
+<ul>
+<li>存储可变长度的字符串 </li>
+</ul>
+<blockquote>
+<p>  <code>varchar(7)</code> 如果实际插入4个字符，那么它只占4个字符位置，当然插入的数据长度不能超过7个字符。</p>
+</blockquote>
+<blockquote>
+<p>  <strong>注意：</strong></p>
+<p>  既然变长串数据类型这样灵活，为什么还要使用定长串数据类型？</p>
+<p>  回答：因为性能，MySQL处理定长列远比处理变长列快得多。</p>
+</blockquote>
+<p><strong>变长文本：<code>text</code></strong></p>
+<p>变长文本类型存储，最大长度为64K</p>
+<p><img src="https://i.loli.net/2020/11/07/YMBXG18lpdgKWVm.png" alt="串类型"></p>
+<h3 id="数值类型"><a href="#数值类型" class="headerlink" title="数值类型"></a>数值类型</h3><p>数值数据类型存储数值。MySQL支持多种数值数据类型，每种存储的数值具有不同的取值范围。支持的取值范围越大，所需存储空间越多。</p>
+<p><img src="https://i.loli.net/2020/11/07/TrcszjHbp2lK7FR.png" alt="数值类型"></p>
+<p>举例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">decimal(5, 2) 	<span class="comment">--表示数值总共5位, 小数占2位</span></span><br><span class="line">tinyint 		<span class="comment">--1字节(8位) 0-255/-128-127</span></span><br><span class="line">int 			<span class="comment">--4字节。 -21亿-21亿/0-42亿</span></span><br><span class="line"><span class="comment">-- MySQL中没有专门存储货币的数据类型，一般情况下使用DECIMAL(8, 2)或float</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  <strong>有符号或无符号</strong></p>
+<p>  所有数值数据类型（除BIT和BOOLEAN外）都可以有符号或无符号</p>
+<p>  有符号数值列可以存储正或负的数值</p>
+<p>  无符号数值列只能存储正数。</p>
+<p>  默认情况为有符号，但如果你知道自己不需要存储负值，可以使用UNSIGNED关键字</p>
+</blockquote>
+<h3 id="日期和时间类型"><a href="#日期和时间类型" class="headerlink" title="日期和时间类型"></a>日期和时间类型</h3><p>MySQL使用专门的数据类型来存储日期和时间值</p>
+<p><img src="https://i.loli.net/2020/11/07/i9WorwyE14DXhZg.png" alt=""></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datetime <span class="comment">-- 8字节 范围：1000-01-01 00:00:00 ~ 9999-12-31 23:59:59</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="二进制数据类型"><a href="#二进制数据类型" class="headerlink" title="二进制数据类型"></a>二进制数据类型</h3><p>二进制数据类型可存储任何数据（甚至包括二进制信息），如图像、多媒体、字处理文档等</p>
+<blockquote>
+<p>  通常情况下，不会使用二进制数据类型进行存储到数据库中</p>
+</blockquote>
+<p><img src="https://i.loli.net/2020/11/07/xiOq49MkGC7mR2p.png" alt="二进制类型"></p>
+<h3 id="表的字段约束"><a href="#表的字段约束" class="headerlink" title="表的字段约束"></a>表的字段约束</h3><ul>
+<li><code>unsigned</code> 无符号(给数值类型使用，表示为正数，不写可以表示正负数都可以)</li>
+<li>字段类型后面加括号限制宽度<ul>
+<li>char(5)、varchar(7) 在字符类型后面加限制，表示字符串的长度</li>
+<li>int(4) 没有意义，默认无符号的int为int(11)，有符号的int(10)，在数字类型后面只加(x)限制宽度没有意义。</li>
+<li><code>int(4) unsigned zerofill</code>只有当给int类型设置有前导零(zerofill)时，设置int的宽度才有意义(不够长度会在前面补 0)。</li>
+</ul>
+</li>
+<li><code>not null</code> 不能为空，在操作数据库时如果输入该字段的数据为NULL ，就会报错</li>
+<li><code>default</code> 设置默认值</li>
+<li><code>primary key</code> 主键不能为空，且唯一。一般和自动递增一起配合使用。</li>
+<li><code>auto_increment</code> 定义列为自增属性，一般用于主键，数值会自动加1</li>
+<li><code>unique</code> 唯一索引(数据不能重复:用户名)可以增加查询速度，但是会降低插入和更新速度</li>
+</ul>
+<h3 id="MySQL的运算符"><a href="#MySQL的运算符" class="headerlink" title="MySQL的运算符"></a>MySQL的运算符</h3><ul>
+<li><p>算术运算符： +、 -、 *、 /或DIV、 %或MOD</p>
+</li>
+<li><p>比较运算符： =、 &gt;、 &lt;、 &gt;=、 &lt;=、!=</p>
+</li>
+<li><p>数据库特有的比较： in、not in、is null、is not null、like、between、and</p>
+</li>
+<li><p>逻辑运算符： and、or、not</p>
+</li>
+<li><p>like: 支持特殊符号 % 和 _  </p>
+<p>其中 % 表示任意数量的任意字符， _ 表示任意一位字符</p>
+<p><strong>详细内容可以看<a href="https://www.runoob.com/mysql/mysql-operator.html" target="_blank" rel="noopener">菜鸟编程MySQL运算符</a></strong></p>
+</li>
+</ul>
+<h3 id="主键"><a href="#主键" class="headerlink" title="主键"></a>主键</h3><blockquote>
+<p>  <font color=red>表中每一行都应该有可以唯一标识自己的一列，用于记录两条记录不能重复</font>，任意两行都不具有相同的主键值</p>
+<p>  应该总是定义主键 虽然并不总是都需要主键，但大多数数据库设计人员都应保证他们创建的每个表具有一个主键，以便于以后的数据操作和管理。</p>
+</blockquote>
+<p><strong>对于主键的要求</strong></p>
+<ul>
+<li><p>记录一旦插入到表中，主键最好不要再修改</p>
+</li>
+<li><p>不允许NULL</p>
+</li>
+<li><p>不在主键列中使用可能会更改的值。（例如，如果使用一个名字作为主键以标识某个供应商，当该供应商合并或更改其名字时，就得更改这个主键。）</p>
+</li>
+<li><p>自增整数类型：数据库会在插入数据时自动为每一条记录分配一个自增整数，这样我们就完全不用担心主键重复，也不用自己预先生成主键</p>
+</li>
+<li><p>可以使用多个列作为联合主键，但联合主键并不常用。使用多列作为主键时，所有列值的组合必须是唯一的</p>
+</li>
+</ul>
+<h2 id="MySql数据库表引擎与字符集"><a href="#MySql数据库表引擎与字符集" class="headerlink" title="MySql数据库表引擎与字符集"></a>MySql数据库表引擎与字符集</h2><h3 id="服务器处理客户端请求"><a href="#服务器处理客户端请求" class="headerlink" title="服务器处理客户端请求"></a>服务器处理客户端请求</h3><p>其实不论客户端进程和服务器进程是采用哪种方式进行通信，最后实现的效果都是：<strong>客户端进程向服务器进程发送一段文本（MySQL语句），服务器进程处理后再向客户端进程发送一段文本（处理结果）。</strong></p>
+<p>那服务器进程对客户端进程发送的请求做了什么处理，才能产生最后的处理结果呢？客户端可以向服务器发送增删改查各类请求，我们这里以比较复杂的查询请求为例来画个图展示一下大致的过程：</p>
+<p><img src="https://i.loli.net/2020/11/08/iW2HgJZTRpaGBby.png" alt=""></p>
+<blockquote>
+<p>  虽然查询缓存有时可以提升系统性能，但也不得不因维护这块缓存而造成一些开销，比如每次都要去查询缓存中检索，查询请求处理完需要更新查询缓存，维护该查询缓存对应的内存区域。从MySQL 5.7.20开始，不推荐使用查询缓存，并在MySQL 8.0中删除。</p>
+</blockquote>
+<h3 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h3><p><code>MySQL</code> 服务器把<strong>数据的存储和提取操作</strong>都封装到了一个叫<strong>存储引擎</strong>的模块里。我们知道表是由一行一行的记录组成的，但这只是一个逻辑上的概念，物理上如何表示记录，怎么从表中读取数据，怎么把数据写入具体的物理存储器上，这都是存储引擎负责的事情。为了实现不同的功能， <code>MySQL</code> 提供了各式各样的存储引擎，不同存储引<br>擎管理的表具体的存储结构可能不同，采用的存取算法也可能不同。</p>
+<blockquote>
+<p>  存储引擎以前叫做<strong>表处理器</strong>，它的功能就是接收上层传下来的指令，然后对表中的数据进行提取或写入操作。</p>
+</blockquote>
+<p>为了管理方便，人们把<strong>连接管理、查询缓存、语法解析、查询优化</strong>这些并不涉及真实数据存储的功能划分为<br><code>MySQL server</code> 的功能，把真实存取数据的功能划分为存储引擎的功能。各种不同的存储引擎向上边的<code>MySQL server</code> 层提供统一的调用接口（也就是存储引擎API），包含了几十个底层函数，像”读取索引第一条内容”、”读取索引下一条内容”、”插入记录”等等。</p>
+<p>所以在MySQL server 完成了查询优化后，只需按照生成的执行计划调用底层存储引擎提供的API，获取到数据后返回给客户端就好了。</p>
+<p>MySQL 支持非常多种存储引擎：</p>
+<table>
+<thead>
+<tr>
+<th>存储引擎</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ARCHIVE</code></td>
+<td>用于数据存档（行被插入后不能再修改）</td>
+</tr>
+<tr>
+<td><code>BLACKHOLE</code></td>
+<td>丢弃写操作，读操作会返回空内容</td>
+</tr>
+<tr>
+<td><code>CSV</code></td>
+<td>在存储数据时，以逗号分隔各个数据项</td>
+</tr>
+<tr>
+<td><code>FEDERATED</code></td>
+<td>用来访问远程表</td>
+</tr>
+<tr>
+<td><code>InnoDB</code></td>
+<td>具备外键支持功能的事务存储引擎</td>
+</tr>
+<tr>
+<td><code>MEMORY</code></td>
+<td>置于内存的表</td>
+</tr>
+<tr>
+<td><code>MERGE</code></td>
+<td>用来管理多个MyISAM表构成的表集合</td>
+</tr>
+<tr>
+<td><code>MyISAM</code></td>
+<td>主要的非事务处理存储引擎</td>
+</tr>
+<tr>
+<td><code>NDB</code></td>
+<td>MySQL集群专用存储引擎</td>
+</tr>
+</tbody></table>
+<h4 id="MyISAM和InnoDB表引擎的区别"><a href="#MyISAM和InnoDB表引擎的区别" class="headerlink" title="MyISAM和InnoDB表引擎的区别"></a>MyISAM和InnoDB表引擎的区别</h4><ol>
+<li><p><strong>事务支持</strong></p>
+<p>MyISAM不支持事务，而InnoDB支持。</p>
+<blockquote>
+<p>  事物：访问并更新数据库中数据的执行单元。事物操作中，要么都执行要么都不执行</p>
+</blockquote>
+</li>
+<li><p><strong>存储结构</strong></p>
+<p>MyISAM：每个MyISAM在磁盘上存储成三个文件。</p>
+<ul>
+<li>.frm文件存储表结构。</li>
+<li>.MYD文件存储数据。</li>
+<li>.MYI文件存储索引。</li>
+</ul>
+<p>InnoDB：主要分为两种文件进行存储。</p>
+<ul>
+<li>.frm 存储表结构</li>
+<li>.ibd 存储数据和索引 （也可能是多个.ibd文件，或者是独立的表空间文件）</li>
+</ul>
+</li>
+<li><p><strong>表锁差异</strong></p>
+<p>MyISAM：<strong>只支持表级锁</strong>，用户在操作myisam表时，select，update，delete，insert语句都会给表自动加锁，如果加锁以后的表满足insert并发的情况下，可以在表的尾部插入新的数据。 </p>
+<p>InnoDB：<strong>支持事务和行级锁，是innodb的最大特色。</strong>行锁大幅度提高了多用户并发操作的性能。但是InnoDB的行锁，<strong>InnoDB的行锁是基于索引建立的，如果索引失效或者没有索引，那么，行锁失效，由行锁升级为表锁。</strong></p>
+</li>
+<li><p><strong>表主键</strong></p>
+<p>MyISAM：允许没有任何索引和主键的表存在，索引都是保存行的地址。 </p>
+<p>InnoDB：如果没有设定主键或者非空唯一索引，就会自动生成一个6字节的主键(用户不可见)，数据是主索引的一部分，附加索引保存的是主索引的值。InnoDB的主键范围更大，最大是MyISAM的2倍。</p>
+</li>
+<li><p><strong>表的具体行数</strong></p>
+<p>MyISAM：保存有表的总行数，如果<code>select count(*) from table;</code>会直接取出出该值。 </p>
+<p>InnoDB：没有保存表的总行数(只能遍历)，如果使用<code>select count(*) from table;</code>就会遍历整个表，消耗相当大，但是在加了wehre条件后，myisam和innodb处理的方式都一样。</p>
+</li>
+<li><p><strong>CURD操作</strong></p>
+<p>MyISAM：如果执行大量的<code>SELECT</code>，MyISAM是更好的选择。 </p>
+<p>InnoDB：如果你的数据执行大量的<code>INSERT</code>或<code>UPDATE</code>，出于性能方面的考虑，应该使用InnoDB表。<code>DELETE</code> 从性能上InnoDB更优，但<code>DELETE FROM table</code>时，InnoDB不会重新建立表，而是一行一行的删除，在innodb上如果要清空保存有大量数据的表，最好使用<code>truncate table</code>这个命令。</p>
+</li>
+<li><p><strong>外键</strong></p>
+<p>MyISAM：不支持 </p>
+<p>InnoDB：支持</p>
+</li>
+<li><p><strong>查询效率</strong></p>
+<p>MyISAM相对简单，所以在效率上要优于InnoDB，小型应用可以考虑使用MyISAM。</p>
+<p>推荐考虑使用InnoDB来替代MyISAM引擎，原因是InnoDB自身很多良好的特点，比如事务支持、存储过程、视图、行级锁定等等，在并发很多的情况下，相信InnoDB的表现肯定要比MyISAM强很多。</p>
+<p>另外，任何一种表都不是万能的，只有恰当的针对业务类型来选择合适的表类型，才能最大的发挥MySQL的性能优势。如果不是很复杂的Web应用，非关键应用，还是可以继续考虑MyISAM的，这个具体情况可以自己斟酌。</p>
+</li>
+<li><p><strong>MyISAM和InnoDB两者的应用场景：</strong></p>
+<p>MyISAM管理非事务表。它提供高速存储和检索，以及全文搜索能力。如果应用中需要执行大量的<code>SELECT</code>查询，那么MyISAM是更好的选择。 </p>
+<p>InnoDB用于事务处理应用程序，具有众多特性，包括ACID事务支持。如果应用中需要执行大量的<code>INSERT</code>或<code>UPDATE</code>操作，则应该使用InnoDB，这样可以提高多用户并发操作的性能。现在默认最常使用InnoDB。</p>
+</li>
+</ol>
+<h3 id="字符集和编码"><a href="#字符集和编码" class="headerlink" title="字符集和编码"></a>字符集和编码</h3><blockquote>
+<p>  我们知道在计算机中只能存储二进制数据，那该怎么存储字符串呢？当然是建立字符与二进制数据的映射关系了，建立这个关系最起码要搞清楚两件事儿：</p>
+<ol>
+<li><p>你要把哪些字符映射成二进制数据？也就是界定清楚字符范围。</p>
+</li>
+<li><p>怎么映射？</p>
+<p> 将一个字符映射成一个二进制数据的过程也叫做<strong>编码</strong>，将一个二进制数据映射到一个字符的过程叫做<strong>解码</strong>。</p>
+</li>
+</ol>
+</blockquote>
+<p>人们抽象出一个字符集的概念来描述某个字符范围的编码规则，以下是一些常用字符集：</p>
+<ul>
+<li><p><code>ASCII</code> 字符集</p>
+<p>共收录128个字符，包括空格、标点符号、数字、大小写字母和一些不可见字符。由于总共才128个字符，所以可以使用1个字节来进行编码，我们看一些字符的编码方式：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">'L' -&gt; 01001100（十六进制：0x4C，十进制：76）</span><br><span class="line">'M' -&gt; 01001101（十六进制：0x4D，十进制：77）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>ISO 8859-1</code> 字符集</p>
+<p>共收录256个字符，是在ASCII 字符集的基础上又扩充了128个西欧常用字符(包括德法两国的字母)，也可以<br>使用1个字节来进行编码。这个字符集也有一个别名<code>latin1</code> 。</p>
+</li>
+<li><p><code>GB2312</code> 字符集</p>
+<p>收录了汉字以及拉丁字母、希腊字母、日文平假名及片假名字母、俄语西里尔字母。其中收录汉字6763个，其他文字符号682个。同时这种字符集又兼容<code>ASCII</code>  字符集，所以在编码方式上显得有些奇怪：</p>
+<ul>
+<li>如果该字符在ASCII 字符集中，则采用1字节编码。否则采用2字节编码。</li>
+</ul>
+<p>这种表示一个字符需要的字节数可能不同的编码方式称为<strong>变长编码方式</strong>。比方说字符串’爱u’ ，其中’爱’ 需要用2个字节进行编码，编码后的十六进制表示为0xCED2 ， ‘u’ 需要用1个字节进行编码，编码后的十六进制表示为0x75 ，所以拼合起来就是0xCED275 。</p>
+</li>
+<li><p><code>GBK</code> 字符集</p>
+<p><code>GBK</code> 字符集只是在收录字符范围上对<code>GB2312</code> 字符集作了扩充，编码方式上兼容<code>GB2312</code> 。</p>
+</li>
+<li><p><code>Unicode</code> 字符集</p>
+<p>也称为万国码，收录地球上能想到的所有字符，而且还在不断扩充。这种字符集兼容<code>ASCII</code> 字符集，采用变长编码方式，编码一个字符需要使用1～4个字节，比如：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">'L' -&gt; 01001100（十六进制：0x4C）</span><br><span class="line">'啊' -&gt; 111001011001010110001010（十六进制：0xE5958A）</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  我们常用的<code>utf8</code>只是<code>Unicode</code>字符集的一种编码方案，<code>Unicode</code>字符集可以采用<code>utf8</code>、<code>utf16</code>、<code>utf32</code>这几种编码方案，<code>utf8</code>使用1～4个字节编码一个字符，<code>utf16</code>使用2个或4个字节编码一个字符，<code>utf32</code>使用4个字节编码一个字符</p>
+</blockquote>
+</li>
+</ul>
+<p>对于同一个字符，不同字符集也可能有不同的编码方式。比如对于汉字’我’ 来说， <code>ASCII</code> 字符集中根本没有收录这个字符， utf8 和gb2312 字符集对汉字’我’的编码方式如下：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">utf8编码：  111001101000100010010001 (3个字节，十六进制表示是：0xE68891)</span><br><span class="line">gb2312编码：1100111011010010 (2个字节，十六进制表示是：0xCED2)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  <strong>更多关于字符集和编码的内容可以看下面这篇文章</strong></p>
+<p>  <strong><a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html</a></strong></p>
+</blockquote>
+<h4 id="MySQL中的utf8和utf8mb4"><a href="#MySQL中的utf8和utf8mb4" class="headerlink" title="MySQL中的utf8和utf8mb4"></a>MySQL中的utf8和utf8mb4</h4><p>我们上边说<code>utf8</code> 字符集表示一个字符需要使用1～4个字节，但是我们常用的一些字符使用1～3个字节就可以表示了。而在MySQL 中字符集表示一个字符所用最大字节长度在某些方面会影响系统的存储和性能，所以MySQL的设计人员定义了两个概念：</p>
+<ul>
+<li><code>utf8mb3</code> ：阉割过的utf8 字符集，只使用1～3个字节表示字符。</li>
+<li><code>utf8mb4</code> ：正宗的utf8 字符集，使用1～4个字节表示字符。</li>
+</ul>
+<p><strong>注意：</strong>在MySQL 中，utf8指的是utf8mb3，所以之后在MySQL中提到utf8 就意味着使用1~3个字节来表示一个字符，如果大家有使用4字节编码一个字符的情况，比如存储一些emoji表情啥的，那请使用utf8mb4 。</p>
+<blockquote>
+<p>  <strong>字符集的查看</strong></p>
+<p>  MySQL 支持多种字符集，查看当前MySQL 中支持的字符集可以用下边这个语句：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show charset;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="Mysql数据库与数据表操作"><a href="#Mysql数据库与数据表操作" class="headerlink" title="Mysql数据库与数据表操作"></a>Mysql数据库与数据表操作</h2><blockquote>
+<p>  <strong>库和表的概念与关系</strong></p>
+<p>  库就像是文件夹，库中可以有很多个表，表就像是我们的excel表格文件一样，每一个表中都可以存储很多数据。</p>
+<p>  mysql中可以有很多不同的库，库中可以有很多不同的表，表中可以定义不同的列（字段），表中可以根据结构去存储很多的数据。</p>
+</blockquote>
+<h3 id="数据库的操作"><a href="#数据库的操作" class="headerlink" title="数据库的操作"></a>数据库的操作</h3><h4 id="数据库创建"><a href="#数据库创建" class="headerlink" title="数据库创建"></a>数据库创建</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 链接mysql数据库后，进入mysql后可以操作数据</span><br><span class="line"># 创建库</span><br><span class="line">create database if not exists test default charset&#x3D;utf8mb4;</span><br><span class="line">-- 1. 数据库 test 如果不存在则创建数据库，存在则不创建</span><br><span class="line">-- 2. 创建 test 数据库，并设置字符集为utf8</span><br><span class="line">-- 3. 无特殊情况都要求字符集为utf8或者utf8mb4的字符编码</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看所有库"><a href="#查看所有库" class="headerlink" title="查看所有库"></a>查看所有库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 查看所有库</span><br><span class="line">show databases;</span><br></pre></td></tr></table></figure>
+
+<h4 id="打开库-进入库-选择库"><a href="#打开库-进入库-选择库" class="headerlink" title="打开库/进入库/选择库"></a>打开库/进入库/选择库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># use 库名</span><br><span class="line">use test;</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除库"><a href="#删除库" class="headerlink" title="删除库"></a>删除库</h4><blockquote>
+<p>  <font color=red>删库有风险，动手需谨慎！！！</font></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 删除库，库中的所有数据都将在磁盘中删除。</span><br><span class="line">drop database 库名</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据表的操作"><a href="#数据表的操作" class="headerlink" title="数据表的操作"></a>数据表的操作</h3><h4 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h4><p>语法格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table 表名(字段名，类型，[字段约束]，…)；</span><br></pre></td></tr></table></figure>
+
+<p>实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 以下创建一个 users 的表</span><br><span class="line">create table if not exists users(</span><br><span class="line">	-- 创建ID字段，为正整数，不允许为空 主键，自动递增</span><br><span class="line">	id int unsigned not null primary key auto_increment,</span><br><span class="line">	-- 创建存储 名字 的字段，为字符串类型，最大长度5个字符，不允许为空</span><br><span class="line">	username varchar(5) not null,</span><br><span class="line">	-- 创建存储 密码 的字段，固定长度 32位字符， 不允许为空</span><br><span class="line">	password char(32) not null,</span><br><span class="line">	-- 创建存储 年龄 的字段，不允许为空，默认值为 20</span><br><span class="line">	age tinyint not null default 20</span><br><span class="line">)engine&#x3D;innodb default charset&#x3D;utf8mb4;</span><br><span class="line">-- 表引擎innodb 字符集utf8mb4</span><br><span class="line"></span><br><span class="line"># 查看表结构</span><br><span class="line">desc users;</span><br><span class="line"></span><br><span class="line">#查看建表语句</span><br><span class="line">show create table users;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2020/11/07/ERAg51wJ43vdKNF.png" alt=""></p>
+<p><strong>创建表的基本原则：</strong></p>
+<ul>
+<li>表明和字段名 尽可能的符合命名规范，并且最好能够‘见名之意’</li>
+<li>表中数据必须有唯一标识，即主键定义。无特殊情况，主键都为数字并自增即可</li>
+<li>表中字段所对应的类型设置合理，并限制合理长度</li>
+<li>表引擎推荐使用innodb，并无特殊情况都要求为utf8或者utf8mb4的字符编码</li>
+</ul>
+<h4 id="修改表结构"><a href="#修改表结构" class="headerlink" title="修改表结构"></a>修改表结构</h4><p>语法格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名 action (更改的选项)</span><br></pre></td></tr></table></figure>
+
+<h5 id="添加字段"><a href="#添加字段" class="headerlink" title="添加字段"></a>添加字段</h5><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名 add 添加的字段信息</span><br></pre></td></tr></table></figure>
+
+<p>实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-- 在 users 表中 追加 一个 num 字段 int类型 不为空 默认加在最后面</span><br><span class="line">alter table users add num int not null;</span><br><span class="line">-- 在指定字段后面追加字段 在 users 表中 age字段后面 添加一个 email 字段</span><br><span class="line">alter table users add email varchar(50) after age;</span><br><span class="line">-- 在指定字段后面追加字段，在 users 表中 age字段后面 添加一个 phone</span><br><span class="line">alter table users add phone char(11) not null after age;</span><br><span class="line">-- 在表的最前面添加一个字段</span><br><span class="line">alter table users add aa int first;</span><br></pre></td></tr></table></figure>
+
+<h5 id="删除字段"><a href="#删除字段" class="headerlink" title="删除字段"></a>删除字段</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 删除字段 alter table 表名 drop 被删除的字段名</span><br><span class="line">alter table users drop aa;</span><br></pre></td></tr></table></figure>
+
+<h5 id="修改字段"><a href="#修改字段" class="headerlink" title="修改字段"></a>修改字段</h5><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名 change|modify 被修改的字段信息</span><br><span class="line"># change: 可以修改字段名，</span><br><span class="line"># modify: 不能修改字段名。</span><br></pre></td></tr></table></figure>
+
+<p>实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 修改表中的 num 字段 类型,使用 modify 不修改字段名</span><br><span class="line">alter table users modify num tinyint not null default 12;</span><br><span class="line"># 修改表中的 num 字段 为 int 并且 字段名改为 mm</span><br><span class="line">alter table users change num mm int;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  <strong>注意：一般情况下，无特殊要求，不要轻易修改表结构</strong></p>
+</blockquote>
+<h4 id="修改表名"><a href="#修改表名" class="headerlink" title="修改表名"></a>修改表名</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table 原表名 rename as 新表名;</span><br></pre></td></tr></table></figure>
+
+<h4 id="更改表中自增的值"><a href="#更改表中自增的值" class="headerlink" title="更改表中自增的值"></a>更改表中自增的值</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 在常规情况下，auto_increment 默认从1开始继续递增</span><br><span class="line"># 更改自增值让其从1000开始</span><br><span class="line">alter table users auto_increment &#x3D; 1000;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  <font color = red> 注意：</font></p>
+<p>  更改之后，只对后面再增加的数据有影响，对已存在的数据没有影响。</p>
+</blockquote>
+<h4 id="修改表引擎"><a href="#修改表引擎" class="headerlink" title="修改表引擎"></a>修改表引擎</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 推荐在定义表时，表引擎定义为 innodb。</span><br><span class="line"># 通过查看建表语句获取当前的表引擎</span><br><span class="line">mysql&gt; show create table users\G;</span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">		Table: users</span><br><span class="line">Create Table: CREATE TABLE &#96;users&#96; (</span><br><span class="line">	PRIMARY KEY (&#96;id&#96;)</span><br><span class="line">    ....</span><br><span class="line">) ENGINE&#x3D;InnoDB AUTO_INCREMENT&#x3D;1001 DEFAULT CHARSET&#x3D;utf8</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line"># 直接查看当前表状态信息</span><br><span class="line">mysql&gt; show table status from test where name &#x3D; &#39;users&#39;\G;</span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">			Name: users</span><br><span class="line">		   Engine: InnoDB</span><br><span class="line">		   ....</span><br><span class="line"></span><br><span class="line"># 修改表引擎语句</span><br><span class="line">alter table users engine &#x3D; &#39;myisam&#39;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop table 表名</span><br></pre></td></tr></table></figure>
+
+<h2 id="MySQL-数据操作——DML"><a href="#MySQL-数据操作——DML" class="headerlink" title="MySQL 数据操作——DML"></a>MySQL 数据操作——DML</h2><blockquote>
+<p>  <strong>数据的DML操作：添加数据，修改数据，删除数据</strong></p>
+</blockquote>
+<h3 id="添加数据"><a href="#添加数据" class="headerlink" title="添加数据"></a>添加数据</h3><p>格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into 表名[(字段列表)] values(值列表...);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">-- 标准添加（指定所有字段，给定所有的值）</span><br><span class="line">insert into stu(id,name,age,sex,classid) values(1,&#39;zhangsan&#39;,20,&#39;m&#39;,&#39;lamp138&#39;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-- 指定部分字段添加值</span><br><span class="line">insert into stu(name,classid) value(&#39;lisi&#39;,&#39;lamp138&#39;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-- 不指定字段添加值</span><br><span class="line">insert into stu value(null,&#39;wangwu&#39;,21,&#39;w&#39;,&#39;lamp138&#39;);</span><br><span class="line"></span><br><span class="line">-- 批量添加值</span><br><span class="line">insert into stu values</span><br><span class="line">(null,&#39;zhaoliu&#39;,25,&#39;w&#39;,&#39;lamp94&#39;),</span><br><span class="line">(null,&#39;uu01&#39;,26,&#39;m&#39;,&#39;lamp94&#39;),</span><br><span class="line">(null,&#39;uu02&#39;,28,&#39;w&#39;,&#39;lamp92&#39;),</span><br><span class="line">(null,&#39;qq02&#39;,24,&#39;m&#39;,&#39;lamp92&#39;),</span><br><span class="line">(null,&#39;uu03&#39;,32,&#39;m&#39;,&#39;lamp138&#39;),</span><br><span class="line">(null,&#39;qq03&#39;,23,&#39;w&#39;,&#39;lamp94&#39;),</span><br><span class="line">(null,&#39;aa&#39;,19,&#39;m&#39;,&#39;lamp138&#39;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h3><p>格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update 表名 set 字段1&#x3D;值1,字段2&#x3D;值2,字段n&#x3D;值n... where 条件;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-- 将id为11的age改为35，sex改为m值</span><br><span class="line">update stu set age&#x3D;35,sex&#x3D;&#39;m&#39; where id&#x3D;11;</span><br><span class="line"></span><br><span class="line">-- 将id值为12和14的数据值sex改为m，classid改为lamp92</span><br><span class="line">update stu set sex&#x3D;&#39;m&#39;,classid&#x3D;&#39;lamp92&#39; where id&#x3D;12 or id&#x3D;14 </span><br><span class="line">update stu set sex&#x3D;&#39;m&#39;,classid&#x3D;&#39;lamp92&#39; where id in(12,14);  -- 等价于上面</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h3><p>格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from 表名 [where 条件];</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-- 删除stu表中id值为100的数据</span><br><span class="line">delete from stu where id&#x3D;100;</span><br><span class="line"></span><br><span class="line">-- 删除stu表中id值为20到30的数据</span><br><span class="line">delete from stu where id&gt;&#x3D;20 and id&lt;&#x3D;30;</span><br><span class="line">delete from stu where id between 20 and 30;	-- 等价于上面</span><br><span class="line"></span><br><span class="line">-- 删除stu表中id值大于200的数据</span><br><span class="line">delete from stu where id&gt;200;</span><br></pre></td></tr></table></figure>
+
+<h2 id="MySQL数据查询——DQL基本语法"><a href="#MySQL数据查询——DQL基本语法" class="headerlink" title="MySQL数据查询——DQL基本语法"></a>MySQL数据查询——DQL基本语法</h2><p>语法格式：<font color = red> sql查询语句 一定要严格按照这样的顺序，否则会产生错误</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select 字段列表|* from 表名</span><br><span class="line">[where 搜索条件]</span><br><span class="line">[group by 分组字段 [having 分组条件]]</span><br><span class="line">[order by 排序字段 排序规则]</span><br><span class="line">[limit 分页参数]</span><br></pre></td></tr></table></figure>
+
+<p>下面以一个数据表stu为例进行讲解</p>
+<p>SQL示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">-- 创建表</span><br><span class="line">CREATE TABLE &#96;stu&#96;(</span><br><span class="line">	&#96;id&#96;  int unsigned NOT NULL AUTO_INCREMENT,</span><br><span class="line">	&#96;name&#96; varchar(10) NOT NULL,</span><br><span class="line">	&#96;email&#96; char(50) NOT NULL,</span><br><span class="line">	&#96;phone&#96; char(11) NOT NULL,</span><br><span class="line">	&#96;age&#96; tinyint(4)NOT NULL,</span><br><span class="line">	&#96;sex&#96; char(1) DEFAULT NULL,</span><br><span class="line">	&#96;class_id&#96; int DEFAULT NULL, </span><br><span class="line">    PRIMARY KEY(id)</span><br><span class="line">)ENGINE&#x3D;MyISAM AUTO_INCREMENT&#x3D;1 DEFAULT CHARSET&#x3D;utf8mb4;</span><br><span class="line"></span><br><span class="line">-- 添加数据</span><br><span class="line">insert into stu values</span><br><span class="line">(null,&#39;张三&#39;,&#39;zhangsane@qq.com&#39;,&#39;13701184321&#39;,21,&#39;男&#39;,1),</span><br><span class="line">(null,&#39;李四&#39;,&#39;lisi@qq.com&#39;,&#39;13701104322&#39;,22,&#39;男&#39;,1),</span><br><span class="line">(null,&#39;王五&#39;,&#39;wangwu@qq.com&#39;,&#39;13701104323&#39;,20,&#39;女&#39;,1),</span><br><span class="line">(null,&#39;赵六&#39;,&#39;zhaoliu@qq.com&#39;,&#39;13701104324&#39;,19,&#39;男&#39;,1),</span><br><span class="line">(null,&#39;田七&#39;,&#39;tianqi@qq.com&#39;,&#39;13701104325&#39;,23,&#39;女&#39;,1),</span><br><span class="line">(null,&#39;王五六&#39;,&#39;wangwuliu@qq.com&#39;,&#39;13701104326&#39;,23,&#39;女&#39;,1),</span><br><span class="line">(null,&#39;熊大&#39;,&#39;xiongda@qq.com&#39;,&#39;13701184327&#39;,25,&#39;男&#39;,2),</span><br><span class="line">(null,&#39;熊二&#39;,&#39;xionger@qq.com&#39;,&#39;13701104328&#39;,22,&#39;男&#39;,2),</span><br><span class="line">(null,&#39;一一&#39;,&#39;yiyi@qq.com&#39;,&#39;13701184329&#39;,19,&#39;女&#39;,2),</span><br><span class="line">(null,&#39;呀呀&#39;,&#39;yaya@qq.com&#39;,&#39;13701104320&#39;,22,&#39;男&#39;,2);</span><br><span class="line"> </span><br><span class="line"> -- 查看表数据</span><br><span class="line">select * from stu;</span><br></pre></td></tr></table></figure>
+
+<h3 id="检索数据SELECT"><a href="#检索数据SELECT" class="headerlink" title="检索数据SELECT"></a>检索数据<code>SELECT</code></h3><p><strong>检索列</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 检索单个列</span><br><span class="line">select name from stu; -- 查询 stu 表中 name （字段）列的所有数据</span><br><span class="line"></span><br><span class="line"># 检索多个列</span><br><span class="line">select id, name, age, sex from stu; </span><br><span class="line"></span><br><span class="line"># 检索所有列</span><br><span class="line">select * from stu;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2020/11/08/C1EtjLHgFfQ76SX.png" alt=""></p>
+<blockquote>
+<p>  如果没有明确排序查询结果，则返回的数据的顺序没有特殊意义。</p>
+<p>  返回数据的顺序可能是数据被添加到表中的顺序，也可能不是。只要返回相同数目的行，就是正常的</p>
+<p>  <strong>使用通配符 <code>*</code> 的说明：</strong></p>
+<p>  一般除非你确实需要表中的每个列，否则最好别使用 <code>*</code> 通配符。</p>
+<p>  虽然使用通配符，不用明确列出所需列，会使你自己省事，但检索不需要的列通常会降低检索和应用程序的性能。使用通配符有一个优点： 由于不明确指定列名（因为 <code>*</code> 检索每个列），所以能检索出名字未知的列。</p>
+</blockquote>
+<p><strong>检索不同的行（去重） DISTNCT</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 检索不同的行（去重） DISTNCT</span><br><span class="line">select distinct class_id from stu;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2020/11/08/No9qvOmStG1z6be.png" alt=""></p>
+<blockquote>
+<p>  DISTINCT关键字指示MySQL只返回不同的值。</p>
+<p>  DISTINCT关键字应用于所有列，而不仅是前置它的列。</p>
+<p>  如果给出<code>SELECT DISTINCT 字段1,字段2,.... FROM xxx;</code>除非指定的列都不同，否则所有行都将被检索出来</p>
+</blockquote>
+<p><strong>使用完全限定的表名</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select name from stu; -- 无限制</span><br><span class="line">select stu.name from stu; -- 限制字段名 stu.name stu表的name字段</span><br><span class="line">select stu.name from test.stu;  -- 限制表名 test.stu test库的stu表</span><br></pre></td></tr></table></figure>
+
+<h3 id="WHERE-数据检索条件过滤"><a href="#WHERE-数据检索条件过滤" class="headerlink" title="WHERE 数据检索条件过滤"></a>WHERE 数据检索条件过滤</h3><blockquote>
+<p>  数据库表一般包含大量的数据，很少需要检索表中所有行。</p>
+<p>  通常只会根据特定操作或报告的需要提取表数据的子集。</p>
+<p>  只检索所需数据需要指定搜索条件（search criteria)，搜索条件也称为过滤条件（filtercondition)。</p>
+<p>  在SELECT语句中，数据根据WHERE子句中指定的搜索条件进行过滤。</p>
+</blockquote>
+<ul>
+<li>可以在where子句中指定任何条件</li>
+<li>可以使用 and 或者 or 指定一个或多个条件</li>
+<li>where条件也可以运用在update和delete语句的后面</li>
+</ul>
+<p><strong>WHERE 子句操作符</strong></p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>=</code></td>
+<td>等于</td>
+</tr>
+<tr>
+<td><code>&lt;&gt;</code>   <code>!=</code></td>
+<td>不等于</td>
+</tr>
+<tr>
+<td><code>&lt;</code></td>
+<td>小于</td>
+</tr>
+<tr>
+<td><code>&lt;=</code></td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td>大于</td>
+</tr>
+<tr>
+<td><code>&gt;=</code></td>
+<td>大于等于</td>
+</tr>
+<tr>
+<td><code>BETWEEN…AND…</code></td>
+<td>指定两值之间</td>
+</tr>
+<tr>
+<td><code>IS NULL</code></td>
+<td>空值</td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-- 查询 stu 表中 age &gt; 22的数据</span><br><span class="line">select * from stu where age &gt; 22;</span><br><span class="line"></span><br><span class="line">-- 查询 stu 表中 name&#x3D;某个条件值 的数据</span><br><span class="line">select * from stu where name &#x3D; &#39;王五&#39;;</span><br><span class="line"></span><br><span class="line">-- 查询 stu 表中 sex 为 null 的数据</span><br><span class="line">select * from stu where sex is null;</span><br></pre></td></tr></table></figure>
+
+<p><strong>组合WHERE子句</strong></p>
+<blockquote>
+<p>   MySQL允许给出多个WHERE子句。</p>
+<p>   这些子句可以两种方式使用：以<code>AND</code>子句的方式或<code>OR</code>子句的方式使用。也称为逻辑操作符</p>
+<ul>
+<li><code>AND</code> 检索满足<strong>所有</strong>给定条件的行</li>
+<li><code>OR</code>   检索满足<strong>任一</strong>给定条件的行</li>
+</ul>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-- 查询 stu 表中 年龄在22到25之间的数据</span><br><span class="line">select * from stu where age &gt;&#x3D; 22 and age &lt;&#x3D; 25;</span><br><span class="line">select * from stu where age between 22 and 25;</span><br><span class="line"></span><br><span class="line">-- 查询 stu 表中 年龄不在22到25之间的数据</span><br><span class="line">select * from stu where age &lt; 22 or age &gt; 25;</span><br><span class="line">select * from stu where age not between 22 and 25;</span><br><span class="line"></span><br><span class="line">-- 查询 stu 表中 年龄在22到25之间的女生信息</span><br><span class="line">select * from stu where age &gt;&#x3D; 22 and age &lt;&#x3D; 25 and sex &#x3D; &#39;女&#39;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  <strong><font color=red>注意</font></strong></p>
+<p>  <code>and</code> 和 <code>or</code> 在使用时要注意 sql语句优先级的问题，sql会优先处理<code>and</code>条件</p>
+<p>  比如下面语句：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from stu where age&#x3D;22 or age &#x3D; 25 and sex &#x3D; &#39;女&#39;;</span><br></pre></td></tr></table></figure>
+
+<p>  假如要求查询 users 表中 年龄为22或者25 的女生信息，上面语句查询的结果就不能符合我们的要求。</p>
+<p>  上面语句查询的是 （年龄为22的所有人） 或者 （年龄为25的女生）信息：</p>
+<p>  要达到我们要求的查询，可以用小括号来提升优先级</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from stu where (age&#x3D;22 or age &#x3D; 25) and sex &#x3D; &#39;女&#39;;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong><code>IN</code>与<code>NOT</code></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-- 查询 stu 表中 id 是1或2或3的数据</span><br><span class="line">select * from stu where id in (1,2,3);</span><br><span class="line">-- 查询 stu 表中 id 不是1 也不是2 也不是3的数据</span><br><span class="line">select * from stu where id not in (1,2,3);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  <code>IN</code> 操作符用来指定条件范围，范围中的每个条件都可以进行匹配。功能与<code>OR</code>相当</p>
+<p>  <code>NOT</code> 用于否定后跟进的条件</p>
+<p>  与<code>OR</code>，相比，使用<code>IN</code>的优点</p>
+<ul>
+<li>在使用长的合法选项清单时，IN操作符的语法更清楚且更直观。</li>
+<li>在使用IN时，计算的次序更容易管理（因为使用的操作符更少）。</li>
+<li>IN操作符一般比OR操作符清单执行更快。</li>
+<li>IN的最大优点是可以包含其他SELECT语句，使得能够更动态地建立WHERE子句。</li>
+</ul>
+</blockquote>
+<p><strong>通配符的使用 <code>LIKE</code></strong></p>
+<p>我们可以在where条件中使用 <code>=</code>，<code>&lt;</code>，<code>&gt;</code> 等符号进行条件的过滤，但是当想查询某个字段是否包含某个字符时如何过滤呢？例如： 查询 name字段中包含五的数据</p>
+<p>可以使用<code>LIKE</code>语句进行某个字段的模糊搜索。</p>
+<p><strong>常用通配符：</strong></p>
+<ul>
+<li>百分号(<code>%</code>) ：表示任意字符出现任意次数</li>
+<li>下划线(<code>_</code>)：用途与<code>%</code>类似，但下划线只匹配单个字符</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">-- like 语句 like某个确定的值 和。where name &#x3D; &#39;王五&#39; 是一样</span><br><span class="line">select * from stu where name like &#39;王五&#39;;</span><br><span class="line"></span><br><span class="line">-- 使用 % 模糊搜索。%代表任意个任意字符</span><br><span class="line">	-- 查询name字段中包含五的</span><br><span class="line">	select * from stu where name like &#39;%五%&#39;;</span><br><span class="line">	</span><br><span class="line">	-- 查询name字段中最后一个字符 为 五的</span><br><span class="line">	select * from stu where name like &#39;%五&#39;;</span><br><span class="line">   </span><br><span class="line">    -- 查询name字段中第一个字符 为 王 的</span><br><span class="line">	select * from stu where name like &#39;王%&#39;;</span><br><span class="line">	</span><br><span class="line">-- 使用 _ 单个的下划线。表示一个任意字符，使用和%类似</span><br><span class="line">	-- 查询表中 name 字段为两个字符的数据</span><br><span class="line">	select * from stu where name like &#39;__&#39;;</span><br><span class="line">	</span><br><span class="line">	-- 查询 name 字段最后为 五 的两个字符的数据</span><br><span class="line">	select * from stu where name like &#39;_五&#39;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  <strong>where子句中的like在使用<code>%</code>或者<code>_</code>进行模糊搜索时，所花时间更长，效率不高，使用时注意：</strong></p>
+<ul>
+<li>不要过度使用通配符。如果其他操作符能达到相同的目的，尽量使用其他操作符。</li>
+<li>在确实需要使用通配符时，除非绝对有必要，否则不要把它们用在搜索模式的开始处。把通配符置于搜索模式的开始处，搜索起来是最慢的。</li>
+<li>仔细注意通配符的位置。如果放错地方，可能不会返回想要的数据</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>  MySql中也支持正则表达式，使用 <code>REGEXP</code> 关键字来匹配。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- 查询 id 为 3到8 的所有数据</span><br><span class="line">select * from stu where id regexp &#39;[3-8]&#39;;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="字段的计算"><a href="#字段的计算" class="headerlink" title="字段的计算"></a>字段的计算</h3><p>存储在数据库表中的数据一般不是应用程序所需要的格式。下面举几个例子:</p>
+<ul>
+<li>如果想在一个字段中既显示用户名，又显示班级号，但这两个信息一般包含在不同的表列中。</li>
+<li>同时姓名、手机号和地址存储在不同的列中（应该这样）,但快递单打印程序却需要把它们作为一个恰当格式的字段检索出来。</li>
+<li>列数据是大小写混合的，但报表程序需要把所有数据按大写表示出来。</li>
+<li>物品订单表存储物品的价格和数量，但不需要存储每个物品的总价格（用价格乘以数量即可）。为打印发票需要物品的总价格。</li>
+<li>需要根据表数据进行总数、平均数计算或其他计算</li>
+</ul>
+<p><strong>计算字段并不实际存在于数据库表中。计算字段是运行时在SELECT语句内创建的</strong></p>
+<p><strong>拼接Concat</strong></p>
+<p>stu表包含用户名和手机号码信息。假如要生成一个学生报表，需要在学生的名字中按照name(phone)这样的<br>格式列出</p>
+<p>解决办法是把两个列拼接起来。在MySQL的SELECT语句中，可使用<code>concat()</code>函数来拼接两个列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select concat(name ,&#39;(&#39;, phone,&#39;)&#39;) from stu;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用别名AS</strong></p>
+<p>SELECT语句拼接字段可以完成。但此新计算列的名字是什么呢？实际上它没有名字，它只是一个值。<br>如果仅在SQL查询工具中查看一下结果，这样没有什么不好。</p>
+<p>但是，一个未命名的列不能用于客户机应用中，因为客户机没有办法引用它。</p>
+<p>为了解决这个问题，SQL支持列别名。别名（alias)是一个字段或值的替换名。别名用<code>AS</code>关键字赋予</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select concat(name ,&#39;(&#39;,phone,&#39;)&#39;) as name_phone from stu;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2020/11/08/i8v9tsl1JkrISmE.png" alt=""></p>
+<h3 id="MySql查询常用函数"><a href="#MySql查询常用函数" class="headerlink" title="MySql查询常用函数"></a>MySql查询常用函数</h3><blockquote>
+<p>  与其他大多数计算机语言一样，SQL支持利用函数来处理数据。</p>
+<p>  函数一般是在数据上执行的，它给数据的转换和处理提供了方便。</p>
+</blockquote>
+<p><strong>文本处理函数</strong></p>
+<p><a href="https://dev.mysql.com/doc/refman/5.7/en/string-functions.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/5.7/en/string-functions.html</a></p>
+<p><img src="https://i.loli.net/2020/11/08/kfDA5FUwxgGN6jz.png" alt="image-20201108204526003"></p>
+<p><strong>日期和时间处理函数</strong></p>
+<p><a href="https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html</a></p>
+<p><img src="https://i.loli.net/2020/11/08/a8mH6gLkY5zOpbS.png" alt=""></p>
+<blockquote>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 根据出生日期计算年龄</span></span><br><span class="line">TIMESTAMPDIFF(YEAR, @birthday, CURDATE()) </span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>数值处理函数</strong></p>
+<p><a href="https://dev.mysql.com/doc/refman/5.7/en/numeric-functions.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/5.7/en/numeric-functions.html</a></p>
+<p><img src="https://i.loli.net/2020/11/08/fkPm93ciztJb7uA.png" alt=""></p>
+<h3 id="Mysql中的统计函数（聚合函数）"><a href="#Mysql中的统计函数（聚合函数）" class="headerlink" title="Mysql中的统计函数（聚合函数）"></a>Mysql中的统计函数（聚合函数）</h3><blockquote>
+<p>  我们经常需要汇总数据而不用把它们实际检索出来，为此MySQL提供了专门的函数。</p>
+<p>  使用这些函数，MySQL查询可用于检索数据，以便分析和报表生成</p>
+</blockquote>
+<ul>
+<li><code>max()</code>  返回某列最大值</li>
+<li><code>min()</code> 返回某列最小值</li>
+<li><code>count()</code> 返回某列的行数</li>
+<li><code>sum()</code>  返回某列值和</li>
+<li><code>avg()</code>    返回某列的平均值</li>
+</ul>
+<blockquote>
+<p>  在使用count时，如果指定列名，则指定列的值为空的行被忽略，但如果COUNT函数中用的是星号（*）,则不忽略。</p>
+</blockquote>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"># 计算 users 表中 最大年龄，最小年龄，年龄和及平均年龄</span><br><span class="line">select max(age),min(age),sum(age),avg(age) from stu;</span><br><span class="line">+----------+----------+----------+----------+</span><br><span class="line">| max(age) | min(age) | sum(age) | avg(age) |</span><br><span class="line">+----------+----------+----------+----------+</span><br><span class="line">|       25 |       19 |      216 |  21.6000 |</span><br><span class="line">+----------+----------+----------+----------+</span><br><span class="line">-- 上面数据中的列都是在查询时使用的函数名，不方便阅读和后期的调用，可以通过别名方式 美化</span><br><span class="line">select max(age) as max_age,</span><br><span class="line">min(age) as min_age,</span><br><span class="line">sum(age) as sum_age,</span><br><span class="line">avg(age) as avg_age from stu;</span><br><span class="line">+---------+---------+---------+---------+</span><br><span class="line">| max_age | min_age | sum_age | avg_age |</span><br><span class="line">+---------+---------+---------+---------+</span><br><span class="line">|      25 |      19 |     216 | 21.6000 |</span><br><span class="line">+---------+---------+---------+---------+</span><br><span class="line">-- 统计 users 表中的数据量</span><br><span class="line">select count(*) from stu;</span><br><span class="line">+----------+</span><br><span class="line">| count(*) |</span><br><span class="line">+----------+</span><br><span class="line">|       10 |</span><br><span class="line">+----------+</span><br><span class="line">select count(id) from stu;</span><br><span class="line">+----------+</span><br><span class="line">| count(id)|</span><br><span class="line">+----------+</span><br><span class="line">|       10 |</span><br><span class="line">+----------+</span><br><span class="line"></span><br><span class="line">-- 上面的两个统计，分别使用了 count(*) 和 count(id),结果目前都一样，有什么区别？</span><br><span class="line">-- count(*) 是按照 users表中所有的列进行数据的统计，只要其中一列上有数据，就可以计算</span><br><span class="line">-- count(id) 是按照指定的 id 字段进行统计，也可以使用别的字段进行统计，</span><br><span class="line">-- 但是注意，如果指定的列上出现了NULL值，那么为NULL的这个数据不会被统计</span><br><span class="line">-- 假设有下面这样的一张表需要统计</span><br><span class="line">+------+-----------+------+--------+-----------+------+------+</span><br><span class="line">| id   | name      |  age |  phone |     email |  sex | mm   |</span><br><span class="line">+------+-----------+------+--------+-----------+------+------+</span><br><span class="line">| 1000 | aa        | 20   | 123    | NULL      | 男   | NULL |</span><br><span class="line">| 1001 | bb        | 20   | 123456 | NULL      | 男   | NULL |</span><br><span class="line">| 1002 | cc        | 25   | 123    | NULL      | 女   | NULL |</span><br><span class="line">| 1003 | dd        | 20   | 456    | NULL      | 女   | NULL |</span><br><span class="line">| 1004 | ff        | 28   | 789    | NULL      | NULL | NULL |</span><br><span class="line">+------+-----------+------+--------+-----------+------+------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br><span class="line">-- 如果按照sex这一列进行统计，结果就是4个而不是5个，因为sex这一列中有NULL值存在</span><br><span class="line">mysql&gt; select count(sex) from stu;</span><br><span class="line">+------------+</span><br><span class="line">| count(sex) |</span><br><span class="line">+------------+</span><br><span class="line">| 4          |</span><br><span class="line">+------------+</span><br></pre></td></tr></table></figure>
+
+<p>聚合函数除了以上简单的使用以外，通常情况下都是配合着分组进行数据的统计和计算</p>
+<h3 id="GROUP-BY-分组"><a href="#GROUP-BY-分组" class="headerlink" title="GROUP BY 分组"></a>GROUP BY 分组</h3><p><code>group by</code> 语句根据一个或多个列对结果集进行分组</p>
+<p>一般情况下，是用于数据的统计或计算，配合聚合函数使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-- 统计 users 表中 男女生人数,</span><br><span class="line">-- 很明显按照上面的需要，可以写出两个语句进行分别统计</span><br><span class="line">select count(*) from stu where sex &#x3D; &#39;女&#39;;</span><br><span class="line">select count(*) from stu where sex &#x3D; &#39;男&#39;;</span><br><span class="line">-- 可以使用分组进行统计，更方便</span><br><span class="line">select sex,count(*) from stu group by sex;</span><br><span class="line"></span><br><span class="line">-- 统计1班和2班的人数</span><br><span class="line">select class_id,count(*) from stu group by class_id;</span><br><span class="line"></span><br><span class="line">-- 分别统计每个班级的男女生人数</span><br><span class="line">select class_id,sex,count(*) as num from stu group by class_id,sex;</span><br></pre></td></tr></table></figure>
+
+<p>注意：在使用<code>group by</code>分组时，一般除了聚合函数，其它在<code>select</code>后面出现的字段列都需要出现在<code>grouop by</code> 后面。</p>
+<p><strong><code>HAVING</code>子句</strong></p>
+<p><code>having</code> 在分组聚合计算后，对结果再一次进行过滤，类似于where，where过滤的是行数据，having过滤的是分组数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-- 要统计班级人数</span><br><span class="line">select class_id,count(*) from stu group by classid;</span><br><span class="line">-- 统计班级人数，并且要人数达到5人及以上</span><br><span class="line">select class_id,count(*) as num from stu group by class_id having num &gt;&#x3D;5;</span><br></pre></td></tr></table></figure>
+
+<h3 id="ORDER-BY-对检索数据进行排序"><a href="#ORDER-BY-对检索数据进行排序" class="headerlink" title="ORDER BY 对检索数据进行排序"></a>ORDER BY 对检索数据进行排序</h3><blockquote>
+<p>  默认查询出的数据，并不是随机排序的，如果没有指定排序，数据一般将以它在底层表中出现的顺序显示，关系数据库设计理论认为，如果不明确规定排序顺序，则不应该假定检索出的数据的顺序有意义。</p>
+</blockquote>
+<p>我们在mysql中使用<code>select</code>的语句查询的数据结果是根据数据在底层文件的结构来排序的，在需要排序时可以使用<code>order by</code>对返回的结果进行排序</p>
+<p><code>order by</code>asc 升序，默认</p>
+<ul>
+<li>desc 降序</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-- 按照年龄对结果进行排序，</span><br><span class="line">	-- 从大到小</span><br><span class="line">	select * from users order by age desc;</span><br><span class="line">	-- 从小到大排序 asc 默认可以不写</span><br><span class="line">	select * from users order by age;</span><br><span class="line">-- 也可以按照多个字段进行排序</span><br><span class="line">select * from users order by age,id; # 先按照age进行排序，age相同情况下，按照id进行排序 升序</span><br><span class="line">select * from users order by age,id desc; -- 降序</span><br></pre></td></tr></table></figure>
+
+<h3 id="限制结果-LIMIT"><a href="#限制结果-LIMIT" class="headerlink" title="限制结果 LIMIT"></a>限制结果 LIMIT</h3><ul>
+<li><code>limit n</code> 提取n条数据，</li>
+<li><code>limit m,n</code> 跳过m条数据，提取后面的n条数据</li>
+<li><code>limit n offset m</code>  跳过m条数据，提取后面的n条数据 ，等同于<code>limit m,n</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">-- 查询stu 表中的数据，只要3条</span><br><span class="line">select * from stu limit 3;</span><br><span class="line"></span><br><span class="line">-- 跳过前3条数据，再取4条数据</span><br><span class="line">select * from stu limit 3,4;</span><br><span class="line">select * from stu limit 4 offset 3;</span><br><span class="line">-- limit一般应用在数据分页上面</span><br><span class="line">-- 例如每页显示10条数据</span><br><span class="line">第一页 limit 0,10</span><br><span class="line">第二页 limit 10,10</span><br><span class="line">第三页 limit 20,10</span><br><span class="line">第四页 limit 30,10</span><br><span class="line">...</span><br><span class="line">-- 查询stu 表中年龄最大的两个人的信息</span><br><span class="line">select * from stu order by age desc limit 2;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2020/11/08/WmOsZi8a5KjRMSN.png" alt="image-20201108191010335"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>mysql中的查询语句比较灵活多样，并且在使用查询语句时，一定要注意sql的正确性和顺序。</p>
+<p><img src="https://i.loli.net/2020/11/08/qoVjDgp12uvzaYw.png" alt="image-20201108162518097"></p>
+<h2 id="Mysql数据库导入导出和授权"><a href="#Mysql数据库导入导出和授权" class="headerlink" title="Mysql数据库导入导出和授权"></a>Mysql数据库导入导出和授权</h2><h3 id="数据导出"><a href="#数据导出" class="headerlink" title="数据导出"></a>数据导出</h3><ul>
+<li><strong>数据库数据导出</strong>：在命令行中然后输入以下命令 导出某个库中的数据</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u root -p 库名 &gt; 要保存的文件路径/xxx.sql</span><br><span class="line"><span class="comment"># 比如：</span></span><br><span class="line">mysqldump -u root -p <span class="built_in">test</span> &gt; D://test.sql</span><br></pre></td></tr></table></figure>
+
+<p>导出一个库中所有数据，会形成一个建表和添加语句组成的sql文件</p>
+<p><img src="https://i.loli.net/2020/11/08/DY6nwXKyW9lefOI.png" alt=""></p>
+<ul>
+<li><strong>将数据库中的表导出</strong> :在命令行中然后输入以下命令 导出某个库中指定表的数据</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u root -p 库名 表名 &gt; 要保存的文件路径/xxx.sql</span><br><span class="line"><span class="comment"># 比如：</span></span><br><span class="line">mysqldump -u root -p <span class="built_in">test</span> users &gt; D://<span class="built_in">test</span>-users.sql</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据导入"><a href="#数据导入" class="headerlink" title="数据导入"></a>数据导入</h3><p>把导出的sql文件数据导入到mysql数据库中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 在新的数据库中 导入备份的数据，导入导出的sql文件</span><br><span class="line">mysql -u root -p 新建的库名 &lt; 路径&#x2F;xxx.sql</span><br><span class="line"># 把导出的表sql 导入数据库</span><br><span class="line">mysql -u root -p 新建的库名 &lt; 路径&#x2F;xxx.sql</span><br></pre></td></tr></table></figure>
+
+<h3 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h3><blockquote>
+<p>  mysql中的root用户是数据库中权限最高的用户，千万不要用在项目中。</p>
+<p>  可以给不同的用户，或者项目，创建不同的mysql用户，并适当的授权，完成数据库的相关操作，这样就在一定程度上保证了数据库的安全。</p>
+</blockquote>
+<p>创建用户的语法格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant 授权的操作 on 授权的库.授权的表 to 账户@登录地址 identified by &#39;密码&#39;;</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 在mysql中 创建一个 zhangsan 用户，授权可以对test这个库中的所有表 进行 添加和查询 的权限</span><br><span class="line">grant select,insert on test.* to zhangsan@&#39;%&#39; identified by &#39;123456&#39;;</span><br><span class="line"></span><br><span class="line"># 用户 lisi，密码 123456 可以对test库中的所有表有所有操作权限</span><br><span class="line">grant all on test.* to lisi@&#39;%&#39; identified by &#39;123456&#39;;</span><br><span class="line"></span><br><span class="line"># 删除用户 lisi</span><br><span class="line">drop user &#39;lisi&#39;@&#39;%&#39;;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="AnswerCoder 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="AnswerCoder 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>AnswerCoder
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.pengspace.top/2020/11/16/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" title="MySQL数据库基础">https://www.pengspace.top/2020/11/16/MySQL数据库基础/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"><i class="fa fa-tag"></i> 数据库</a>
+              <a href="/tags/MySQL/" rel="tag"><i class="fa fa-tag"></i> MySQL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/16/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/" rel="prev" title="移动端布局">
+      <i class="fa fa-chevron-left"></i> 移动端布局
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/11/16/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E9%AB%98%E7%BA%A7/" rel="next" title="MySQL数据库高级">
+      MySQL数据库高级 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库介绍"><span class="nav-number">1.</span> <span class="nav-text">数据库介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySql基础操作"><span class="nav-number">2.</span> <span class="nav-text">MySql基础操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用MySql的三种方式："><span class="nav-number">2.1.</span> <span class="nav-text">使用MySql的三种方式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-Structure-query-language-结构化查询语言"><span class="nav-number">2.2.</span> <span class="nav-text">SQL ( Structure query language ) 结构化查询语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库操作步骤-windows命令行"><span class="nav-number">2.3.</span> <span class="nav-text">数据库操作步骤(windows命令行)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySql数据类型"><span class="nav-number">3.</span> <span class="nav-text">MySql数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串数据类型"><span class="nav-number">3.1.</span> <span class="nav-text">字符串数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数值类型"><span class="nav-number">3.2.</span> <span class="nav-text">数值类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日期和时间类型"><span class="nav-number">3.3.</span> <span class="nav-text">日期和时间类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二进制数据类型"><span class="nav-number">3.4.</span> <span class="nav-text">二进制数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表的字段约束"><span class="nav-number">3.5.</span> <span class="nav-text">表的字段约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL的运算符"><span class="nav-number">3.6.</span> <span class="nav-text">MySQL的运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主键"><span class="nav-number">3.7.</span> <span class="nav-text">主键</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySql数据库表引擎与字符集"><span class="nav-number">4.</span> <span class="nav-text">MySql数据库表引擎与字符集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器处理客户端请求"><span class="nav-number">4.1.</span> <span class="nav-text">服务器处理客户端请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储引擎"><span class="nav-number">4.2.</span> <span class="nav-text">存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MyISAM和InnoDB表引擎的区别"><span class="nav-number">4.2.1.</span> <span class="nav-text">MyISAM和InnoDB表引擎的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符集和编码"><span class="nav-number">4.3.</span> <span class="nav-text">字符集和编码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL中的utf8和utf8mb4"><span class="nav-number">4.3.1.</span> <span class="nav-text">MySQL中的utf8和utf8mb4</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql数据库与数据表操作"><span class="nav-number">5.</span> <span class="nav-text">Mysql数据库与数据表操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库的操作"><span class="nav-number">5.1.</span> <span class="nav-text">数据库的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库创建"><span class="nav-number">5.1.1.</span> <span class="nav-text">数据库创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看所有库"><span class="nav-number">5.1.2.</span> <span class="nav-text">查看所有库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#打开库-进入库-选择库"><span class="nav-number">5.1.3.</span> <span class="nav-text">打开库&#x2F;进入库&#x2F;选择库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除库"><span class="nav-number">5.1.4.</span> <span class="nav-text">删除库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据表的操作"><span class="nav-number">5.2.</span> <span class="nav-text">数据表的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建表"><span class="nav-number">5.2.1.</span> <span class="nav-text">创建表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改表结构"><span class="nav-number">5.2.2.</span> <span class="nav-text">修改表结构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#添加字段"><span class="nav-number">5.2.2.1.</span> <span class="nav-text">添加字段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除字段"><span class="nav-number">5.2.2.2.</span> <span class="nav-text">删除字段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修改字段"><span class="nav-number">5.2.2.3.</span> <span class="nav-text">修改字段</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改表名"><span class="nav-number">5.2.3.</span> <span class="nav-text">修改表名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更改表中自增的值"><span class="nav-number">5.2.4.</span> <span class="nav-text">更改表中自增的值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改表引擎"><span class="nav-number">5.2.5.</span> <span class="nav-text">修改表引擎</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除表"><span class="nav-number">5.2.6.</span> <span class="nav-text">删除表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL-数据操作——DML"><span class="nav-number">6.</span> <span class="nav-text">MySQL 数据操作——DML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加数据"><span class="nav-number">6.1.</span> <span class="nav-text">添加数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改数据"><span class="nav-number">6.2.</span> <span class="nav-text">修改数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除数据"><span class="nav-number">6.3.</span> <span class="nav-text">删除数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL数据查询——DQL基本语法"><span class="nav-number">7.</span> <span class="nav-text">MySQL数据查询——DQL基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#检索数据SELECT"><span class="nav-number">7.1.</span> <span class="nav-text">检索数据SELECT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WHERE-数据检索条件过滤"><span class="nav-number">7.2.</span> <span class="nav-text">WHERE 数据检索条件过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字段的计算"><span class="nav-number">7.3.</span> <span class="nav-text">字段的计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySql查询常用函数"><span class="nav-number">7.4.</span> <span class="nav-text">MySql查询常用函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysql中的统计函数（聚合函数）"><span class="nav-number">7.5.</span> <span class="nav-text">Mysql中的统计函数（聚合函数）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GROUP-BY-分组"><span class="nav-number">7.6.</span> <span class="nav-text">GROUP BY 分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ORDER-BY-对检索数据进行排序"><span class="nav-number">7.7.</span> <span class="nav-text">ORDER BY 对检索数据进行排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#限制结果-LIMIT"><span class="nav-number">7.8.</span> <span class="nav-text">限制结果 LIMIT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">7.9.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql数据库导入导出和授权"><span class="nav-number">8.</span> <span class="nav-text">Mysql数据库导入导出和授权</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据导出"><span class="nav-number">8.1.</span> <span class="nav-text">数据导出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据导入"><span class="nav-number">8.2.</span> <span class="nav-text">数据导入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#权限管理"><span class="nav-number">8.3.</span> <span class="nav-text">权限管理</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a href="/">
+    <img class="site-author-image" itemprop="image" alt="AnswerCoder"
+      src="https://i.loli.net/2020/05/01/VMPAdgQKfpzoWtc.jpg">
+  </a>
+  <p class="site-author-name" itemprop="name">AnswerCoder</p>
+  <div class="site-description" itemprop="description">记录自己学习的历程</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Brian-YounG7" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Brian-YounG7" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:15939534511@163.com" title="E-Mail → mailto:15939534511@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">AnswerCoder</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">145k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:12</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/canvas_lines.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/canvas_sphere.min.js"></script>
+
+
+  
+  <script data-pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'oftcVvNvcCjOKYqUI80AVwVU-gzGzoHsz',
+      appKey     : 'LT2CXjogpz8lsiOffakk42ih',
+      placeholder: "说点什么吧~",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script>
+</body>
+</html>

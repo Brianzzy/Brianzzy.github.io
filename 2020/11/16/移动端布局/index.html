@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.pengspace.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="移动端现状 内核 当前国产主流手机浏览器，内核都是Webkit   分辨率：手机分辨率，碎片化太多 Android：480x800, 480x854, 540x960, 720x1280，1080x1920 等 iPhone：640x960, 640x1136, 750x1334, 1242x2208 等 2K、4K等高分辨率    在开发过程中，Google chrome是主要模拟手机的手段之一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="移动端布局">
+<meta property="og:url" content="https://www.pengspace.top/2020/11/16/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/index.html">
+<meta property="og:site_name" content="鹏空间">
+<meta property="og:description" content="移动端现状 内核 当前国产主流手机浏览器，内核都是Webkit   分辨率：手机分辨率，碎片化太多 Android：480x800, 480x854, 540x960, 720x1280，1080x1920 等 iPhone：640x960, 640x1136, 750x1334, 1242x2208 等 2K、4K等高分辨率    在开发过程中，Google chrome是主要模拟手机的手段之一">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/11/05/Gkg6KFxR7IHm3ZJ.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/05/s1gtWMJ95GX42j3.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/05/Y7wazID9g2hUQGO.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/05/tmYVi7JlQxLUeup.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/05/NfyYevr6w3DQa1q.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/05/AKrpNHldgYZSI6F.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/05/Oznr9KpjHYfoLe8.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/05/TVsbDKdaExAP8f4.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/05/Pb8shxufpnevYMS.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/05/NvrsDGHJ3mp6WM9.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/05/EZfINrvdcjOiazR.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/05/dmEyo3HPGRc9WJK.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/05/QTybV43Cfz62JLo.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/05/PIBMRicrzHqlyn2.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/05/SCPpKOIl3Qy4soZ.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/05/tS6KdNzboRBkLiw.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/05/I8aFMTEqcypOxXZ.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/05/v5pARWne17VXTZ9.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/05/HPAdJC73MOzXIbo.png">
+<meta property="article:published_time" content="2020-11-16T11:31:49.000Z">
+<meta property="article:modified_time" content="2020-11-16T11:38:17.399Z">
+<meta property="article:author" content="AnswerCoder">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="flex布局">
+<meta property="article:tag" content="响应式布局">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/11/05/Gkg6KFxR7IHm3ZJ.png">
+
+<link rel="canonical" href="https://www.pengspace.top/2020/11/16/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>移动端布局 | 鹏空间</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+    <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+    <script type="text/javascript" src="/js/src/fireworks.js"></script>
+  
+<link rel="alternate" href="/atom.xml" title="鹏空间" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">鹏空间</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">学习笔记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.pengspace.top/2020/11/16/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2020/05/01/VMPAdgQKfpzoWtc.jpg">
+      <meta itemprop="name" content="AnswerCoder">
+      <meta itemprop="description" content="记录自己学习的历程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鹏空间">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          移动端布局
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-16 19:31:49 / 修改时间：19:38:17" itemprop="dateCreated datePublished" datetime="2020-11-16T19:31:49+08:00">2020-11-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/2020/11/16/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/16/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>14k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="移动端现状"><a href="#移动端现状" class="headerlink" title="移动端现状"></a>移动端现状</h2><ul>
+<li>内核<ul>
+<li>当前国产主流手机浏览器，内核都是Webkit</li>
+</ul>
+</li>
+<li>分辨率：手机分辨率，碎片化太多<ul>
+<li>Android：480x800, 480x854, 540x960, 720x1280，1080x1920 等</li>
+<li>iPhone：640x960, 640x1136, 750x1334, 1242x2208 等</li>
+<li>2K、4K等高分辨率</li>
+</ul>
+</li>
+</ul>
+<p>在开发过程中，Google chrome是主要模拟手机的手段之一，步骤：</p>
+<ol>
+<li><p>鼠标右键 检查 或 F12 控制器界面方向；</p>
+</li>
+<li><p>选择 手机模式</p>
+</li>
+<li><p>选择 手机类型及尺寸；调节适当的显示比例；</p>
+</li>
+<li><p>点右键 查看 页面元素；</p>
+</li>
+</ol>
+<p><img src="https://i.loli.net/2020/11/05/Gkg6KFxR7IHm3ZJ.png" alt=""></p>
+<h2 id="viewport-视口"><a href="#viewport-视口" class="headerlink" title="viewport(视口)"></a>viewport(视口)</h2><p><strong>定义：</strong></p>
+<p>视口：浏览器（PC、移动端）显示页面内容的屏幕区域；不同的屏幕的大小，我们看到的区域也是不同的；</p>
+<p>PC端的页面直接放入手机屏显示，不友好，可以用viewport来解决</p>
+<p><img src="https://i.loli.net/2020/11/05/s1gtWMJ95GX42j3.png" alt="image-20201105130620315"></p>
+<p><img src="https://i.loli.net/2020/11/05/Y7wazID9g2hUQGO.png" alt=""></p>
+<p>HTML宽度默认为980px，不是很合适；</p>
+<blockquote>
+<p>  各手机型号尺寸：</p>
+<table>
+<thead>
+<tr>
+<th>设备</th>
+<th>尺寸（英寸）</th>
+<th>开发尺寸（px）</th>
+<th>物理像素比（dpr）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>iphone3G</td>
+<td>3.5</td>
+<td>320*480</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>iphone4/4s</td>
+<td>3.5</td>
+<td>320*480</td>
+<td>2.0</td>
+</tr>
+<tr>
+<td>iphone5/5s/5c</td>
+<td>4.0</td>
+<td>320*568</td>
+<td>2.0</td>
+</tr>
+<tr>
+<td>HTC One M8</td>
+<td>4.5</td>
+<td>360*640</td>
+<td>3.0</td>
+</tr>
+<tr>
+<td>iphone6</td>
+<td>4.7</td>
+<td>375*667</td>
+<td>2.0</td>
+</tr>
+<tr>
+<td>Nexus4</td>
+<td>4.7</td>
+<td>384*640</td>
+<td>2.0</td>
+</tr>
+<tr>
+<td>Nexus5x</td>
+<td>5.2</td>
+<td>411*731</td>
+<td>2.6</td>
+</tr>
+<tr>
+<td>iphone6 Plus</td>
+<td>5.5</td>
+<td>414*736</td>
+<td>3.0</td>
+</tr>
+<tr>
+<td>Samsung Galaxy Note4</td>
+<td>5.7</td>
+<td>480*853</td>
+<td>3.0</td>
+</tr>
+<tr>
+<td>Sony Xperia Z Ultra</td>
+<td>6.4</td>
+<td>540*960</td>
+<td>2.0</td>
+</tr>
+<tr>
+<td>Nexus 7(‘12)</td>
+<td>7.0</td>
+<td>600*960</td>
+<td>1.3</td>
+</tr>
+<tr>
+<td>iPad Mini</td>
+<td>7.9</td>
+<td>768*1024</td>
+<td>1.0</td>
+</tr>
+</tbody></table>
+</blockquote>
+<p>那么设置HTML宽度多少为合适呢？设置为屏幕的窗口大小应该正好合适</p>
+<p><strong>设置viewport</strong></p>
+<p>meta标签设置：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, user-scalable=no, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>width=device-width</code>：改变HTML默认的980px 为 屏幕的宽度；</p>
+<p><code>user-scalable</code>: 是否允许用户缩放屏幕 值：no(0不允许) yes(1允许)；</p>
+<p><code>initial-scale</code>：初始化缩放比例；1.0：不缩放；</p>
+<p><code>maximum-scale</code>：用户对页面的最大缩放比例；值：比例</p>
+<p><code>minimum-scale</code>：用户对页面的最小缩放比例；值：比例</p>
+<h2 id="二倍图"><a href="#二倍图" class="headerlink" title="二倍图"></a>二倍图</h2><p><strong>物理像素点</strong></p>
+<ul>
+<li>指计算机显示设备中的最小单位，即一个像素点的大小。每一个像素点可以理解为就是屏幕上的一个发光<br>点。每个点可以发一个颜色，就是我们看到的画面。</li>
+<li>早期的屏幕，物理像素点都比较大，随着技术的进步，物理像素点会被做的越来越小。</li>
+</ul>
+<p><strong>屏幕分辨率</strong></p>
+<ul>
+<li>由物理像素点的个数来衡量，表示屏幕水平和垂直方向的物理像素点的个数。</li>
+</ul>
+<blockquote>
+<p>  例如：iPhone3和iPhone4是同一个屏幕尺寸下，比较分辨率：</p>
+<p>  <img src="https://i.loli.net/2020/11/05/tmYVi7JlQxLUeup.png" alt=""></p>
+<p>  Retina（视网膜屏幕）是一种显示技术，可以将把更多的物理像素点压缩至一块屏幕里；从而达到更高的分辨率，并提高屏幕显示的细腻程度。</p>
+<p>  <img src="https://i.loli.net/2020/11/05/NfyYevr6w3DQa1q.png" alt="image-20201105133553373"></p>
+</blockquote>
+<p><strong>图片分辨率</strong></p>
+<p>假设：有200*200分辨率的图片，展示在宽度分别是320（iphone3）、640(iphone4)分辨率的手机上，展示<br>的效果如下：</p>
+<p><img src="https://i.loli.net/2020/11/05/AKrpNHldgYZSI6F.png" alt="image-20201105133722991"></p>
+<p>可以看出，不同的屏幕下，显示的图片大小是不一样的；物理像素点的宽度大小为1：0.5，物理像素点的数量：320（1 x 200=200长度）、640(0.5 x 400=200长度；都设为是200长度，才能保证显示的大小一样，这时320的屏幕是200像素点，而640的屏幕是400个像素点。</p>
+<p>在移动端，我们可以通过设置CSS样式宽高200px后，会自动保证每个屏幕显示元素大小一样，它会自动算出不同屏幕下，背后需要提供物理像素点需要多少个。</p>
+<p><strong>二倍图</strong></p>
+<p>像针对640分辨率手机屏（iPhone4），要求设计给400*400图，对应我们CSS设置200px,有二倍的关系：</p>
+<p>命名：</p>
+<ul>
+<li><a href="mailto:xxxxx@2x.png">xxxxx@2x.png</a>：二倍图</li>
+<li><a href="mailto:xxxxx@3x.png">xxxxx@3x.png</a>：三倍图</li>
+</ul>
+<h2 id="移动端常见布局"><a href="#移动端常见布局" class="headerlink" title="移动端常见布局"></a>移动端常见布局</h2><p>了解常见布局不同，针对业务需求选择不同的方案；实际开发过程中，都是混合使用，没有哪一种是绝对的<br>单独使用。</p>
+<p>常见布局包括以下几种方式</p>
+<ul>
+<li>单独制作移动端页面<ul>
+<li>流式布局 (百分比布局)</li>
+<li>flex弹性布局 (强列推荐)</li>
+<li>less+rem+媒体查询布局</li>
+<li>混合布局</li>
+</ul>
+</li>
+<li>响应式页面兼容移动端<ul>
+<li>媒体查询</li>
+<li>bootstrap</li>
+</ul>
+</li>
+</ul>
+<p>比较：</p>
+<ul>
+<li>单独制作：流式、flex、rem布局、专门针对各种手机屏幕进行开发。例如：淘宝、京东、苏宁手机端都是单独制作的</li>
+<li>响应式：可兼容PC 移动端，一个页面多个端适配显示；制作起来要考虑到兼容性的样式。例如：三星电子官网<a href="http://www.samsung.com/cn/" target="_blank" rel="noopener">www.samsung.com/cn/</a> 就是响应式布局</li>
+</ul>
+<h3 id="流式布局"><a href="#流式布局" class="headerlink" title="流式布局"></a>流式布局</h3><p>看下面代码，左右两部分以百分比来定义宽度，这样无论屏幕如何变化都可以保证效果</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">        *&#123;<span class="attribute">margin</span>: <span class="number">0</span>;<span class="attribute">padding</span>: <span class="number">0</span>;&#125;</span></span><br><span class="line"><span class="css">        <span class="selector-class">.op</span>&#123;</span></span><br><span class="line">            width: 100%;</span><br><span class="line">            border: 1px solid red;</span><br><span class="line">            overflow: hidden;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="css">        <span class="selector-class">.op</span>&gt;<span class="selector-tag">div</span>&#123;</span></span><br><span class="line">            float: left;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="css">        <span class="selector-class">.left</span>&#123;</span></span><br><span class="line">            width: 40%;</span><br><span class="line">            height: 200px;</span><br><span class="line">            background: blue;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="css">        <span class="selector-class">.right</span>&#123;</span></span><br><span class="line">            width: 60%;</span><br><span class="line">            height: 200px;</span><br><span class="line">            background: pink;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"op"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span>左<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span>右<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="flex布局"><a href="#flex布局" class="headerlink" title="flex布局"></a>flex布局</h3><p>参考<a href="https://ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="noopener">Flex 布局教程：语法篇</a></p>
+<h4 id="flex介绍"><a href="#flex介绍" class="headerlink" title="flex介绍"></a>flex介绍</h4><p>布局的传统解决方案，基于<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/box_model" target="_blank" rel="noopener">盒状模型</a>，依赖 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display" target="_blank" rel="noopener"><code>display</code></a> 属性 + <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position" target="_blank" rel="noopener"><code>position</code></a>属性 + <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/float" target="_blank" rel="noopener"><code>float</code></a>属性。它对于那些特殊布局非常不方便，比如，垂直居中就不容易实现。</p>
+<p>2009年，W3C 提出了一种新的方案—-Flex 布局，可以简便、完整、响应式地实现各种页面布局。目前，它已经得到了所有浏览器的支持，这意味着，现在就能很安全地使用这项功能。</p>
+<p>Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。</p>
+<p><strong>传统布局与flex布局比较：</strong></p>
+<ul>
+<li><p>传统布局：</p>
+<ul>
+<li>兼容性好、布局繁琐、浮动（清除浮动）</li>
+<li>有局限性不能在移动端很好的布局</li>
+</ul>
+</li>
+<li><p>flex布局：</p>
+<ul>
+<li>操作方便，布局极其简单，移动端使用比较广泛</li>
+<li>PC端浏览器支持情况比较差</li>
+</ul>
+<blockquote>
+<p>  如果是PC端页面布局，采用传统方式；如果是移动端或者是不考虑兼容的PC端则采用flex布局</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>flex布局特点：</strong></p>
+<ul>
+<li>任何一个容器标签都可以指定使用 flex 布局。</li>
+<li><font color = red>当为父标签设为 flex 布局以后，子元素的 <code>float</code>、<code>clear</code> 和 <code>vertical-align</code> 属性将失效。</font></li>
+<li>使用思想上和传统盒子完全不同，不要再想子元素是块级元素、行内元素，</li>
+<li>flex通过行和列的思路来控制布局；</li>
+</ul>
+<p><strong>基本概念：</strong></p>
+<p>采用 flex 布局的元素，称为 flex 容器（flex container），父级简称”<strong>容器</strong>“。它的所有子元素自动成为容器成员，称为 flex 项目（flex item），简称”<strong>项目</strong>“。</p>
+<p><img src="https://i.loli.net/2020/11/05/Oznr9KpjHYfoLe8.png" alt=""></p>
+<p><strong>语法使用：</strong></p>
+<p>任何一个容器都可以指定为 Flex 布局。</p>
+<blockquote>
+  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line"> <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>行内元素也可以使用 Flex 布局。</p>
+<blockquote>
+  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line"> <span class="attribute">display</span>: inline-flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>Webkit 内核的浏览器，必须加上<code>-webkit</code>前缀。</p>
+<blockquote>
+  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line"> <span class="attribute">display</span>: -webkit-flex; <span class="comment">/* Safari */</span></span><br><span class="line"> <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="容器属性"><a href="#容器属性" class="headerlink" title="容器属性"></a>容器属性</h4><p>容器属性有以下6个</p>
+<ul>
+<li><code>flex-direction</code></li>
+<li><code>flex-wrap</code></li>
+<li><code>flex-flow</code></li>
+<li><code>justify-content</code></li>
+<li><code>align-items</code></li>
+<li><code>align-content</code></li>
+</ul>
+<h5 id="flex-direction属性"><a href="#flex-direction属性" class="headerlink" title="flex-direction属性"></a>flex-direction属性</h5><p> <code>flex-direction</code>属性决定主轴的方向（即项目的排列方向）。元素默认按照确认的主轴方向进行排布。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flex-direction:row | row-reverse | column | column-reverse;</span><br></pre></td></tr></table></figure>
+
+<p>它有4个值：</p>
+<table>
+<thead>
+<tr>
+<th align="left">属性值</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>row</code> (默认值)</td>
+<td align="left">水平方向 ，从左到右</td>
+</tr>
+<tr>
+<td align="left"><code>row-reverse</code></td>
+<td align="left">水平方向，从右到左</td>
+</tr>
+<tr>
+<td align="left"><code>column</code></td>
+<td align="left">垂直方向，从上到下</td>
+</tr>
+<tr>
+<td align="left"><code>column-reverse</code></td>
+<td align="left">垂直方向，从下到上</td>
+</tr>
+</tbody></table>
+<h5 id="flex-wrap属性"><a href="#flex-wrap属性" class="headerlink" title="flex-wrap属性"></a>flex-wrap属性</h5><p>默认情况下，项目都排在一条线（又称”轴线”）上。<code>flex-wrap</code>属性定义，如果一条轴线排不下，如何换行。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flex-wrap:nowrap | warp | wrap-reverse;</span><br></pre></td></tr></table></figure>
+
+<p>它有3个值：</p>
+<table>
+<thead>
+<tr>
+<th align="left">属性值</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>nowarp</code>(默认值)</td>
+<td align="left">不换行；子项目加起来的宽度超过父级的宽度时，子项宽度会被缩小，宽度只是不生效，必须设置</td>
+</tr>
+<tr>
+<td align="left"><code>warp</code></td>
+<td align="left">换行，子项的总宽加起来超过父级宽度，就会换行，第一行在上方</td>
+</tr>
+<tr>
+<td align="left"><code>warp-reverse</code></td>
+<td align="left">换行，子项的总宽加起来超过父级宽度，就会换行，第一行在下方</td>
+</tr>
+</tbody></table>
+<h5 id="flex-flow属性"><a href="#flex-flow属性" class="headerlink" title="flex-flow属性"></a>flex-flow属性</h5><p><code>flex-flow</code>属性是<code>flex-direction</code>属性和<code>flex-wrap</code>属性的简写形式，默认值为<code>row nowrap</code>。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flex-flow: &lt;flex-direction&gt; || &lt;flex-wrap&gt;;</span><br></pre></td></tr></table></figure>
+
+<h5 id="justify-content属性"><a href="#justify-content属性" class="headerlink" title="justify-content属性"></a>justify-content属性</h5><p><code>justify-content</code>属性定义了项目在主轴上的对齐方式，类似word里的左对齐，右对齐，居中对齐，分散对齐；</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">justify-content: flex-start | flex-end | center | space-between | space-around;</span><br></pre></td></tr></table></figure>
+
+<p>它有5个值：</p>
+<table>
+<thead>
+<tr>
+<th align="left">属性值</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>flex-start</code>(默认值)</td>
+<td align="left">从头部开始 排列，如果主轴是x轴，则从左到右（左对齐）</td>
+</tr>
+<tr>
+<td align="left"><code>flex-end</code></td>
+<td align="left">从尾部开始排列</td>
+</tr>
+<tr>
+<td align="left"><code>center</code></td>
+<td align="left">在主轴居中对齐（如果主轴是x轴 水平居中）</td>
+</tr>
+<tr>
+<td align="left"><code>space-around</code></td>
+<td align="left">每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。</td>
+</tr>
+<tr>
+<td align="left"><code>space-between</code></td>
+<td align="left">两端对齐，项目之间的间隔都相等。</td>
+</tr>
+</tbody></table>
+<p><img src="https://i.loli.net/2020/11/05/TVsbDKdaExAP8f4.png" alt="image-20201105165428118"></p>
+<h5 id="align-items属性"><a href="#align-items属性" class="headerlink" title="align-items属性"></a>align-items属性</h5><p><code>align-items</code>属性是控制子项单行在侧轴（交叉轴，默认是y轴）上的对齐方式，在子项为单项（单行）的时候使用；整体一行元素看成整体，设置在侧轴上的对齐方式。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">align-items: flex-start | flex-end | center | baseline | stretch;</span><br></pre></td></tr></table></figure>
+
+<p>它有5个值：</p>
+<table>
+<thead>
+<tr>
+<th align="left">属性值</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>flex-start</code></td>
+<td align="left">交叉轴的起点对齐(如果是y轴 ，从上到下）</td>
+</tr>
+<tr>
+<td align="left"><code>flex-end</code></td>
+<td align="left">交叉轴的终点对齐</td>
+</tr>
+<tr>
+<td align="left"><code>center</code></td>
+<td align="left">交叉轴的中点对齐。</td>
+</tr>
+<tr>
+<td align="left"><code>stretch</code>(默认值)</td>
+<td align="left">如果项目未设置高度或设为auto，将占满整个容器的高度。</td>
+</tr>
+<tr>
+<td align="left"><code>baseline</code></td>
+<td align="left">项目的第一行文字的基线对齐。</td>
+</tr>
+</tbody></table>
+<p><img src="https://i.loli.net/2020/11/05/Pb8shxufpnevYMS.png" alt=""></p>
+<h5 id="align-content属性"><a href="#align-content属性" class="headerlink" title="align-content属性"></a>align-content属性</h5><p><code>align-content</code>属性设置项目在侧轴的排列方式 ，只能用于子项出现换行或者多行的情况,如果项目只有一根轴线(一行)，该属性不起作用。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">align-content: flex-start | flex-end | center | space-between | space-around | stretch;</span><br></pre></td></tr></table></figure>
+
+<p>它有6个值：</p>
+<table>
+<thead>
+<tr>
+<th align="left">属性值</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>flex-start</code></td>
+<td align="left">从侧轴头部开始排列</td>
+</tr>
+<tr>
+<td align="left"><code>flex-end</code></td>
+<td align="left">从侧轴尾部开始排列</td>
+</tr>
+<tr>
+<td align="left"><code>center</code></td>
+<td align="left">在侧轴中间显示</td>
+</tr>
+<tr>
+<td align="left"><code>stretch</code>(默认值)</td>
+<td align="left">项目高度平分容器高度</td>
+</tr>
+<tr>
+<td align="left"><code>space-between</code></td>
+<td align="left">与侧轴两端对齐，轴线之间的间隔平均分布。</td>
+</tr>
+<tr>
+<td align="left"><code>space-arond</code></td>
+<td align="left">每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。</td>
+</tr>
+</tbody></table>
+<p><img src="https://i.loli.net/2020/11/05/NvrsDGHJ3mp6WM9.png" alt="image-20201105171729060"></p>
+<h4 id="项目属性"><a href="#项目属性" class="headerlink" title="项目属性"></a>项目属性</h4><p>项目属性有以下6个：</p>
+<ul>
+<li><code>order</code></li>
+<li><code>flex-grow</code></li>
+<li><code>flex-shrink</code></li>
+<li><code>flex-basis</code></li>
+<li><code>flex</code></li>
+<li><code>align-self</code></li>
+</ul>
+<h5 id="order属性"><a href="#order属性" class="headerlink" title="order属性"></a>order属性</h5><p><img src="https://i.loli.net/2020/11/05/EZfINrvdcjOiazR.png" alt=""></p>
+<h5 id="flex-grow属性"><a href="#flex-grow属性" class="headerlink" title="flex-grow属性"></a>flex-grow属性</h5><p><img src="https://i.loli.net/2020/11/05/dmEyo3HPGRc9WJK.png" alt="image-20201105172534642"></p>
+<h5 id="flex-shrink属性"><a href="#flex-shrink属性" class="headerlink" title="flex-shrink属性"></a>flex-shrink属性</h5><p><img src="https://i.loli.net/2020/11/05/QTybV43Cfz62JLo.png" alt=""></p>
+<h5 id="flex-basis属性"><a href="#flex-basis属性" class="headerlink" title="flex-basis属性"></a>flex-basis属性</h5><p><img src="https://i.loli.net/2020/11/05/PIBMRicrzHqlyn2.png" alt=""></p>
+<h5 id="flex属性"><a href="#flex属性" class="headerlink" title="flex属性"></a>flex属性</h5><p><code>flex</code>属性是<code>flex-grow</code>, <code>flex-shrink</code> 和 <code>flex-basis</code>的简写，默认值为<code>0 1 auto</code>。后两个属性可选。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">flex</span>: none | [ &lt;<span class="string">'flex-grow'</span>&gt; &lt;<span class="string">'flex-shrink'</span>&gt;? || &lt;<span class="string">'flex-basis'</span>&gt; ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该属性有两个快捷值：<code>auto</code> (<code>1 1 auto</code>) 和 <code>none</code> (<code>0 0 auto</code>)。</p>
+<p>建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。</p>
+<h5 id="align-self属性"><a href="#align-self属性" class="headerlink" title="align-self属性"></a>align-self属性</h5><p><code>align-self</code>属性允许单个项目有与其他项目不一样的对齐方式，可覆盖<code>align-items</code>属性。默认值为<code>auto</code>，表示继承父元素的<code>align-items</code>属性，如果没有父元素，则等同于<code>stretch</code>。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">align-self</span>: auto | flex-start | flex-end | center | baseline | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>除了auto，其他5个属性值的含义与<code>align-items</code>属性完全一样。</p>
+<h3 id="移动端适配"><a href="#移动端适配" class="headerlink" title="移动端适配"></a>移动端适配</h3><h4 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h4><blockquote>
+<p>  媒体查询可以感受到屏幕的变化；可以根据屏幕不同的宽，从而获得不同的样式，然后实现不同的样式显示。</p>
+<ol>
+<li><p>CSS3 新语法，是一个查询屏幕的过程，通过查询当前屏幕尺寸属于哪个范围，从而有哪个范围的样式生效；</p>
+</li>
+<li><p>感受屏幕变化，屏幕变化就是宽度的变化，通过预设置，当屏幕到了我已经预设置的变化的范围，就会把我提前设置好的样式进行生效；</p>
+</li>
+</ol>
+</blockquote>
+<p><strong>语法</strong>：CSS样式如下</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">mediatype 查询类型:</span></span><br><span class="line"><span class="comment">-----------------</span></span><br><span class="line"><span class="comment">all 所有设备</span></span><br><span class="line"><span class="comment">print 用于打印机和打印预览</span></span><br><span class="line"><span class="comment">screen 用于电脑屏幕，平板电脑，智能手机等。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">条件:</span></span><br><span class="line"><span class="comment">----</span></span><br><span class="line"><span class="comment">and 并且 not 不满足 only 仅仅满足</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">media feature 查询条件:</span></span><br><span class="line"><span class="comment">----------------------</span></span><br><span class="line"><span class="comment">width,min-with,max-width</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">@media</span> mediatype <span class="keyword">and</span>|<span class="keyword">not</span>|<span class="keyword">only</span> (media feature) &#123;</span><br><span class="line">	<span class="selector-tag">CSS-Code</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>例子：</strong>如果文档宽度小于 500 像素则修改背景颜色(background-color)</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* min-width/max-width：最小界值，最大界值；查询条件包含等于号；*/</span></span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width:</span><span class="number">499px</span>) &#123;</span><br><span class="line">	<span class="selector-tag">body</span> &#123;</span><br><span class="line">		<span class="attribute">background-color</span>: red;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="rem"><a href="#rem" class="headerlink" title="rem"></a>rem</h4><blockquote>
+<p>  rem是一个相对单位，类似于em，</p>
+<p>  不同的是rem的基准是相对于html元素的字体大小，em是父元素字体大小。</p>
+</blockquote>
+<p>rem让一些不能等比自适应的元素，达到当设备尺寸发生改变的时候，等比例适配当前设备。</p>
+<p>rem单位，可以控制整个页面所有元素有关PX类（宽、高、padding、margin、top…）只要是你设置数值的地方都可以实现控制；</p>
+<p>根(root): 1 rem代表HTML的font-size大小；</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 1.根html 为 10px */</span></span><br><span class="line"><span class="selector-tag">html</span> &#123;</span><br><span class="line">	<span class="attribute">font-size</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 2.此时 div 的宽就是 150px */</span></span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">15rem</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>rem应用：</strong></p>
+<p>使用媒体查询根据不同设备按比例设置html的字体大小，然后页面元素使用rem做尺寸单位，当html字体大小变化，元素尺寸也会发生变化，从而达到等比缩放的适配。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width:</span> <span class="number">320px</span>) &#123;</span><br><span class="line">	<span class="selector-tag">html</span> &#123;</span><br><span class="line">		<span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width:</span> <span class="number">640px</span>) &#123;</span><br><span class="line">    <span class="selector-tag">html</span> &#123;</span><br><span class="line">    	<span class="attribute">font-size</span>: <span class="number">40px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*在屏幕宽度为320px-639px的设备上，div的宽高就都是20px;</span></span><br><span class="line"><span class="comment">在屏幕宽度大与等于640px的设备上，div的宽高就都是40px;*/</span></span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">1rem</span>;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">1rem</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="less"><a href="#less" class="headerlink" title="less"></a>less</h4><ul>
+<li>less : 让你写更少的代码，实现相同的效果；</li>
+<li>less :是一门 CSS 扩展语言，它扩展了CSS的动态特性。 CSS 预处理语言。</li>
+<li>常见的CSS预处理器：Sass、Less、Stylus 。</li>
+<li>Less中文网址：<a href="http://lesscss.cn/" target="_blank" rel="noopener">http://lesscss.cn/</a></li>
+</ul>
+<p><strong>less安装：</strong></p>
+<p>sublime安装less和less2Css插件：</p>
+<p><a href="https://blog.csdn.net/redase/article/details/83998172" target="_blank" rel="noopener">https://blog.csdn.net/redase/article/details/83998172</a></p>
+<p>vscode安装less插件：</p>
+<ul>
+<li>在扩展：商店中搜 Easy Less安装即可</li>
+</ul>
+<p>测试：写一个.less文件，保存，就会在当前目录生成一个对应的.css文件</p>
+<p><img src="https://i.loli.net/2020/11/05/SCPpKOIl3Qy4soZ.png" alt="image-20201105205211449"></p>
+<p><strong>less变量</strong></p>
+<p>变量是指没有固定的值，可以改变的。我们CSS中的一些颜色和数值等经常使用，可以设置为变量；语法：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//@变量名:值;</span></span><br><span class="line"><span class="variable">@bg:</span><span class="number">#333</span>;</span><br><span class="line"><span class="selector-class">.box_1</span> &#123;</span><br><span class="line">	<span class="attribute">background-color</span>: <span class="variable">@bg</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box_2</span> &#123;</span><br><span class="line">	<span class="attribute">background-color</span>: <span class="variable">@bg</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>变量命名规则：</p>
+<ul>
+<li>必须有@为前缀</li>
+<li>不能包含特殊字符~=+、不能以数字开头</li>
+<li>大小写敏感区分；</li>
+</ul>
+<p><strong>less嵌套</strong></p>
+<p>类似HTML一样写less结构；语法：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* css 写法 */</span></span><br><span class="line"><span class="selector-id">#header</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* less 写法 */</span></span><br><span class="line"><span class="selector-id">#header</span> &#123;</span><br><span class="line">	.logo &#123;</span><br><span class="line">		<span class="selector-tag">width</span>: 300<span class="selector-tag">px</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>交集|伪类|伪元素选择器，语法：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* css写法 */</span></span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>&#123;</span><br><span class="line">	<span class="attribute">color</span>:red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* less写法 */</span></span><br><span class="line"><span class="selector-tag">a</span>&#123;</span><br><span class="line">	&amp;:hover&#123;</span><br><span class="line">		<span class="selector-tag">color</span><span class="selector-pseudo">:red</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>less运算</strong></p>
+<p>任何数字、颜色或者变量都可以参与运算，Less提供了加（+）、减（-）、乘（*）、除（/）算术运算。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数字</span></span><br><span class="line"><span class="attribute">width</span>: <span class="number">200px</span> - <span class="number">50</span>;</span><br><span class="line"><span class="comment">// 颜色</span></span><br><span class="line"><span class="attribute">background-color</span>: <span class="number">#666</span> - <span class="number">#222</span>;</span><br><span class="line"><span class="comment">// 注意：运算符中间左右有个空格隔开</span></span><br></pre></td></tr></table></figure>
+
+<p>运算后的单位选择：</p>
+<ul>
+<li>如果两个值之间只有一个值有单位，则运算结果就取该单位</li>
+<li>对于两个不同的单位的值之间的运算，运算结果的值取第一个值的单位</li>
+</ul>
+<blockquote>
+<p>  更多less的用法可以访问less的文档</p>
+<ol>
+<li><p><a href="http://lesscss.cn/" target="_blank" rel="noopener">http://lesscss.cn/</a></p>
+</li>
+<li><p><a href="https://less.bootcss.com/" target="_blank" rel="noopener">https://less.bootcss.com/</a></p>
+</li>
+</ol>
+</blockquote>
+<h4 id="两种移动端适配方案"><a href="#两种移动端适配方案" class="headerlink" title="两种移动端适配方案"></a>两种移动端适配方案</h4><h5 id="方案一-：rem-媒体查询-less"><a href="#方案一-：rem-媒体查询-less" class="headerlink" title="方案一 ：rem+媒体查询+less"></a>方案一 ：rem+媒体查询+less</h5><p>上面已经说明过了</p>
+<p>使用媒体查询根据不同设备按比例设置html的字体大小，然后页面元素使用rem做尺寸单位，当html字体大小变化，元素尺寸也会发生变化，从而达到等比缩放的适配。</p>
+<p>大概步骤就是：</p>
+<ol>
+<li>准备各个档位下的rem ：提前准备好各个档位下的HTML 的font-size大小；</li>
+<li>拿到当前尺寸的1rem代表多少px；</li>
+<li>计算比例：把页面刚才所有的元素的PX值替换为rem,可通过less来计算。</li>
+<li>达到目标：那么，屏尺寸变化时，1rem(基础块)也会变化，自然就是等比缩放。</li>
+</ol>
+<h5 id="方案二：rem-flexible-js-less"><a href="#方案二：rem-flexible-js-less" class="headerlink" title="方案二：rem+ flexible.js+less"></a>方案二：rem+ flexible.js+less</h5><p>和上个方案实现原理一样，都是通过改变1rem(基础块)大小实现页面整体元素改变；</p>
+<p><strong>filexible.js</strong></p>
+<ul>
+<li><p>手机淘宝团队出的 简洁高效 移动端适配库；<font color = red>和flex布局没有任何关系</font></p>
+</li>
+<li><p>github地址：<a href="https://github.com/amfe/lib-flexible" target="_blank" rel="noopener">https://github.com/amfe/lib-flexible</a></p>
+</li>
+<li><p>不是通过设置CSS媒体查询设置font-size，通过 JS 设置font-size，效果是屏幕变化一点，就有一个rem重新计算；</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setRem</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="comment">// docEl.clientWidth JS获取当前屏幕的宽度</span></span><br><span class="line">	<span class="comment">// 除以10,得到基础块,(将屏幕划分为10块)</span></span><br><span class="line">	<span class="keyword">var</span> rem = docEl.clientWidth / <span class="number">10</span>;</span><br><span class="line">	docEl.style.fontSize = rem + <span class="string">'px'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>举个例子：</p>
+<ul>
+<li><p>假如拿到屏幕宽度按430px设计的设计稿，</p>
+</li>
+<li><p>拿到UI设计稿，原稿实现：页面上所有的元素，在设计稿上进行测量，代码实现；（流式、flex）只要是UI给图上有标注，就是写出来；先全部实现出来，一会儿统一替换；</p>
+<ul>
+<li>在哪里写？less文件</li>
+<li>需要把生成的css文件进行引入index.html；</li>
+</ul>
+</li>
+<li><p>设计稿宽度/10 ：1rem = 43px；</p>
+</li>
+<li><p>统一替换：100px=100/43 rem;</p>
+</li>
+</ul>
+<blockquote>
+<p>  <strong>两种方案的对比</strong></p>
+<ul>
+<li>相同：<ul>
+<li>都是对font-size实现控制，1rem（基础块）变化，实现等比效果；</li>
+</ul>
+</li>
+<li>不同：<ul>
+<li>rem+媒体查询+less：通过设置不同的档位下，设置不同的1rem值；效果为阶梯式变化；</li>
+<li>flexible.js+rem：通过js设置不同的1rem值，效果为连续变化；这个看起来更为连贯，适配任何屏幕。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="响应式布局"><a href="#响应式布局" class="headerlink" title="响应式布局"></a>响应式布局</h3><h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>响应式布局可以通过同一份代码快速、有效适配手机、平板、PC设备等所有的屏幕。</p>
+<p>响应式布局涉及屏幕宽度变化(媒体查询)和布局知识[传统布局方案(百分比、浮动、清除浮动、定位)]</p>
+<h4 id="档位划分"><a href="#档位划分" class="headerlink" title="档位划分"></a>档位划分</h4><p>媒体查询：档位划分；市场上默认的划分，三个节点、四个档位</p>
+<ul>
+<li>w&lt;768 超小屏幕（xs）（手机）</li>
+<li>768&lt;= w &lt;992 小屏设备（sm）（平板）</li>
+<li>992&lt;= w &lt;1200 中等屏幕（md）（小显示屏的PC显示器）</li>
+<li>1200&lt;=w 大宽屏设备（lg）（大桌面显示器）</li>
+</ul>
+<p><img src="https://i.loli.net/2020/11/05/tS6KdNzboRBkLiw.png" alt=""></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*把市场上所有屏幕包括在内:*/</span></span><br><span class="line"><span class="comment">/* 1. 超小屏幕下 xs 小于 768 */</span></span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width:</span> <span class="number">0px</span>) &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 2. 小屏幕下 sm 大于等于768 */</span></span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width:</span> <span class="number">768px</span>) &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 3. 中等屏幕下 md 大于等于 992px */</span></span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width:</span> <span class="number">992px</span>) &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 4. 大屏幕下 lg 大于等于1200 */</span></span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width:</span> <span class="number">1200px</span>) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="版心"><a href="#版心" class="headerlink" title="版心"></a>版心</h4><p>不同的档位下，版心不同；所有的子元素都是归于版心下，不同的版心宽度，意味着子元素要以不同的布局排版满足用户浏览友好的需求；</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 1. 超小屏幕下 xs 小于 768 布局容器的宽度为 100% */</span></span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width:</span> <span class="number">767px</span>) &#123;</span><br><span class="line">	<span class="selector-class">.container</span> &#123;</span><br><span class="line">		<span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 2. 小屏幕下 sm 大于等于768 布局容器改为 750px */</span></span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width:</span> <span class="number">768px</span>) &#123;</span><br><span class="line">	<span class="selector-class">.container</span> &#123;</span><br><span class="line">		<span class="attribute">width</span>: <span class="number">750px</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 3. 中等屏幕下 md 大于等于 992px 布局容器修改为 970px */</span></span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width:</span> <span class="number">992px</span>) &#123;</span><br><span class="line">    <span class="selector-class">.container</span> &#123;</span><br><span class="line">    	<span class="attribute">width</span>: <span class="number">970px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 4. 大屏幕下 lg 大于等于1200 布局容器修改为 1170 */</span></span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width:</span> <span class="number">1200px</span>) &#123;</span><br><span class="line">    <span class="selector-class">.container</span> &#123;</span><br><span class="line">    	<span class="attribute">width</span>: <span class="number">1170px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  注意：</p>
+<ul>
+<li>媒体查询使用符号的相关：min-，max-包含等号，后面是数值单位为px；</li>
+<li>除超小屏以外：版心的宽度设置都是小于当前档位最小界值，比如 min-width: 768px，版心是750px；两边留空白，用户体验好。</li>
+<li>以上是市场默认划分，可根据自己需求添加档位；</li>
+</ul>
+</blockquote>
+<h4 id="BootStrap"><a href="#BootStrap" class="headerlink" title="BootStrap"></a><a href="https://www.bootcss.com/" target="_blank" rel="noopener">BootStrap</a></h4><p>BootStrap框架可快速搭建出响应式页面；</p>
+<ul>
+<li><p>BootStrap 出自 Twitter（推特），是目前最受欢迎的前端响应式框架。</p>
+</li>
+<li><p>网址：</p>
+<ul>
+<li>中文网：<a href="http://www.bootcss.com/" target="_blank" rel="noopener">http://www.bootcss.com/</a></li>
+</ul>
+</li>
+<li><p>版本：</p>
+<ul>
+<li>2.x.x：停止维护，代码不够简洁，功能不够完善。</li>
+<li>3.x.x：目前使用最多，稳定，不支持IE6-IE7。对 IE8 支持，界面效果不好，偏向用于开发响应式布局、移动设备优先的WEB 项目。</li>
+<li>4.x.x：最新版，目前还不是很流行</li>
+</ul>
+</li>
+</ul>
+<p><strong>使用</strong></p>
+<p>使用前需要先去官网下载<a href="https://v3.bootcss.com/getting-started/，如无特殊需求，建议下载用于生产环境的。" target="_blank" rel="noopener">https://v3.bootcss.com/getting-started/，如无特殊需求，建议下载用于生产环境的。</a></p>
+<p><img src="https://i.loli.net/2020/11/05/I8aFMTEqcypOxXZ.png" alt=""></p>
+<p>下载完成后，将其整个文件夹放入你的项目中。</p>
+<p> 初始化html文件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-CN"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 要求 当前网页 使用 IE浏览器 最高版本的内核 来渲染 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 视口的设置：视口的宽度和设备一致，默认的缩放比例和PC端一致，用户不能自行缩放 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>BootStrap Template<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- Bootstrap 的文件引入--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"css/bootstrap.min.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries --&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--解决ie9以下浏览器对html5新增标签的不识别，并导致CSS不起作用的问题--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--解决ie9以下浏览器对 css3 Media Query 的不识别 --&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- WARNING: Respond.js doesn't work if you view the page via file:// --&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 条件注释:解决小于IE9的版本一些问题 --&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--[if lt IE 9]&gt;</span></span><br><span class="line"><span class="comment">        &lt;script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="comment">        &lt;script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="comment">        &lt;![endif]--&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">h1</span>&gt;</span>你好，世界！<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  条件注释：满足条件，下面代码链接就会发出请求；</p>
+  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-attr">[if lt IE 9]</span></span><br><span class="line">	&lt;script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"&gt;&lt;/script&gt;</span><br><span class="line">	&lt;script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"&gt;&lt;/script&gt;</span><br><span class="line"><span class="selector-attr">[endif]</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="布局容器"><a href="#布局容器" class="headerlink" title="布局容器"></a>布局容器</h5><ul>
+<li>版心设置：BootStrap 需要为页面内容包裹一个 .container 或者.container-fluid 容器，它提供了两个作此用处的类。</li>
+<li><code>.container</code>：设置不同档位下的版心的宽度；<ul>
+<li>超小屏（xs : extra small）：手机； 0px &lt;=w ；版心宽度为100%</li>
+<li>小屏（sm : small） ：平板； 768px&lt;=w ；版心宽度定为 750px</li>
+<li>中屏（md: medium）：桌面；992px&lt;=w ；版心宽度定为 970px</li>
+<li>大屏（lg: large）：大桌面；1200px&lt;=w ；版心宽度定为 1170px</li>
+</ul>
+</li>
+<li>.container-fluid：百分百宽度；</li>
+<li>特点：<ul>
+<li>所有元素为CSS3盒子模型；</li>
+<li>布局盒子有左右15px padding值；</li>
+</ul>
+</li>
+</ul>
+<h5 id="Bootstrap预制类名"><a href="#Bootstrap预制类名" class="headerlink" title="Bootstrap预制类名"></a>Bootstrap预制类名</h5><ul>
+<li><p>排版</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>h1. Bootstrap heading<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>h2. Bootstrap heading<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;<span class="name">h6</span>&gt;</span>h6. Bootstrap heading<span class="tag">&lt;/<span class="name">h6</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>更多内容可以参考：<a href="https://v3.bootcss.com/css/#type" target="_blank" rel="noopener">https://v3.bootcss.com/css/#type</a></p>
+</li>
+<li><p>按钮</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"btn btn-default"</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">role</span>=<span class="string">"button"</span>&gt;</span>Link<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn btn-default"</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span>Button<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"btn btn-default"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"Input"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"btn btn-default"</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"Submit"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>更多内容可以参考：<a href="https://v3.bootcss.com/css/#buttons" target="_blank" rel="noopener">https://v3.bootcss.com/css/#buttons</a></p>
+</li>
+<li><p>辅助类样式</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 上下文颜色 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"text-muted"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 下拉三角 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"caret"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>更多内容可以参考：<a href="https://v3.bootcss.com/css/#helper-classes" target="_blank" rel="noopener">https://v3.bootcss.com/css/#helper-classes</a></p>
+</li>
+<li><p>字体图标</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 搜索🔍 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"glyphicon glyphicon-search"</span> <span class="attr">aria-hidden</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>更多内容可以参考：<a href="https://v3.bootcss.com/components/#glyphicons" target="_blank" rel="noopener">https://v3.bootcss.com/components/#glyphicons</a></p>
+</li>
+</ul>
+<h5 id="Bootstrap栅格系统"><a href="#Bootstrap栅格系统" class="headerlink" title="Bootstrap栅格系统"></a>Bootstrap栅格系统</h5><p>栅格系统可以设置子元素在不同档位下的布局；</p>
+<p>栅格系统，在各个档位下，控制子元素布局不同；将版心宽度均分为12份；</p>
+<p>各个档位下都有预制好的类前缀：</p>
+<p><img src="https://i.loli.net/2020/11/05/v5pARWne17VXTZ9.png" alt=""></p>
+<p>栅格系统用于通过一系列的<strong>行（row）与列（column）的组合</strong>来创建页面布局，你的内容就可以放入这些创建好的布局中，控制不同的档位下，<strong>列的子元素占有几份</strong></p>
+<p><strong>基本使用：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 中屏和以上占有6份 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-md-6"</span>&gt;</span>.col-md-6<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-md-6"</span>&gt;</span>.col-md-6<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 各个档位下，按照各个档位下布局 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-md-6 col-lg-4"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-md-6 col-lg-8"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>单一类前缀：各个档位下的类前缀，为包括当前且向上生效；例如：.col-md-6为中屏和以上占有6份；</li>
+<li>多个类前缀：分别按照各个档位列划分生效；</li>
+<li>每个子项：默认左右15px的padding；</li>
+<li>行（.row） 可以去除父容器左右15px的padding值：.row的左右margin为-15px；</li>
+</ul>
+<p><strong>列嵌套</strong></p>
+<p>可以在已经分好的子元素中内部，继续进行列的划分（共12份），继续在分好的布局内继续划分；</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 直接嵌套 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-4"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-6"</span>&gt;</span>小列<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-6"</span>&gt;</span>小列<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 使用row嵌套 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-4"</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 加1个行 row 这样可以表现出抵消父元素的左右15padding值 而且高度自动和父级一样高; --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-6"</span>&gt;</span>小列<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-6"</span>&gt;</span>小列<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>列偏移：</strong></p>
+<p>划分好的子项进行列的份数偏移，场景：左右布局，居中布局；</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 左右对齐--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 如果只有一个盒子 那么就偏移 = 12-4-4 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-lg-4"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-lg-4 col-lg-offset-4"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 居中--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 如果只有一个盒子 那么就偏移 = 2 8 2 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-md-8 col-md-offset-2"</span>&gt;</span>中间盒子<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>栅格系统相关内容可以参考：<a href="https://v3.bootcss.com/css/#grid" target="_blank" rel="noopener">https://v3.bootcss.com/css/#grid</a></p>
+<h5 id="响应式工具"><a href="#响应式工具" class="headerlink" title="响应式工具"></a>响应式工具</h5><p><img src="https://i.loli.net/2020/11/05/HPAdJC73MOzXIbo.png" alt=""></p>
+<ul>
+<li>注意：和列类前缀的参数形成对比记忆，<ul>
+<li>col-sm-* 是超小屏（包含）以上的屏幕都是这个份数的划分；</li>
+<li>响应式工具 只是对当前档位下的类前缀类名生效；</li>
+</ul>
+</li>
+</ul>
+<p>响应式工具相关内容可以参考：<a href="https://v3.bootcss.com/css/#responsive-utilities" target="_blank" rel="noopener">https://v3.bootcss.com/css/#responsive-utilities</a></p>
+
+    </div>
+
+    
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="AnswerCoder 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="AnswerCoder 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>AnswerCoder
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.pengspace.top/2020/11/16/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%83%E5%B1%80/" title="移动端布局">https://www.pengspace.top/2020/11/16/移动端布局/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
+              <a href="/tags/flex%E5%B8%83%E5%B1%80/" rel="tag"><i class="fa fa-tag"></i> flex布局</a>
+              <a href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80/" rel="tag"><i class="fa fa-tag"></i> 响应式布局</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/16/%E6%9E%9A%E4%B8%BE%E3%80%81%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84/" rel="prev" title="枚举、注解和反射">
+      <i class="fa fa-chevron-left"></i> 枚举、注解和反射
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/11/16/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" rel="next" title="MySQL数据库基础">
+      MySQL数据库基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#移动端现状"><span class="nav-number">1.</span> <span class="nav-text">移动端现状</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#viewport-视口"><span class="nav-number">2.</span> <span class="nav-text">viewport(视口)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二倍图"><span class="nav-number">3.</span> <span class="nav-text">二倍图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#移动端常见布局"><span class="nav-number">4.</span> <span class="nav-text">移动端常见布局</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#流式布局"><span class="nav-number">4.1.</span> <span class="nav-text">流式布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex布局"><span class="nav-number">4.2.</span> <span class="nav-text">flex布局</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#flex介绍"><span class="nav-number">4.2.1.</span> <span class="nav-text">flex介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#容器属性"><span class="nav-number">4.2.2.</span> <span class="nav-text">容器属性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#flex-direction属性"><span class="nav-number">4.2.2.1.</span> <span class="nav-text">flex-direction属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#flex-wrap属性"><span class="nav-number">4.2.2.2.</span> <span class="nav-text">flex-wrap属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#flex-flow属性"><span class="nav-number">4.2.2.3.</span> <span class="nav-text">flex-flow属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#justify-content属性"><span class="nav-number">4.2.2.4.</span> <span class="nav-text">justify-content属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#align-items属性"><span class="nav-number">4.2.2.5.</span> <span class="nav-text">align-items属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#align-content属性"><span class="nav-number">4.2.2.6.</span> <span class="nav-text">align-content属性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#项目属性"><span class="nav-number">4.2.3.</span> <span class="nav-text">项目属性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#order属性"><span class="nav-number">4.2.3.1.</span> <span class="nav-text">order属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#flex-grow属性"><span class="nav-number">4.2.3.2.</span> <span class="nav-text">flex-grow属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#flex-shrink属性"><span class="nav-number">4.2.3.3.</span> <span class="nav-text">flex-shrink属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#flex-basis属性"><span class="nav-number">4.2.3.4.</span> <span class="nav-text">flex-basis属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#flex属性"><span class="nav-number">4.2.3.5.</span> <span class="nav-text">flex属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#align-self属性"><span class="nav-number">4.2.3.6.</span> <span class="nav-text">align-self属性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移动端适配"><span class="nav-number">4.3.</span> <span class="nav-text">移动端适配</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#媒体查询"><span class="nav-number">4.3.1.</span> <span class="nav-text">媒体查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rem"><span class="nav-number">4.3.2.</span> <span class="nav-text">rem</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#less"><span class="nav-number">4.3.3.</span> <span class="nav-text">less</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两种移动端适配方案"><span class="nav-number">4.3.4.</span> <span class="nav-text">两种移动端适配方案</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方案一-：rem-媒体查询-less"><span class="nav-number">4.3.4.1.</span> <span class="nav-text">方案一 ：rem+媒体查询+less</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方案二：rem-flexible-js-less"><span class="nav-number">4.3.4.2.</span> <span class="nav-text">方案二：rem+ flexible.js+less</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应式布局"><span class="nav-number">4.4.</span> <span class="nav-text">响应式布局</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#介绍"><span class="nav-number">4.4.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#档位划分"><span class="nav-number">4.4.2.</span> <span class="nav-text">档位划分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#版心"><span class="nav-number">4.4.3.</span> <span class="nav-text">版心</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BootStrap"><span class="nav-number">4.4.4.</span> <span class="nav-text">BootStrap</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#布局容器"><span class="nav-number">4.4.4.1.</span> <span class="nav-text">布局容器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Bootstrap预制类名"><span class="nav-number">4.4.4.2.</span> <span class="nav-text">Bootstrap预制类名</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Bootstrap栅格系统"><span class="nav-number">4.4.4.3.</span> <span class="nav-text">Bootstrap栅格系统</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#响应式工具"><span class="nav-number">4.4.4.4.</span> <span class="nav-text">响应式工具</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a href="/">
+    <img class="site-author-image" itemprop="image" alt="AnswerCoder"
+      src="https://i.loli.net/2020/05/01/VMPAdgQKfpzoWtc.jpg">
+  </a>
+  <p class="site-author-name" itemprop="name">AnswerCoder</p>
+  <div class="site-description" itemprop="description">记录自己学习的历程</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Brian-YounG7" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Brian-YounG7" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:15939534511@163.com" title="E-Mail → mailto:15939534511@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">AnswerCoder</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">145k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:12</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/canvas_lines.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/canvas_sphere.min.js"></script>
+
+
+  
+  <script data-pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'oftcVvNvcCjOKYqUI80AVwVU-gzGzoHsz',
+      appKey     : 'LT2CXjogpz8lsiOffakk42ih',
+      placeholder: "说点什么吧~",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script>
+</body>
+</html>
