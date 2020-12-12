@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/blog32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/blog16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.pengspace.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="JSP简介JSP（全称Java Server Pages）是由 Sun Microsystems 公司倡导和许多公司参与共同创建的一种使软件开发者可以响应客户端请求，而动态生成 HTML、XML 或其他格式文档的Web网页的技术标准，在传统的网页HTML文件中插入Java程序段(Scriptlet)和JSP标记(tag)，从而形成JSP文件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一文搞懂jSP">
+<meta property="og:url" content="https://www.pengspace.top/2020/12/12/%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82jSP/index.html">
+<meta property="og:site_name" content="鹏空间">
+<meta property="og:description" content="JSP简介JSP（全称Java Server Pages）是由 Sun Microsystems 公司倡导和许多公司参与共同创建的一种使软件开发者可以响应客户端请求，而动态生成 HTML、XML 或其他格式文档的Web网页的技术标准，在传统的网页HTML文件中插入Java程序段(Scriptlet)和JSP标记(tag)，从而形成JSP文件。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-12T05:51:56.000Z">
+<meta property="article:modified_time" content="2020-12-12T05:53:25.366Z">
+<meta property="article:author" content="AnswerCoder">
+<meta property="article:tag" content="JavaWeb">
+<meta property="article:tag" content="jsp">
+<meta property="article:tag" content="EL表达式">
+<meta property="article:tag" content="JSTL标签库">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.pengspace.top/2020/12/12/%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82jSP/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>一文搞懂jSP | 鹏空间</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+    <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+    <script type="text/javascript" src="/js/src/fireworks.js"></script>
+  
+<link rel="alternate" href="/atom.xml" title="鹏空间" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">鹏空间</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">学习笔记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.pengspace.top/2020/12/12/%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82jSP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2020/05/01/VMPAdgQKfpzoWtc.jpg">
+      <meta itemprop="name" content="AnswerCoder">
+      <meta itemprop="description" content="记录自己学习的历程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鹏空间">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一文搞懂jSP
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-12-12 13:51:56 / 修改时间：13:53:25" itemprop="dateCreated datePublished" datetime="2020-12-12T13:51:56+08:00">2020-12-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaWeb/" itemprop="url" rel="index"><span itemprop="name">JavaWeb</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/2020/12/12/%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82jSP/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/12/12/%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82jSP/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="JSP简介"><a href="#JSP简介" class="headerlink" title="JSP简介"></a>JSP简介</h2><p>JSP（全称Java Server Pages）是由 Sun Microsystems 公司倡导和许多公司参与共同创建的一种使软件开发者可以响应客户端请求，而动态生成 HTML、XML 或其他格式文档的Web网页的技术标准，在传统的网页HTML文件中插入Java程序段(Scriptlet)和JSP标记(tag)，从而形成JSP文件。</p>
+<a id="more"></a>
+
+<p>JSP 技术是以 Java 语言作为脚本语言的，JSP 网页为整个服务器端的 Java 库单元提供了一个接口来服务于HTTP的应用程序。</p>
+<p><strong>语法</strong></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">声明标签: &lt;%!变量或者方法声明%&gt;</span><br><span class="line">表达式标签: &lt;%= 表达式%&gt; 在页面上显示的效果</span><br><span class="line">程序代码标签: &lt;%java代码%&gt; 页面上动态展示内容</span><br><span class="line">&lt;!-- html注释内容,查看源码时能看到 --&gt;</span><br><span class="line">&lt;%-- jsp注释,查看页面源码时看不到 --%&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>原理</strong></p>
+<p><font color=red>JSP本质上也是servlet</font></p>
+<p>将jsp文件翻译成java文件并编译成class文件，其中包含的HTML代码以流的方式被响应回浏览器显示</p>
+<blockquote>
+<p>  <strong>JSP中出现的状态码（服务器状态码）</strong>        </p>
+<p>  状态码是指由服务器根据HTTP协议所提交的信息，返回的HTTP头信息代码。</p>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>消息</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>100</td>
+<td>Continue</td>
+<td>只有一部分请求被服务器接收，但只要没被服务器拒绝，客户端就会延续这个请求</td>
+</tr>
+<tr>
+<td>101</td>
+<td>Switching Protocols</td>
+<td>服务器交换机协议</td>
+</tr>
+<tr>
+<td>200</td>
+<td>OK</td>
+<td>请求被确认</td>
+</tr>
+<tr>
+<td>201</td>
+<td>Created</td>
+<td>请求时完整的，新的资源被创建</td>
+</tr>
+<tr>
+<td>202</td>
+<td>Accepted</td>
+<td>请求被接受，但未处理完</td>
+</tr>
+<tr>
+<td>300</td>
+<td>Multiple Choices</td>
+<td>一个超链接表，用户可以选择一个超链接并访问，最大支持5个超链接</td>
+</tr>
+<tr>
+<td>301</td>
+<td>Moved Permanently</td>
+<td>被请求的页面已经移动到了新的URL下</td>
+</tr>
+<tr>
+<td>302</td>
+<td>Found</td>
+<td>被请求的页面暂时性地移动到了新的URL下</td>
+</tr>
+<tr>
+<td>303</td>
+<td>See Other</td>
+<td>被请求的页面可以在一个不同的URL下找到</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+<td>服务器无法识别请求</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden</td>
+<td>禁止访问所请求的页面</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found</td>
+<td>服务器无法找到所请求的页面</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed</td>
+<td>请求中所指定的方法不被允许</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error</td>
+<td>请求不完整，服务器遇见了出乎意料的状况</td>
+</tr>
+<tr>
+<td>501</td>
+<td>Not Implemented</td>
+<td>请求不完整，服务器不提供所需要的功能</td>
+</tr>
+<tr>
+<td>502</td>
+<td>Bad Gateway</td>
+<td>请求不完整，服务器从上游服务器接受了一个无效的响应</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable</td>
+<td>请求不完整，服务器暂时重启或关闭</td>
+</tr>
+<tr>
+<td>504</td>
+<td>Gateway Timeout</td>
+<td>网关超时</td>
+</tr>
+<tr>
+<td>505</td>
+<td>HTTP Version Not Supported</td>
+<td>服务器不支持所指定的HTTP版本</td>
+</tr>
+</tbody></table>
+</blockquote>
+<h2 id="JSP的内置对象"><a href="#JSP的内置对象" class="headerlink" title="JSP的内置对象"></a>JSP的内置对象</h2><p>JSP中一共预先定义了9个对象，分别为：request、response、session、application、out、<br>pagecontext、config、page、exception</p>
+<ol>
+<li><p><strong>request对象</strong></p>
+<p>该对象代表了客户端的请求信息，主要用于接受通过HTTP协议传送到服务器的数据。（包括头信息、系统信息、请求方式以及请求参数等）<strong>request对象的作用域为一次请求。</strong>所属类型:HttpServletRequest。</p>
+</li>
+<li><p><strong>response对象</strong></p>
+<p>response 代表的是对客户端的响应，主要是将JSP容器处理过的对象传回到客户端。response对象也具有作用域，<strong>它只在JSP页面内有效</strong>。所属类型:HttpServletResponse</p>
+</li>
+<li><p><strong>session对象</strong></p>
+<p>session 对象是由服务器自动创建的与用户请求相关的对象。服务器为每个用户都生成一个session对象，用于保存该用户的信息，跟踪用户的操作状态。session对象内部使用Map类来保存数据，因此保存数据的格式为<code>&quot;Key/value&quot;</code>。 所属类型:HttpSession</p>
+</li>
+<li><p><strong>application对象</strong></p>
+<p>application 对象可将信息保存在服务器中，直到服务器关闭，application对象中保存的信息会在整个应用中都有效。与session对象相比，application对象生命周期更长，类似于系统的「全局变量」。所属类型:ServletContext</p>
+</li>
+<li><p><strong>out 对象</strong></p>
+<p>out 对象用于在Web浏览器内输出信息，并且管理应用服务器上的输出缓冲区。在使用 out 对象输出数据时，可以对数据缓冲区进行操作，及时清除缓冲区中的残余数据，为其他的输出让出缓冲空间。待数据输出完毕后，要及时关闭输出流。例如：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">out.print(<span class="string">"&lt;script type='text/javascript'&gt;alert('用户名不存在');location.href='index.jsp'&lt;/script&gt;"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>pageContext 对象</strong></p>
+<p>pageContext 对象的作用是取得任何范围的参数，通过它可以获取 JSP页面的out、request、reponse、session、application 等对象。pageContext对象的创建和初始化都是由容器来完成的，在JSP页面中可以直接使用pageContext对象。</p>
+</li>
+<li><p><strong>config 对象</strong></p>
+<p>config 对象的主要作用是取得服务器的配置信息。通过 pageConext对象的 getServletConfig() 方法可以获取一个config对象。当一个Servlet 初始化时，容器把某些信息通过config对象传递给这个 Servlet。 开发者可以在web.xml 文件中为应用程序环境中的Servlet程序和JSP页面提供初始化参数。</p>
+</li>
+<li><p><strong>page 对象</strong></p>
+<p>page 对象代表JSP本身，只有在JSP页面内才是合法的。 page隐含对象本质上包含当前 Servlet接口引用的变量，类似于Java编程中的 this 指针。</p>
+</li>
+<li><p><strong>exception 对象</strong></p>
+<p>exception 对象的作用是显示异常信息，只有在包含 isErrorPage=”true” 的页面中才可以被使用，在一般的JSP页面中使用该对象将无法编译JSP文件。excepation对象和Java的所有对象一样，都具有系统提供的继承结构。exception 对象几乎定义了所有异常情况。在Java程序中，可以使用try/catch关键字来处理异常情况； 如果在JSP页面中出现没有捕获到的异常，就会生成 exception 对象，并把 exception 对象传送到在page指令中设定的错误页面中，然后在错误页面中处理相应的 exception 对象。</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;%--先在可能发生错误的页面中添加errorPage属性:--%&gt;</span><br><span class="line">&lt;%@ page pageEncoding=<span class="string">"utf-8"</span> errorPage=<span class="string">"error.jsp"</span> contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br><span class="line"></span><br><span class="line">&lt;%--在error.jsp页面中设置isErrorPage=<span class="string">"true"</span> 的属性--%&gt;</span><br><span class="line">&lt;%@ page language=<span class="string">"java"</span> isErrorPage=<span class="string">"true"</span> <span class="keyword">import</span>=<span class="string">"java.util.*"</span> pageEncoding=<span class="string">"UTF-8"</span>%&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  <strong>jsp对象的作用域:</strong></p>
+<p>  pageContext &lt; request  &lt; session &lt; application</p>
+<p>  pageContext :当前页面</p>
+<p>  request:单次请求<br>  session:浏览器访问期间(会话期间)<br>  application:服务器启动期间,所存的数据可以跨浏览器</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="JSP的指令"><a href="#JSP的指令" class="headerlink" title="JSP的指令"></a>JSP的指令</h2><p>JSP指令用来设置整个JSP页面相关的属性，如网页的编码方式和脚本语言。</p>
+<p>语法格式如下：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ directive attribute=<span class="string">"value"</span> %&gt;</span><br><span class="line">directive：指令名称 attribute 属性名 value:属性值</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>指令名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>page</td>
+<td>定义网页依赖属性，比如脚本语言、error页面、缓存需求等等</td>
+</tr>
+<tr>
+<td>include</td>
+<td>包含其他文件</td>
+</tr>
+<tr>
+<td>taglib</td>
+<td>引入标签库的定义</td>
+</tr>
+</tbody></table>
+<ol>
+<li><p><strong>page指令</strong></p>
+<p>Page指令为容器提供当前页面的使用说明，一个JSP页面可以包含多个page指令</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page attribute=<span class="string">"value"</span> %&gt;</span><br></pre></td></tr></table></figure>
+
+<p>page指令的属性</p>
+<table>
+<thead>
+<tr>
+<th>常用属性</th>
+<th>属性值</th>
+<th>属性描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>language</td>
+<td>java</td>
+<td>解释该JSP文件时采用的语言，一般为java语言，默认为java</td>
+</tr>
+<tr>
+<td>extends</td>
+<td>任何类的全名</td>
+<td>编译该JSP文件时继承哪个类，JSP为Servlet，因此当指明继承普通类时需要实现Servlet的init、destroy等方法</td>
+</tr>
+<tr>
+<td>import</td>
+<td>引入该JSP中用到的类、包等</td>
+<td>import是唯一可以声明多次的page指令属性，中间用英文逗号隔开&lt;%@page import=包名.类名，包名.类名%&gt;</td>
+</tr>
+<tr>
+<td>session</td>
+<td>true/false</td>
+<td>该JSP内是否内置Session对象，如果为true，则内置Session对象，可直接使用，否则反之，默认为true</td>
+</tr>
+<tr>
+<td>autoFlush</td>
+<td>true/false</td>
+<td>是否运行缓存，如果为true，则使用out.println()等方法输出的字符串并不是立刻到达客户端服务器的，而是暂时存到缓存里，缓存满了或者程序行完毕或者执行out.flush()操作时才到客户端，默认为true。</td>
+</tr>
+<tr>
+<td>buffer</td>
+<td>none或者数字KB</td>
+<td>指定缓存大小，当autoFlush设为true时有效，例如&lt;%@ page buffer=10kb%&gt;</td>
+</tr>
+<tr>
+<td>isThreadSafe</td>
+<td>true/false</td>
+<td>是否线程安全，如果为true，则运行多个线程同时运行该jsp程序，否则只运行一个线程，其余线程等待，默认为false</td>
+</tr>
+<tr>
+<td>isErrorPage</td>
+<td>true/false</td>
+<td>指定该页面是否为错误显示页面，如果为true，则该JSP内置有一个Exception对象 exception，可直接使用，否则没有，默认为false</td>
+</tr>
+<tr>
+<td>errorPage</td>
+<td>某个JSP页面的相对路径</td>
+<td>指明一个错误页面，如果该JSP程序抛出一个未捕捉的异常，则转到 errorPage指定的页面，errorPage指定的页面通常isErrorPage属性为true，且内置的exception对象为未捕捉的异常</td>
+</tr>
+<tr>
+<td>contentType</td>
+<td>有效的文档类型</td>
+<td>客户端浏览器根据该属性判断文档类型，例如 HTML格式为text/html、纯文本格式为text/plain、JPG图像为image/jpeg、GIF图像为image/gif、WORD文档为application/msword，该属性常跟着charset设置编码一起，作用是通知服务器和浏览器都使用同一个码表</td>
+</tr>
+<tr>
+<td>pageEncoding</td>
+<td>字符集编码如：UTF-8</td>
+<td>设置页面字符集编码</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>Include指令</strong></p>
+<p>JSP可以通过include指令来包含其他文件。被包含的文件可以是JSP文件、HTML文件或文本文件。包含的文件就好像是该JSP文件的一部分，会被同时编译执行。</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ include file=<span class="string">"文件相对 url 地址"</span> %&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Taglib指令</strong></p>
+<p>JSP API允许用户自定义标签，一个自定义标签库就是自定义标签的集合。</p>
+<p>Taglib指令引入一个自定义标签集合的定义，包括库路径、自定义标签。</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ taglib uri=<span class="string">"uri"</span> prefix=<span class="string">""</span> %&gt;</span><br></pre></td></tr></table></figure>
+
+<p>uri属性确定标签库的位置，prefix属性指定标签库的前缀(可自定义)。</p>
+</li>
+</ol>
+<h2 id="EL表达式"><a href="#EL表达式" class="headerlink" title="EL表达式"></a>EL表达式</h2><p>EL（Expression Language）：简化对象和变量访问的一种语法</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">语法格式：$&#123;需要取出数据的键值&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当表达式没有指定变量或者对象的范围时，那么容器会依次从pageContext—&gt;request—&gt;session—&gt;application中查找该变量或对象，我们可以通过隐含对象获得指定作用域的值</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$&#123;pageScope.key&#125; 	用于获取当前页面的属性值</span><br><span class="line">$&#123;requestScope.key&#125; 用于获取请求范围的属性值</span><br><span class="line">$&#123;sessionScope.key&#125; 用于获取会话范围的属性值</span><br><span class="line">$&#123;applicationScope.key&#125; 用于获取程序范围的属性值</span><br></pre></td></tr></table></figure>
+
+<p><font color = red>EL表达式不可以直接取出变量，只能通过将变量放入作用域的方式</font></p>
+<p><strong>EL中基础操作符</strong></p>
+<p>EL表达式支持大部分Java所提供的算术和逻辑操作符：</p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>操作符</strong></th>
+<th align="left"><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">.</td>
+<td align="left">访问一个Bean属性或者一个映射条目</td>
+</tr>
+<tr>
+<td align="left">[]</td>
+<td align="left">访问一个数组或者链表的元素</td>
+</tr>
+<tr>
+<td align="left">( )</td>
+<td align="left">组织一个子表达式以改变优先级</td>
+</tr>
+<tr>
+<td align="left">+</td>
+<td align="left">加</td>
+</tr>
+<tr>
+<td align="left">-</td>
+<td align="left">减或负</td>
+</tr>
+<tr>
+<td align="left">*</td>
+<td align="left">乘</td>
+</tr>
+<tr>
+<td align="left">/ or div</td>
+<td align="left">除</td>
+</tr>
+<tr>
+<td align="left">% or mod</td>
+<td align="left">取模</td>
+</tr>
+<tr>
+<td align="left">== or eq</td>
+<td align="left">测试是否相等</td>
+</tr>
+<tr>
+<td align="left">!= or ne</td>
+<td align="left">测试是否不等</td>
+</tr>
+<tr>
+<td align="left">&lt; or lt</td>
+<td align="left">测试是否小于</td>
+</tr>
+<tr>
+<td align="left">&gt; or gt</td>
+<td align="left">测试是否大于</td>
+</tr>
+<tr>
+<td align="left">&lt;= or le</td>
+<td align="left">测试是否小于等于</td>
+</tr>
+<tr>
+<td align="left">&gt;= or ge</td>
+<td align="left">测试是否大于等于</td>
+</tr>
+<tr>
+<td align="left">&amp;&amp; or and</td>
+<td align="left">测试逻辑与</td>
+</tr>
+<tr>
+<td align="left">|| or or</td>
+<td align="left">测试逻辑或</td>
+</tr>
+<tr>
+<td align="left">! or not</td>
+<td align="left">测试取反</td>
+</tr>
+<tr>
+<td align="left">empty</td>
+<td align="left">测试是否空值</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>  <strong>关于EL表达式更多内容可以参考：<a href="https://www.runoob.com/jsp/jsp-expression-language.html" target="_blank" rel="noopener">https://www.runoob.com/jsp/jsp-expression-language.html</a></strong></p>
+</blockquote>
+<h2 id="JSTL"><a href="#JSTL" class="headerlink" title="JSTL"></a>JSTL</h2><p>JSTL(JSP标准标签库)是一个JSP标签集合，它封装了JSP应用的通用核心功能。</p>
+<p>JSTL支持通用的、结构化的任务，比如迭代，条件判断，XML文档操作，国际化标签，SQL标签。 除了这些，它还提供了一个框架来使用集成JSTL的自定义标签。</p>
+<p>根据JSTL标签所提供的功能，可以将其分为5个类别。核心标签、格式化标签、sql标签、xml标签、jstl函数</p>
+<blockquote>
+<p>  要使用JSTL首先需要导入jar包</p>
+<p>  下载 jakarta-taglibs-standard-1.1.2.zip 包并解压，将 jakarta-taglibs-standard-1.1.2/lib/ 下的两个 jar 文<br>  件：standard.jar 和 jstl.jar 文件拷贝到 /WEB-INF/lib/ 下，并配置。</p>
+</blockquote>
+<p><strong>语法：</strong></p>
+<ol>
+<li><p>在JSP页面中引入<code>&lt;%@ taglib prefix=”页面使用的名称” uri=”功能范围的路径”%&gt;</code></p>
+<table>
+<thead>
+<tr>
+<th>功能范围</th>
+<th>说明</th>
+<th>Uri</th>
+<th>前缀prefix</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>core</td>
+<td>核心标签</td>
+<td><a href="http://java.sun.com/jsp/jstl/core" target="_blank" rel="noopener">http://java.sun.com/jsp/jstl/core</a></td>
+<td>c</td>
+</tr>
+<tr>
+<td>i18n</td>
+<td>格式化标签</td>
+<td><a href="http://java.sun.com/jsp/jstl/fmt" target="_blank" rel="noopener">http://java.sun.com/jsp/jstl/fmt</a></td>
+<td>fmt</td>
+</tr>
+<tr>
+<td>sql</td>
+<td>sql标签</td>
+<td><a href="http://java.sun.com/jsp/jstl/sql" target="_blank" rel="noopener">http://java.sun.com/jsp/jstl/sql</a></td>
+<td>sql</td>
+</tr>
+<tr>
+<td>xml</td>
+<td>xml标签</td>
+<td><a href="http://java.sun.com/jsp/jstl/xml" target="_blank" rel="noopener">http://java.sun.com/jsp/jstl/xml</a></td>
+<td>x</td>
+</tr>
+<tr>
+<td>functions</td>
+<td>jstl函数</td>
+<td><a href="http://java.sun.com/jsp/jstl/function" target="_blank" rel="noopener">http://java.sun.com/jsp/jstl/function</a></td>
+<td>fn</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>通过标签库前缀和标记及属性进行操作<code>&lt;前缀:标记 属性=&quot;值&quot;,属性=&quot;值&quot;&gt;</code></p>
+</li>
+</ol>
+<p><strong>核心标签</strong></p>
+<p>核心标签有以下几种标记</p>
+<ul>
+<li>表达式操作 out、set、remove、catch</li>
+<li>流程控制 if、choose、when、otherwise</li>
+<li>迭代操作 forEach、forTokens</li>
+<li>URL操作 import、param、url、redirect</li>
+</ul>
+<p>常用的标记及其属性：</p>
+<ul>
+<li><p>＜c:set&gt; ：主要用来将变量存储至JSP范围中 或是JavaBean的属性或Map对象中</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+<th>是否必须写</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>value</td>
+<td>要被存储的值</td>
+<td>否</td>
+<td>无</td>
+</tr>
+<tr>
+<td>var</td>
+<td>存入的变量名称</td>
+<td>否</td>
+<td>无</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>var变量的JSP范围</td>
+<td>否</td>
+<td>Page</td>
+</tr>
+<tr>
+<td>target</td>
+<td>JavaBean或Map对象</td>
+<td>否</td>
+<td>无</td>
+</tr>
+<tr>
+<td>property</td>
+<td>指定target对象的属性</td>
+<td>否</td>
+<td>无</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>＜c:out&gt;主要用来显示数据的内容</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+<th>是否必须写</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>value</td>
+<td>需要显示出来的值</td>
+<td>是</td>
+<td>无</td>
+</tr>
+<tr>
+<td>default</td>
+<td>如果value的值为null，则显示default的值</td>
+<td>否</td>
+<td>无</td>
+</tr>
+<tr>
+<td>escapeXml</td>
+<td>是否转换特殊字符，如：＜转换成 &amp; lt;</td>
+<td>否</td>
+<td>True</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>＜c:remove&gt; 主要负责移除变量</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+<th>是否必须写</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>var</td>
+<td>欲移除的变量名称</td>
+<td>是</td>
+<td>无</td>
+</tr>
+<tr>
+<td>Scope</td>
+<td>var变量的jsp范围</td>
+<td>否</td>
+<td>Page</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>＜c:if&gt; 主要用于进行if判断,如果为true,则输出标签体中的内容</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+<th>是否必须写</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>test</td>
+<td>表达式的结果为true，则执行体内容，false则相反</td>
+<td>是</td>
+<td>无</td>
+</tr>
+<tr>
+<td>var</td>
+<td>如果 用来存储test运算的结果(true或false)</td>
+<td>否</td>
+<td>无</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>Var变量的JSP范围</td>
+<td>否</td>
+<td>page</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>＜c:choose &gt;,＜c:when &gt;,＜c:otherwise &gt; 作用相当于if-else</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+<th>是否必须写</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>test</td>
+<td>表达式的结果为true，则执行体内容，false则相反</td>
+<td>是</td>
+<td>无</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>＜c:forEach&gt; 循环控制，它可以将数组,集合(Collection)中的成员循序浏览一遍。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+<th>必须</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>var</td>
+<td>用来存放现在指定的成员</td>
+<td>是</td>
+<td>无</td>
+</tr>
+<tr>
+<td>items</td>
+<td>被迭代的集合对象（需要使用EL表达式）</td>
+<td>否</td>
+<td>无</td>
+</tr>
+<tr>
+<td>varStatus</td>
+<td>用来代指被迭代的集合对象</td>
+<td>否</td>
+<td>无</td>
+</tr>
+<tr>
+<td>begin</td>
+<td>开始的位置</td>
+<td>否</td>
+<td>0</td>
+</tr>
+<tr>
+<td>end</td>
+<td>结束的位置</td>
+<td>否</td>
+<td>最后一个成员</td>
+</tr>
+<tr>
+<td>step</td>
+<td>每次迭代的间隔数</td>
+<td>否</td>
+<td>1</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<p><strong>格式化标签</strong></p>
+<p>常用的标记及其属性：</p>
+<ul>
+<li><p>&lt; fmt:formatDate &gt; 将日期类型格式化为指定模式的字符串</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>value</td>
+<td>将要被格式化的数据</td>
+<td></td>
+</tr>
+<tr>
+<td>pattern</td>
+<td>格式化的模式，与SimpleDateFormat的参数设置一样,如yyyy-MM-dd</td>
+<td></td>
+</tr>
+<tr>
+<td>var</td>
+<td>格式化后的字符串所要存放的变量，若不指定var，则会将格式化的结果直接显示在页面</td>
+<td></td>
+</tr>
+<tr>
+<td>scope</td>
+<td>变量存放的域属性空间</td>
+<td>page</td>
+</tr>
+<tr>
+<td>type</td>
+<td>其取值为date、time、both，表示给出的value是日期、时间、还是两者都包含</td>
+<td>date</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>&lt; fmt:parseDate &gt; 用于将指定字符串转化为日期类型</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>value</td>
+<td>服务器获取的时间</td>
+</tr>
+<tr>
+<td>pattern</td>
+<td>转换的格式</td>
+</tr>
+<tr>
+<td>var</td>
+<td>页面显示的变量</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>&lt; fmt:formatNumber &gt; 按照指定格式对数字进行格式化</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>maxIntegerDigits</td>
+<td>整数部分最多的位数</td>
+</tr>
+<tr>
+<td>minIntegerDigits</td>
+<td>整数部分最少的位数</td>
+</tr>
+<tr>
+<td>maxFrctionDigits</td>
+<td>小数部分最多的位数</td>
+</tr>
+<tr>
+<td>minFrctionDigits</td>
+<td>小数部分最少的位数</td>
+</tr>
+<tr>
+<td>var</td>
+<td>存储格式化结果的变量</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>var属性的作用域</td>
+</tr>
+<tr>
+<td>integerOnly</td>
+<td>是否只解析整型数true或者浮点数false</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<blockquote>
+<p>  <strong>关于JSTL更多内容可以参考：<a href="https://www.runoob.com/jsp/jsp-jstl.html" target="_blank" rel="noopener">https://www.runoob.com/jsp/jsp-jstl.html</a></strong></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="AnswerCoder 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.png" alt="AnswerCoder 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>AnswerCoder
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://www.pengspace.top/2020/12/12/%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82jSP/" title="一文搞懂jSP">https://www.pengspace.top/2020/12/12/一文搞懂jSP/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/JavaWeb/" rel="tag"><i class="fa fa-tag"></i> JavaWeb</a>
+              <a href="/tags/jsp/" rel="tag"><i class="fa fa-tag"></i> jsp</a>
+              <a href="/tags/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag"><i class="fa fa-tag"></i> EL表达式</a>
+              <a href="/tags/JSTL%E6%A0%87%E7%AD%BE%E5%BA%93/" rel="tag"><i class="fa fa-tag"></i> JSTL标签库</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/12/%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82java-Servlet/" rel="prev" title="一文搞懂java Servlet">
+      <i class="fa fa-chevron-left"></i> 一文搞懂java Servlet
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/12/%E8%BF%87%E6%BB%A4%E5%99%A8-Filter-%E5%92%8C%E7%9B%91%E5%90%AC%E5%99%A8-Listener/" rel="next" title="过滤器(Filter)和监听器(Listener)">
+      过滤器(Filter)和监听器(Listener) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JSP简介"><span class="nav-number">1.</span> <span class="nav-text">JSP简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSP的内置对象"><span class="nav-number">2.</span> <span class="nav-text">JSP的内置对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSP的指令"><span class="nav-number">3.</span> <span class="nav-text">JSP的指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EL表达式"><span class="nav-number">4.</span> <span class="nav-text">EL表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSTL"><span class="nav-number">5.</span> <span class="nav-text">JSTL</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a href="/">
+    <img class="site-author-image" itemprop="image" alt="AnswerCoder"
+      src="https://i.loli.net/2020/05/01/VMPAdgQKfpzoWtc.jpg">
+  </a>
+  <p class="site-author-name" itemprop="name">AnswerCoder</p>
+  <div class="site-description" itemprop="description">记录自己学习的历程</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Brian-YounG7" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Brian-YounG7" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:15939534511@163.com" title="E-Mail → mailto:15939534511@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">AnswerCoder</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">182k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:46</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/canvas_lines.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/canvas_sphere.min.js"></script>
+
+
+  
+  <script data-pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'oftcVvNvcCjOKYqUI80AVwVU-gzGzoHsz',
+      appKey     : 'LT2CXjogpz8lsiOffakk42ih',
+      placeholder: "说点什么吧~",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script>
+</body>
+</html>
